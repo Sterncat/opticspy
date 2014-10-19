@@ -1,0 +1,4 @@
+Opticspy
+========
+
+python optics module
