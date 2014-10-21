@@ -1,7 +1,6 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib.mlab as mlab
-import math
+from core import diffraction_core
+__all__ = ['apershow','rec','circle']
+
 
 def apershow(aper_fft, clipfactor):
 
@@ -65,7 +64,7 @@ def circle(background_size, center, radius, clipfactor):
 	aper1 = np.zeros([n,n])
 	for i in range(n):
 		for j in range(n):
-			r = math.sqrt((i-xcenter)**2+(j-ycenter)**2)
+			r = sqrt((i-xcenter)**2+(j-ycenter)**2)
 			if r < radius:
 				aper1[i,j] = 1
 	print "aperture_matrix:\n",aper1
