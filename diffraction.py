@@ -1,18 +1,18 @@
 from core import diff_core as DC
 #__all__ = ['apershow','rec','circle']
+import show
 
-
-def apershow(aper_fft, clipfactor):
-
-	aper_fft = abs(aper_fft)
-	gamax=aper_fft.max()
-	gamin=aper_fft.min()
-	print gamax
-	print gamin
-#	scale=0.25*255*clipfactor/gamax
-#	ga=min(scale*aper_fft,255);
-	DC.plt.imshow(aper_fft,vmax=gamax, vmin=gamin)
-	DC.plt.show()
+#def apershow(aper_fft, clipfactor):
+#
+#	aper_fft = abs(aper_fft)
+#	gamax=aper_fft.max()
+#	gamin=aper_fft.min()
+#	print gamax
+#	print gamin
+##	scale=0.25*255*clipfactor/gamax
+##	ga=min(scale*aper_fft,255);
+#	DC.plt.imshow(aper_fft,vmax=gamax, vmin=gamin)
+#	DC.plt.show()
 	
 def rec(background_size, rec_height, rec_width, row_start, col_start, clipfactor):
 	"""
@@ -51,12 +51,12 @@ def rec(background_size, rec_height, rec_width, row_start, col_start, clipfactor
 	aper1[(rowstart-1):(rowstart-1+height),(colstart-1):(colstart-1+width)] = aper
 #	print "aperture_matrix:",aper1
 	aperfft = DC.np.fft.fftshift(DC.np.fft.fft2(aper1))
-	apershow(aperfft,1)
+	show.apershow(aperfft,1)
 	
 	
 	
 
-def circle(background_size, center, radius, clipfactor):
+def circle(background_size, radius, clipfactor):
 	"""
 	Compute the cirlce aperture's diffraction pattern.
 	
@@ -89,4 +89,4 @@ def circle(background_size, center, radius, clipfactor):
 				aper1[i,j] = 1
 #	print "aperture_matrix:",aper1
 	aperfft = DC.np.fft.fftshift(DC.np.fft.fft2(aper1))
-	apershow(aperfft,1)
+	show.apershow(aperfft,1)
