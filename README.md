@@ -3,4 +3,4 @@ Opticspy
 
 ###Python optics module  
 ####1. Wave propagation
-####2. Ooptical transfer function(OTF) 
+####2. Optical transfer function(OTF) 
