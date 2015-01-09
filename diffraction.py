@@ -84,7 +84,7 @@ def circle(background_size, radius, clipfactor):
 	aper1 = DC.np.zeros([n,n])
 	for i in range(n):
 		for j in range(n):
-			r = DC.sqrt((i-background_size/2)**2+(j-background_size/2)**2)
+			r = DC.sqrt((i-n/2)**2+(j-n/2)**2)
 			if r < radius:
 				aper1[i,j] = 1
 #	print "aperture_matrix:",aper1
