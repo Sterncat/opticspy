@@ -21,4 +21,4 @@ It is just a note for myself. I think the module should contain these things in 
 </ul>
 
 ### What I have done
-> [Here](/files/opticspy_1.html) is some example of this opticspy module.
+> [Here](http://sterncat.github.io/files/opticspy_1.html) is some example of this opticspy module.
