@@ -33,6 +33,15 @@ class Aperture():
 		aperfft = np.fft.fftshift(np.fft.fft2(self.aper))
 		pltshow.apershow(aperfft)
 
+	def otf(self):
+		"""
+		Compute an aperture's otf
+		"""
+		print "-------------OTF---------------"
+		aperfft = np.fft.fftshift(np.fft.fft2(self.aper))**2
+		aper_OTF = np.fft.fftshift(np.fft.fft2(aperfft))
+		pltshow.apershow(aper_OTF)
+
 
 class Circle(Aperture):
 	"""
@@ -44,7 +53,7 @@ class Circle(Aperture):
 	
  	Parameters
 	------------------------------------
-	background_size: int
+	background: int
 				Square background
 
 	radius: int
@@ -52,8 +61,8 @@ class Circle(Aperture):
 
 	"""
 	def __init__(self, background, radius):
-		self.background = background
-		self.radius = radius
+		#self.background = background
+		#self.radius = radius
 
 		n = background
 		Aperture.aper = np.zeros([n,n])
@@ -74,16 +83,16 @@ class Rectangle(Aperture):
 		
 	 	Parameters
 		-----------
-		background_size: int
+		background: int
 					Square background
-		rec_height: int
+		height: int
 					aperture height
-		rec_width: int
+		width: int
 					aperture width
 		"""
-		self.background = background
-		self.height = height
-		self.width = width
+		#self.background = background
+		#self.height = height
+		#self.width = width
 		n = background
 		matrix_1 = [height,width]
 		aper1 = np.ones(matrix_1)
