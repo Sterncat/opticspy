@@ -26,12 +26,12 @@ def Twyman_Green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	Interferogram of aberration
 	"""
 	lambda_1 = lambda_1*(10**-9)
-	coefficients = [A,B,C,D,E,F,G]
+	coefficients = [A*2,B*2,C*2,D*2,E*2,F*2,G*2]
 	r = numpy.linspace(-PR, PR, 400)
 	x, y = numpy.meshgrid(r,r) 
 	rr = numpy.sqrt(x**2 + y**2)
 	def wavenumber(n):
-	     return n*lambda_1
+	     return n*lambda_1*2/PR
 	[A,B,C,D,E,F,G] =  map(wavenumber, [A,B,C,D,E,F,G])
 	OPD = 	A + \
 			B * x + \
@@ -73,7 +73,7 @@ def Twyman_Green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 		'G: Primary spherical aberration']
 		for i in b:
 			if i != 0:
-				label = label + str(i) + r'$\lambda$' + ' ' + labellist[count] + '\n'
+				label = label + str(i/2) + r'$\lambda$' + ' ' + labellist[count] + '\n'
 			else:
 				count_1 = count_1 + 1
 			count = count + 1
@@ -85,3 +85,4 @@ def Twyman_Green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	plt.title('Twyman Green Interferogram',fontsize=15)
 	fig.set_tight_layout(True)
 	plt.show()
+	return Ixy
