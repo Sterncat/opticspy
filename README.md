@@ -22,12 +22,13 @@ It is just a note for myself. I think the module should contain these things in 
 </ul>
 
 ### What I have done
-> [Here](/files/opticspy_1.html) is some example of this opticspy module.
+> [Here](http://sterncat.github.io/files/opticspy_1.html) is some example of this opticspy module.
 
 <ul>
   <li>1. Rectangular, circle diffraction pattern, OTF</li>
   <li>2. Third order ray abberation plot</li>
   <li>3. Twyman_Green interferogram with aberration</li>
+  <li>4. Lateral Shear interferogram with aberration</li>
 </ul>
 
 
