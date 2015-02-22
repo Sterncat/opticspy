@@ -185,8 +185,9 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 	label = labelgenerate(coefficients)
 
 	plt.xlabel(label,fontsize=15)
-	plt.title('Twyman Green Interferogram',fontsize=15)
+	plt.title('Lateral Shear Interferogram',fontsize=15)
 	fig.set_tight_layout(True)
-	
 	plt.show()
-	return Ixy_new
+
+
+
