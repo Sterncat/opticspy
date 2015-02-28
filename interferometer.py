@@ -109,7 +109,7 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 	C: Astigmatism
 	D: Defocus
 	E: x-Tilt
-	S: Shear distance
+	S: Shear distance(positive)
 	lambda_1: wavelength in nanometer, default = 632nm
 	PR: pupil radius, default = 1
 
