@@ -1,1 +1,1 @@
-import aper, aberration, interferometer, zernike, test1, zernike_coefficient
+import aper, aberration, interferometer_seidel,interferometer_zenike, zernike

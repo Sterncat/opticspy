@@ -1,7 +1,6 @@
 class Coefficient(object):
-	__list_1__ = []
-	__zernikelist__ = [
-						"Piston or Bias",
+	__coefficients__ = []
+	__zernikelist__ = [ "Piston or Bias",
 						"Tilt x",
 						"Tilt y",
 						"Power",
@@ -36,8 +35,7 @@ class Coefficient(object):
 						"Quaternary Astigmatism y",
 						"Quaternary Coma x",
 						"Quaternary Coma y",
-						"Quaternary Spherical"
-						]
+						"Quaternary Spherical"]
 
 	def __init__(self, 
 			Z0=0, Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, \
@@ -82,13 +80,13 @@ class Coefficient(object):
 		self.Z34 = Z34
 		self.Z35 = Z35
 
-		self.__list_1__ = [Z0, Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9, Z10, \
+		self.__coefficients__ = [Z0, Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9, Z10, \
 					Z11, Z12, Z13, Z14, Z15, Z16, Z17, Z18, Z19, \
 					Z20, Z21, Z22, Z23, Z24, Z25, Z26, Z27, Z28, \
 					Z29, Z30, Z31, Z32, Z33, Z34, Z35,]
 	def listcoefficient(self):
 		m = 0
-		for i in self.__list_1__:
+		for i in self.__coefficients__:
 			if i != 0:
 				print 'Z'+str(m)+' =',i,self.__zernikelist__[m]
 			m = m + 1
@@ -97,6 +95,68 @@ class Coefficient(object):
 		for i in self.__zernikelist__:
 			print "Z"+str(m)+":"+i
 			m = m + 1
+
+
+def zernike2opd(x,y,Z):
+
+	S = x**2 + y**2
+	Z0  =  Z[0]  * 1
+	Z1  =  Z[1]  * x
+	Z2  =  Z[2]  * y
+	Z3  =  Z[3]  * (-1+2*S)
+	Z4  =  Z[4]  * S
+	Z5  =  Z[5]  * (2*x*y)
+	Z6  =  Z[6]  * (-2*x+3*x*S)
+	Z7  =  Z[7]  * (1-2*y-6*S+3*y*S+6*S**2)
+	Z8  =  Z[8]  * (1-6*S+6*S**2)
+	Z9  =  Z[9]  * (x**3-3*x*y)
+	Z10 =  Z[10] * (3*x**2*y-y**3)
+	Z11 =  Z[11] * (-3*x**2+3*y**2+4*x**2*S-4*y**2*S)
+	Z12 =  Z[12] * (-6*x*y+8*x*y*(x**2+y**2))
+	Z13 =  Z[13] * (3*x-12*x*S+10*x*S**2)
+	Z14 =  Z[14] * (3*y-12*y*S+10*y*S**2)
+	Z15 =  Z[15] * (-1+12*S-30*S**2+20*S**3)
+	Z16 =  Z[16] * (x**4-6*x**2*y**2+y**4)
+	Z17 =  Z[17] * (4*x**3*y-4*x*y**3)
+	Z18 =  Z[18] * (-4*x**3+12*x*y**2+5*x**3*S-15*x*y**2*S)
+	Z19 =  Z[19] * (-12*x**2*y+4*y**3+15*x**2*y*S-5*y**3*S)
+	Z20 =  Z[20] * (6*x**2-6*y**2-20*x**2*S+20*y**2*S+\
+					15*x**2*S**2-15*y**2*S**2)
+	Z21 =  Z[21] * (12*x*y-40*x*y*S+30*x*y*S*2)
+	Z22 =  Z[22] * (-4*x+30*x*S-60*x*S**2+35*x*S**3)
+	Z23 =  Z[23] * (-4*y+30*y*S-60*y*S**2+35*y*S**3)
+	Z24 =  Z[24] * (1-20*S+90*S**2-140*S**3+70*S**4)
+	Z25 =  Z[25] * (x**5-10*x**3*y**2+5*x*y**4)
+	Z26 =  Z[26] * (5*x**4*y-10*x**2*y**3+y**5)
+	Z27 =  Z[27] * (-5*x**4+30*x**2*y**2-5*y**4+6*x**4*S-\
+					36*x**2*y**2*S+6*y**4*S)
+	Z28 =  Z[28] * (-20*x**3*y+20*x*y**3+24*x**3*y*S-24*x*y**3*S)
+	Z29 =  Z[29] * (10*x**3-30*x*y**2-30*x**3*S+90*x*y**2*S+\
+					21*x**3*S**2-63*x*y**2*S**2)
+	Z30 =  Z[30] * (30*x**2*y-10*y**3-90*x**2*y*S+30*y**3*S+\
+					63*x**2*y*S**2-21*y**3*S**2)
+	Z31 =  Z[31] * (-10*x**2+10*y**2+60*x**2*S-60*y**2*S-\
+					105*x**2*S**2+105*y**2*S**2+\
+					56*x**2*S**3-56*y**2*S**3)
+	Z32 =  Z[32] * (-20*x*y+120*x*y*S-210*x*y*S**2+112*x*y*S**3)
+	Z33 =  Z[33] * (5*x-60*x*S+210*x*S**2-280*x*S**3+126*x*S**4)
+	Z34 =  Z[34] * (5*y-60*y*S+210*y*S**2-280*y*S**3+126*y*S**4)
+	Z35 =  Z[35] * (-1+30*S-210*S**2+560*S**3-630*S**4+252*S**5)
+
+	OPD = 	Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
+			Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
+			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
+			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
+	return OPD
+
+
+
+
+
+
+
+
+
 
 
 

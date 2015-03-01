@@ -1,12 +1,12 @@
-import numpy
-import matplotlib.pyplot as plt
+import numpy as __np__
+import matplotlib.pyplot as __plt__
 
-def makecircle(a, r, PR):
+def __makecircle__(a, r, PR):
 	max = a.max()
-	size = numpy.sqrt(a.size)
+	size = __np__.sqrt(a.size)
 	for i in range(int(size)):
 		for j in range(int(size)):
-			if numpy.sqrt(r[i]**2+r[j]**2) > PR:
+			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
 				a[i,j] = max
 
 def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
@@ -36,9 +36,9 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	"""
 	lambda_1 = lambda_1*(10**-9)
 	coefficients = [A*2,B*2,C*2,D*2,E*2,F*2,G*2]
-	r = numpy.linspace(-PR, PR, 400)
-	x, y = numpy.meshgrid(r,r) 
-	rr = numpy.sqrt(x**2 + y**2)
+	r = __np__.linspace(-PR, PR, 400)
+	x, y = __np__.meshgrid(r,r) 
+	rr = __np__.sqrt(x**2 + y**2)
 	def wavenumber(n):
 	     return n*lambda_1*2/PR
 	[A,B,C,D,E,F,G] =  map(wavenumber, [A,B,C,D,E,F,G])
@@ -50,16 +50,16 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	  		F * y * (x**2 + y**2) + \
 	  		G * (x**2 + y**2)**2
 
-	ph = 2 * numpy.pi / lambda_1 * OPD
+	ph = 2 * __np__.pi / lambda_1 * OPD
 
 	I1 = 1
 	I2 = 1
-	Ixy = I1 + I2 + 2 * numpy.sqrt(I1*I2) * numpy.cos(ph)
-	makecircle(Ixy, r, PR) 
+	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
+	__makecircle__(Ixy, r, PR) 
 #======================================================
-	fig = plt.figure(1)
-	plt.imshow(Ixy, extent=[-PR,PR,-PR,PR])
-	plt.set_cmap('Greys')
+	fig = __plt__.figure(1)
+	__plt__.imshow(Ixy, extent=[-PR,PR,-PR,PR])
+	__plt__.set_cmap('Greys')
 
 	label = ''
 	def	labelgenerate(b):
@@ -83,10 +83,10 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 			label = label + ' ' + 'no aberration'
 		return label
 	label = labelgenerate(coefficients)
-	plt.xlabel(label,fontsize=15)
-	plt.title('Twyman Green Interferogram',fontsize=15)
+	__plt__.xlabel(label,fontsize=15)
+	__plt__.title('Twyman Green Interferogram',fontsize=15)
 	fig.set_tight_layout(True)
-	plt.show()
+	__plt__.show()
 
 ################################################################
 ################################################################
@@ -118,10 +118,10 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 	Lateral Shear interferogram of aberration
 	"""
 	lambda_1 = lambda_1*(10**-9)
-	r = numpy.linspace(-PR, PR, 400)
-	#r1 = numpy.linspace(-PR-S/2,PR+S/2)
-	x, y = numpy.meshgrid(r,r) 
-	rr = numpy.sqrt(x**2 + y**2)
+	r = __np__.linspace(-PR, PR, 400)
+	#r1 = __np__.linspace(-PR-S/2,PR+S/2)
+	x, y = __np__.meshgrid(r,r) 
+	rr = __np__.sqrt(x**2 + y**2)
 	coefficients = [A*2,B*2,C*2,D*2,E*2]
 	def wavenumber(n):
 	     return n*lambda_1*2/PR
@@ -131,22 +131,22 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 			C * x * S + \
 			2 * D * x * S + \
 	  		E * y
-	ph = 2 * numpy.pi / lambda_1 * OPD
+	ph = 2 * __np__.pi / lambda_1 * OPD
 
 	I1 = 1
 	I2 = 1
-	Ixy = -(I1 + I2 + 2 * numpy.sqrt(I1 * I2) * numpy.cos(ph))
+	Ixy = -(I1 + I2 + 2 * __np__.sqrt(I1 * I2) * __np__.cos(ph))
 
 	def doublecircle(a, PR, S):
 		x = int(400+200*S/PR)
 		y = 400
-		rec = numpy.zeros((y,x))
+		rec = __np__.zeros((y,x))
 		for i in range(400):
 			for j in range(400):
 				rec[j, i+100*S/PR] = a[j, i]
 
-		x1 = numpy.linspace(-PR-S/2, PR+S/2, x)
-		y1 = numpy.linspace(-PR, PR, y)
+		x1 = __np__.linspace(-PR-S/2, PR+S/2, x)
+		y1 = __np__.linspace(-PR, PR, y)
 		max = a.max()
 		min = a.min()
 		for i in range(x):
@@ -159,9 +159,9 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 					rec[j,i] = min*2/10
 		return rec
 	Ixy_new = doublecircle(Ixy, PR, S) 
-	fig = plt.figure(1)
-	plt.imshow(Ixy_new, extent=[-PR-S/2,PR+S/2,-PR,PR])
-	plt.set_cmap('Greys')
+	fig = __plt__.figure(1)
+	__plt__.imshow(Ixy_new, extent=[-PR-S/2,PR+S/2,-PR,PR])
+	__plt__.set_cmap('Greys')
 
 	label = ''
 	def	labelgenerate(b):
@@ -184,10 +184,10 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 		return label
 	label = labelgenerate(coefficients)
 
-	plt.xlabel(label,fontsize=15)
-	plt.title('Lateral Shear Interferogram',fontsize=15)
+	__plt__.xlabel(label,fontsize=15)
+	__plt__.title('Lateral Shear Interferogram',fontsize=15)
 	fig.set_tight_layout(True)
-	plt.show()
+	__plt__.show()
 
 
 
