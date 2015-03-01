@@ -29,6 +29,7 @@ It is just a note for myself. I think the module should contain these things in 
   <li>2. Third order ray abberation plot</li>
   <li>3. Twyman_Green interferogram with aberration</li>
   <li>4. Lateral Shear interferogram with aberration</li>
+  <li>5. Zernike Coefficient</li>
 </ul>
 
 
