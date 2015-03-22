@@ -1,7 +1,7 @@
 import numpy as __np__
-from numpy import cos as cos
-from numpy import sin as sin
-import matplotlib.pyplot as plt
+from numpy import cos as __cos__
+from numpy import sin as __sin__
+import matplotlib.pyplot as __plt__
 from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
@@ -94,76 +94,103 @@ class Coefficient(object):
 					Z29, Z30, Z31, Z32, Z33, Z34, Z35,]
 	def listcoefficient(self):
 		m = 0
+		label = ""
 		for i in self.__coefficients__:
 			if i != 0:
 				print 'Z'+str(m)+' =',i,self.__zernikelist__[m]
+				label = label + 'Z'+str(m)+' ='+str(i)+":"+self.__zernikelist__[m]+" "
 			m = m + 1
+		return label
+
 	def zernikelist(self):
 		m = 0
 		for i in self.__zernikelist__:
 			print "Z"+str(m)+":"+i
 			m = m + 1
+
 	def zernikesurface(self):
 		theta = __np__.linspace(0, 2*__np__.pi, 50)
 		rho = __np__.linspace(0, 1, 50)
 		[u,r] = __np__.meshgrid(theta,rho)
-		X = r*cos(u)
-		Y = r*sin(u)
-		Z = self.__coefficients__
-		Z0  =  Z[0]  * 1
-		Z1  =  Z[1]  * r*cos(u)
-		Z2  =  Z[2]  * r*sin(u)
-		Z3  =  Z[3]  * (2*r**2-1)
-		Z4  =  Z[4]  * r**2*cos(2*u)
-		Z5  =  Z[5]  * r**2*sin(2*u)
-		Z6  =  Z[6]  * (3*r**2-2)*r*cos(u)
-		Z7  =  Z[7]  * (3*r**2-2)*r*sin(u)
-		Z8  =  Z[8]  * (1-6*r**2+6*r**4)
-		Z9  =  Z[9]  * r**3*cos(3*u)
-		Z10 =  Z[10] * r**3*sin(3*u)
-		Z11 =  Z[11] * (4*r**2-3)*r**2*cos(2*u)
-		Z12 =  Z[12] * (4*r**2-3)*r**2*sin(2*u)
-		Z13 =  Z[13] * (10*r**4-12*r**2+3)*r*cos(u)
-		Z14 =  Z[14] * (10*r**4-12*r**2+3)*r*sin(u)
-		Z15 =  Z[15] * (20*r**6-30*r**4+12*r**2-1)
-		Z16 =  Z[16] * r**4*cos(4*u)
-		Z17 =  Z[17] * r**4*sin(4*u)
-		Z18 =  Z[18] * (5*r**2-4)*r**3*cos(3*u)
-		Z19 =  Z[19] * (5*r**2-4)*r**3*sin(3*u)
-		Z20 =  Z[20] * (15*r**4-20*r**2+6)*r**2*cos(2*u)
-		Z21 =  Z[21] * (15*r**4-20*r**2+6)*r**2*sin(2*u)
-		Z22 =  Z[22] * (35*r**6-60*r**4+30*r**2-4)*r*cos(u)
-		Z23 =  Z[23] * (35*r**6-60*r**4+30*r**2-4)*r*sin(u)
-		Z24 =  Z[24] * (70*r**8-140*r**6+90*r**4-20*r**2+1)
-		Z25 =  Z[25] * r**5*cos(5*u)
-		Z26 =  Z[26] * r**5*sin(5*u)
-		Z27 =  Z[27] * (6*r**2-5)*r**4*cos(4*u)
-		Z28 =  Z[28] * (6*r**2-5)*r**4*sin(4*u)
-		Z29 =  Z[29] * (21*r**4-30*r**2+10)*r**3*cos(3*u)
-		Z30 =  Z[30] * (21*r**4-30*r**2+10)*r**3*sin(3*u)
-		Z31 =  Z[31] * (56*r**6-105*r**4+60*r**2-10)*r**2*cos(2*u)
-		Z32 =  Z[32] * (56*r**6-105*r**4+60*r**2-10)*r**2*sin(2*u)
-		Z33 =  Z[33] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*cos(u)
-		Z34 =  Z[34] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*sin(u)
-		Z35 =  Z[35] * (252*r**10-630*r**8+560*r**6-210*r**4+30*r**2-1)
-		Z = Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
-			Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
-			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
-			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
-		fig = plt.figure()
+		X = r*__cos__(u)
+		Y = r*__sin__(u)
+		Z = __zernikepolar__(self.__coefficients__,r,u)
+		fig = __plt__.figure()
 		ax = fig.gca(projection='3d')
-		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.coolwarm,
-	        linewidth=0, antialiased=False)
-		#ax.set_zlim(-1, 1)
+		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
+	        linewidth=0, antialiased=False, alpha = 0.6)
+		v = max(abs(Z.max()),abs(Z.min()))
+		ax.set_zlim(-v, v)
 		ax.zaxis.set_major_locator(__LinearLocator__(10))
 		ax.zaxis.set_major_formatter(__FormatStrFormatter__('%.02f'))
 
+		cset = ax.contourf(X, Y, Z, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
+
 		fig.colorbar(surf, shrink=0.5, aspect=5)
-		plt.show()
 
+		#label = self.listcoefficient()
+		__plt__.title('Zernike Polynomials Surface',fontsize=15)
+		#__plt__.xlabel(label,fontsize=15)
+		__plt__.show()
+	def zernikemap(self):
+		theta = __np__.linspace(0, 2*__np__.pi, 100)
+		rho = __np__.linspace(0, 1, 100)
+		[u,r] = __np__.meshgrid(theta,rho)
+		X = r*__cos__(u)
+		Y = r*__sin__(u)
+		Z = __zernikepolar__(self.__coefficients__,r,u)
+		fig = __plt__.figure()
+		im = __plt__.pcolormesh(X, Y, Z, cmap=__cm__.RdYlGn)
+		__plt__.colorbar()
+		__plt__.show()
 
-def zernike2opd(x,y,Z):
+def __zernikepolar__(coefficient,r,u):
+	Z = coefficient
+	Z0  =  Z[0]  * 1                                 
+	Z1  =  Z[1]  * r*__cos__(u)
+	Z2  =  Z[2]  * r*__sin__(u)
+	Z3  =  Z[3]  * (2*r**2-1)
+	Z4  =  Z[4]  * r**2*__cos__(2*u)
+	Z5  =  Z[5]  * r**2*__sin__(2*u)
+	Z6  =  Z[6]  * (3*r**2-2)*r*__cos__(u)
+	Z7  =  Z[7]  * (3*r**2-2)*r*__sin__(u)
+	Z8  =  Z[8]  * (1-6*r**2+6*r**4)
+	Z9  =  Z[9]  * r**3*__cos__(3*u)
+	Z10 =  Z[10] * r**3*__sin__(3*u)
+	Z11 =  Z[11] * (4*r**2-3)*r**2*__cos__(2*u)
+	Z12 =  Z[12] * (4*r**2-3)*r**2*__sin__(2*u)
+	Z13 =  Z[13] * (10*r**4-12*r**2+3)*r*__cos__(u)
+	Z14 =  Z[14] * (10*r**4-12*r**2+3)*r*__sin__(u)
+	Z15 =  Z[15] * (20*r**6-30*r**4+12*r**2-1)
+	Z16 =  Z[16] * r**4*__cos__(4*u)
+	Z17 =  Z[17] * r**4*__sin__(4*u)
+	Z18 =  Z[18] * (5*r**2-4)*r**3*__cos__(3*u)
+	Z19 =  Z[19] * (5*r**2-4)*r**3*__sin__(3*u)
+	Z20 =  Z[20] * (15*r**4-20*r**2+6)*r**2*__cos__(2*u)
+	Z21 =  Z[21] * (15*r**4-20*r**2+6)*r**2*__sin__(2*u)
+	Z22 =  Z[22] * (35*r**6-60*r**4+30*r**2-4)*r*__cos__(u)
+	Z23 =  Z[23] * (35*r**6-60*r**4+30*r**2-4)*r*__sin__(u)
+	Z24 =  Z[24] * (70*r**8-140*r**6+90*r**4-20*r**2+1)
+	Z25 =  Z[25] * r**5*__cos__(5*u)
+	Z26 =  Z[26] * r**5*__sin__(5*u)
+	Z27 =  Z[27] * (6*r**2-5)*r**4*__cos__(4*u)
+	Z28 =  Z[28] * (6*r**2-5)*r**4*__sin__(4*u)
+	Z29 =  Z[29] * (21*r**4-30*r**2+10)*r**3*__cos__(3*u)
+	Z30 =  Z[30] * (21*r**4-30*r**2+10)*r**3*__sin__(3*u)
+	Z31 =  Z[31] * (56*r**6-105*r**4+60*r**2-10)*r**2*__cos__(2*u)
+	Z32 =  Z[32] * (56*r**6-105*r**4+60*r**2-10)*r**2*__sin__(2*u)
+	Z33 =  Z[33] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*__cos__(u)
+	Z34 =  Z[34] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*__sin__(u)
+	Z35 =  Z[35] * (252*r**10-630*r**8+560*r**6-210*r**4+30*r**2-1)
 
+	Z = Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
+		Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
+		Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
+		Z30+ Z31+ Z32+ Z33+ Z34+ Z35
+	return Z
+
+def __zernikecartesian__(coefficient,x,y):
+	Z = coefficient
 	S = x**2 + y**2
 	Z0  =  Z[0]  * 1
 	Z1  =  Z[1]  * x
@@ -207,9 +234,8 @@ def zernike2opd(x,y,Z):
 	Z33 =  Z[33] * (5*x-60*x*S+210*x*S**2-280*x*S**3+126*x*S**4)
 	Z34 =  Z[34] * (5*y-60*y*S+210*y*S**2-280*y*S**3+126*y*S**4)
 	Z35 =  Z[35] * (-1+30*S-210*S**2+560*S**3-630*S**4+252*S**5)
-
-	OPD = 	Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
+	Z = 	Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
 			Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
 			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
 			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
-	return OPD
+	return Z

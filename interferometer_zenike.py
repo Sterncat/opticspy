@@ -19,7 +19,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	def wavenumber(n):
 	     return n*lambda_1/PR
 	coefficients_new =  map(wavenumber, coefficients)
-	OPD = 	__zernike__.zernike2opd(x,y,coefficients_new)
+	OPD = 	__zernike__.__zernikecartesian__(coefficients_new,x,y)
 	ph = 2 * __np__.pi / lambda_1 * OPD
 
 	I1 = 1
