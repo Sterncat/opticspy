@@ -1,3 +1,10 @@
+import numpy as __np__
+from numpy import cos as cos
+from numpy import sin as sin
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
 class Coefficient(object):
 	__coefficients__ = []
 	__zernikelist__ = [ "Piston or Bias",
@@ -95,6 +102,63 @@ class Coefficient(object):
 		for i in self.__zernikelist__:
 			print "Z"+str(m)+":"+i
 			m = m + 1
+	def zernikesurface(self):
+		theta = __np__.linspace(0, 2*__np__.pi, 50)
+		rho = __np__.linspace(0, 1, 50)
+		[u,r] = __np__.meshgrid(theta,rho)
+		X = r*cos(u)
+		Y = r*sin(u)
+		Z = self.__coefficients__
+		Z0  =  Z[0]  * 1
+		Z1  =  Z[1]  * r*cos(u)
+		Z2  =  Z[2]  * r*sin(u)
+		Z3  =  Z[3]  * (2*r**2-1)
+		Z4  =  Z[4]  * r**2*cos(2*u)
+		Z5  =  Z[5]  * r**2*sin(2*u)
+		Z6  =  Z[6]  * (3*r**2-2)*r*cos(u)
+		Z7  =  Z[7]  * (3*r**2-2)*r*sin(u)
+		Z8  =  Z[8]  * (1-6*r**2+6*r**4)
+		Z9  =  Z[9]  * r**3*cos(3*u)
+		Z10 =  Z[10] * r**3*sin(3*u)
+		Z11 =  Z[11] * (4*r**2-3)*r**2*cos(2*u)
+		Z12 =  Z[12] * (4*r**2-3)*r**2*sin(2*u)
+		Z13 =  Z[13] * (10*r**4-12*r**2+3)*r*cos(u)
+		Z14 =  Z[14] * (10*r**4-12*r**2+3)*r*sin(u)
+		Z15 =  Z[15] * (20*r**6-30*r**4+12*r**2-1)
+		Z16 =  Z[16] * r**4*cos(4*u)
+		Z17 =  Z[17] * r**4*sin(4*u)
+		Z18 =  Z[18] * (5*r**2-4)*r**3*cos(3*u)
+		Z19 =  Z[19] * (5*r**2-4)*r**3*sin(3*u)
+		Z20 =  Z[20] * (15*r**4-20*r**2+6)*r**2*cos(2*u)
+		Z21 =  Z[21] * (15*r**4-20*r**2+6)*r**2*sin(2*u)
+		Z22 =  Z[22] * (35*r**6-60*r**4+30*r**2-4)*r*cos(u)
+		Z23 =  Z[23] * (35*r**6-60*r**4+30*r**2-4)*r*sin(u)
+		Z24 =  Z[24] * (70*r**8-140*r**6+90*r**4-20*r**2+1)
+		Z25 =  Z[25] * r**5*cos(5*u)
+		Z26 =  Z[26] * r**5*sin(5*u)
+		Z27 =  Z[27] * (6*r**2-5)*r**4*cos(4*u)
+		Z28 =  Z[28] * (6*r**2-5)*r**4*sin(4*u)
+		Z29 =  Z[29] * (21*r**4-30*r**2+10)*r**3*cos(3*u)
+		Z30 =  Z[30] * (21*r**4-30*r**2+10)*r**3*sin(3*u)
+		Z31 =  Z[31] * (56*r**6-105*r**4+60*r**2-10)*r**2*cos(2*u)
+		Z32 =  Z[32] * (56*r**6-105*r**4+60*r**2-10)*r**2*sin(2*u)
+		Z33 =  Z[33] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*cos(u)
+		Z34 =  Z[34] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*sin(u)
+		Z35 =  Z[35] * (252*r**10-630*r**8+560*r**6-210*r**4+30*r**2-1)
+		Z = Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
+			Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
+			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
+			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
+		fig = plt.figure()
+		ax = fig.gca(projection='3d')
+		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm,
+	        linewidth=0, antialiased=False)
+		#ax.set_zlim(-1, 1)
+		ax.zaxis.set_major_locator(LinearLocator(10))
+		ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+
+		fig.colorbar(surf, shrink=0.5, aspect=5)
+		plt.show()
 
 
 def zernike2opd(x,y,Z):
@@ -148,21 +212,3 @@ def zernike2opd(x,y,Z):
 			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
 			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
 	return OPD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
