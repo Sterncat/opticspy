@@ -2,9 +2,10 @@ import numpy as __np__
 from numpy import cos as cos
 from numpy import sin as sin
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
+from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
+from matplotlib import cm as __cm__
+from matplotlib.ticker import LinearLocator as __LinearLocator__
+from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 class Coefficient(object):
 	__coefficients__ = []
 	__zernikelist__ = [ "Piston or Bias",
@@ -151,11 +152,11 @@ class Coefficient(object):
 			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
 		fig = plt.figure()
 		ax = fig.gca(projection='3d')
-		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm,
+		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.coolwarm,
 	        linewidth=0, antialiased=False)
 		#ax.set_zlim(-1, 1)
-		ax.zaxis.set_major_locator(LinearLocator(10))
-		ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+		ax.zaxis.set_major_locator(__LinearLocator__(10))
+		ax.zaxis.set_major_formatter(__FormatStrFormatter__('%.02f'))
 
 		fig.colorbar(surf, shrink=0.5, aspect=5)
 		plt.show()
