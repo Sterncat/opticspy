@@ -11,72 +11,7 @@ from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 class Coefficient(object):
 	"""
 	Return a set of Zernike Polynomials Coefficient
-
-	These are the operations that Coefficient support:
-	------------------------------------------------
-	listcoefficient():
-
-	List the coefficient in Coefficient
-
-	------------------------------------------------
-	zernikelist():
-
-	List all Zernike Polynomials
-
-	------------------------------------------------
-	zernikesurface(self, label_1 = True):
-
-	Return a 3D Zernike Polynomials surface figure
-
-	label_1: default show label
-
-	------------------------------------------------
-	zernikemap(self, label_1 = True):
-
-	Return a 2D Zernike Polynomials map figure
-
-	label_1: default show label
-
-	------------------------------------------------
-	zernikeline()
-
-	Return a 1D cutoff through x and y axis of a 3D 
-	Zernike Polynomials surface figure
-	
-	================================================
-	Internal method:
-	------------------------------------------------
-	__init__(self, 
-			Z0=0, Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, 
-			Z8=0, Z9=0, Z10=0, Z11=0, Z12=0, Z13=0, Z14=0, 
-			Z15=0, Z16=0, Z17=0, Z18=0, Z19=0, Z20=0, Z21=0, 
-			Z22=0, Z23=0, Z24=0, Z25=0, Z26=0, Z27=0, Z28=0, 
-			Z29=0, Z30=0, Z31=0, Z32=0, Z33=0, Z34=0, Z35=0):
-	
-	Initialize function
-	------------------------------------------------
-	__zernikepolar__(coefficient,r,u):
-
-	Return combined aberration
-
-	Zernike Polynomials Caculation in polar coordinates
-
-	coefficient: Zernike Polynomials Coefficient from input
-	r: rho in polar coordinates
-	u: theta in polar coordinates
-
-	------------------------------------------------
-	__zernikecartesian__(coefficient,x,y):
-
-	Return combined aberration
-
-	Zernike Polynomials Caculation in Cartesian coordinates
-
-	coefficient: Zernike Polynomials Coefficient from input
-	x: x in Cartesian coordinates
-	y: y in Cartesian coordinates
 	"""
-
 	__coefficients__ = []
 	__zernikelist__ = [ "Piston or Bias",
 						"Tilt x",
@@ -127,6 +62,14 @@ class Coefficient(object):
 					Z20, Z21, Z22, Z23, Z24, Z25, Z26, Z27, Z28, \
 					Z29, Z30, Z31, Z32, Z33, Z34, Z35,]
 	def listcoefficient(self):
+		"""
+		------------------------------------------------
+		listcoefficient():
+
+		List the coefficient in Coefficient
+
+		------------------------------------------------
+		"""
 		m = 0
 		label1 = ""
 		label2 = ""
@@ -139,12 +82,30 @@ class Coefficient(object):
 		return [label1,label2]
 
 	def zernikelist(self):
+		"""
+		------------------------------------------------
+		zernikelist():
+
+		List all Zernike Polynomials
+
+		------------------------------------------------
+		"""
 		m = 0
 		for i in self.__zernikelist__:
 			print "Z"+str(m)+":"+i
 			m = m + 1
 
-	def zernikesurface(self, label_1 = True):
+	def zernikesurface(self, label = True):
+		"""
+		------------------------------------------------
+		zernikesurface(self, label_1 = True):
+
+		Return a 3D Zernike Polynomials surface figure
+
+		label_1: default show label
+
+		------------------------------------------------
+		"""
 		theta = __np__.linspace(0, 2*__np__.pi, 50)
 		rho = __np__.linspace(0, 1, 50)
 		[u,r] = __np__.meshgrid(theta,rho)
@@ -162,15 +123,27 @@ class Coefficient(object):
 
 		cset = ax.contourf(X, Y, Z, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
 
-		fig.colorbar(surf, shrink=0.5, aspect=5)
+		fig.colorbar(surf, shrink=1, aspect=30)
 
-		label = self.listcoefficient()[0]
-		if label_1 == True:
-			__plt__.title('Zernike Polynomials Surface',fontsize=15)
-			ax.text2D(0.02, 0.1, label, transform=ax.transAxes)
+		label_1 = self.listcoefficient()[0]
+		if label == True:
+			__plt__.title('Zernike Polynomials Surface',fontsize=12)
+			ax.text2D(0.02, 0.1, label_1, transform=ax.transAxes)
 		__plt__.show()
 
-	def zernikemap(self, label_1 = True):
+	def zernikemap(self, label = True):
+		"""
+		------------------------------------------------
+		zernikemap(self, label_1 = True):
+
+		Return a 2D Zernike Polynomials map figure
+
+		label_1: default show label
+
+		------------------------------------------------
+		"""
+
+
 		theta = __np__.linspace(0, 2*__np__.pi, 100)
 		rho = __np__.linspace(0, 1, 100)
 		[u,r] = __np__.meshgrid(theta,rho)
@@ -181,14 +154,23 @@ class Coefficient(object):
 		ax = fig.gca()
 		im = __plt__.pcolormesh(X, Y, Z, cmap=__cm__.RdYlGn)
 
-		if label_1 == True:
-			__plt__.title('Zernike Polynomials Surface Map',fontsize=15)
+		if label == True:
+			__plt__.title('Zernike Polynomials Surface Map',fontsize=12)
 			ax.set_xlabel(self.listcoefficient()[1])
-
 		__plt__.colorbar()
+		ax.set_aspect('equal', 'datalim')
 		__plt__.show()
 
 	def zernikeline(self):
+		"""
+		------------------------------------------------
+		zernikeline()
+
+		Return a 1D cutoff through x and y axis of a 3D 
+		Zernike Polynomials surface figure
+		------------------------------------------------
+		"""
+
 		X = __np__.linspace(-1, 1, 100)
 		Y = __np__.linspace(-1, 1, 100)
 		ZX = __zernikecartesian__(self.__coefficients__,X,0)
@@ -201,6 +183,20 @@ class Coefficient(object):
 		__plt__.show()
 
 def __zernikepolar__(coefficient,r,u):
+	"""
+	------------------------------------------------
+	__zernikepolar__(coefficient,r,u):
+
+	Return combined aberration
+
+	Zernike Polynomials Caculation in polar coordinates
+
+	coefficient: Zernike Polynomials Coefficient from input
+	r: rho in polar coordinates
+	u: theta in polar coordinates
+
+	------------------------------------------------
+	"""
 	Z = coefficient
 	Z0  =  Z[0]  * 1                                 
 	Z1  =  Z[1]  * r*__cos__(u)
@@ -246,6 +242,19 @@ def __zernikepolar__(coefficient,r,u):
 	return Z
 
 def __zernikecartesian__(coefficient,x,y):
+	"""
+	------------------------------------------------
+	__zernikecartesian__(coefficient,x,y):
+
+	Return combined aberration
+
+	Zernike Polynomials Caculation in Cartesian coordinates
+
+	coefficient: Zernike Polynomials Coefficient from input
+	x: x in Cartesian coordinates
+	y: y in Cartesian coordinates
+	------------------------------------------------
+	"""
 	Z = coefficient
 	S = x**2 + y**2
 	Z0  =  Z[0]  * 1
