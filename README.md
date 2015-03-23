@@ -1,36 +1,67 @@
 
-###Begin to develop python module opticspy
+#opticspy  
 
-I want to this for a long time. And I think it is nice and interesting to develop some python module for myself. One reason is to practice python programming and the other reason is that there not much opensource easy-to-use optics program module(matlab has great fuctions but do not specify to optics application).
+Opticspy is a python module for optics application. I want to this for a long time. One reason is I know both optics and python, so why no develop some optics tools? The second reason is that there is not much opensource, easy-to-use optics program module(matlab has great fuctions but do not specify to optics application). I want this could be developed in to a core for a future web application for optics.
 
-This project is hosted on github in [https://github.com/Sterncat/opticspy](https://github.com/Sterncat/opticspy)
+###There are some examples opticspy module:   
+   
+####1. [Aperture Method](http://sterncat.github.io/files/Aperture_Method.html)    
+  
+####2. [Interferometer Method](http://sterncat.github.io/files/Interferometer_Method.html)  
+  
+####3. [Zernike Method](http://sterncat.github.io/files/Zernike_Method.html)    
+  
+####This is the [Opticspy project page](http://sterncat.github.io/opticspy/)
 
-### What should contain in the module
-It is just a note for myself. I think the module should contain these things in optics(list will change)
+####This project is hosted on github in [https://github.com/Sterncat/opticspy](https://github.com/Sterncat/opticspy)
+
+##How to use
+```
+>>> import opticspy
+```
+
+And just have fun with it!
+
+## What I want
+<ul>	
+  <li>1. After import the module and you will get some functions that can do some calculation and education in optics</li>
+  <li>2. Parameters should be very flexible, and the results should be shown in visualized, intuitionistic figures.</li>
+  <li>3. After development of core, I want it be dynamic web application(with Javascript)</li>
+  <li>4. I even hope one day it will become a part of online optics design application, who knows?</li>
+</ul>
+
+
+## What I want to contain in the module
+I think the module should contain bunch of things in optics.
 <ul>
   <li>1. Diffraction: generate diffraction pattern</li>
   <li>2. Geometric matrix calculation</li>
-  <li>3. OTF and MTF calculation</li>
-  <li>4. Several interferogram</li>
+  <li>3. PSF, OTF and MTF calculation</li>
+  <li>4. Several interferogram(Twyman Green, Shearing, etc)</li>
+  <li>5. Ray tracing</li>
+  <li>6. Zernike coefficients, surface and surface fitting</li>
+  <li>7. Third and high order aberration calculation</li>
 </ul>
 
-### What I want
-<ul>	
-  <li>1. After import the module and you will get some functions that can use to do some calculation and education in optics</li>
-    <li>2. Parameters should be very flexible, and the results should be shown in visualized, intuitionistic figures.</li>
-    <li>3. After development of core, I want it be dynamic web application(with Javascript)</li>
-</ul>
-
-### What I have done
-> [Here](http://sterncat.github.io/files/opticspy_1.html) is some example of this opticspy module.
+## What I have done
 
 <ul>
   <li>1. Rectangular, circle diffraction pattern, OTF</li>
-  <li>2. Third order ray abberation plot</li>
+  <li>2. Third order ray aberration plot</li>
   <li>3. Twyman_Green interferogram with aberration</li>
   <li>4. Lateral Shear interferogram with aberration</li>
-  <li>5. Zernike Coefficient</li>
+  <li>5. Zernike Coefficient calculation</li>
+  <li>6. Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D)</li>
 </ul>
+
+##Authors and Contributors
+I am Xing Fan. An optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/). 
+
+And this is my personal blog [Marvin's Neverland!](http://sterncat.github.io)
+
+##Support or Contact
+If you have questions and advice, or want to participate in this project, contact me at marvin.fanxing@gmail.com. I would be very happy to find some one have the same interest!
+
 
 
 ###MIT License
