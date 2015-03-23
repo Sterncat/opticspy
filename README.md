@@ -5,11 +5,11 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ###There are some examples opticspy module:   
    
-####1. [Aperture Method](http://sterncat.github.io/files/Aperture_Method.html)    
+####1. [Aperture Methods](http://sterncat.github.io/files/Aperture_Method.html)    
   
-####2. [Interferometer Method](http://sterncat.github.io/files/Interferometer_Method.html)  
+####2. [Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html)  
   
-####3. [Zernike Method](http://sterncat.github.io/files/Zernike_Method.html)    
+####3. [Zernike Methods](http://sterncat.github.io/files/Zernike_Method.html)    
   
 ####This is the [Opticspy project page](http://sterncat.github.io/opticspy/)
 
