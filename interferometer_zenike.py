@@ -11,6 +11,24 @@ def __makecircle__(a, r, PR):
 				a[i,j] = max
 
 def twyman_green(coefficients, lambda_1 = 632, PR = 1):
+	"""
+	Genertate Twyman_Green Interferogram based on zernike polynomials
+	=============================================
+	
+	input
+	----------------------------------------------
+	
+	Class zernike polynomials coefficients in wavenumber
+	 
+	see Class:opticspy.zernike.Coefficients
+	
+	lambda_1: wavelength in nanometer, default = 632nm
+	PR: pupil radius, default = 1
+
+	output
+	----------------------------------------------
+	Interferogram of aberration
+	"""
 	lambda_1 = lambda_1*(10**-9)
 	coefficients = coefficients.__coefficients__
 	r = __np__.linspace(-PR, PR, 400)

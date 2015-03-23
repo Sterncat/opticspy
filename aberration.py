@@ -1,6 +1,7 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 def third(s1,s2,s3,s4,s5):
+	
 	"""
 	Third order aberrations:
 	Ray aberrations
@@ -12,6 +13,8 @@ def third(s1,s2,s3,s4,s5):
 
 	output: third order aberration graph
 	"""
+
+
 	print "third order aberration"
 	py = __np__.linspace(-1,1,100)
 	px = __np__.linspace(0,1,50)

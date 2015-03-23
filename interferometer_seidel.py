@@ -11,7 +11,7 @@ def __makecircle__(a, r, PR):
 
 def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	"""
-	Genertate Twyman_Green Interferogram
+	Genertate Twyman_Green Interferogram based on Seidel aberration
 	=============================================
 	
 	input
