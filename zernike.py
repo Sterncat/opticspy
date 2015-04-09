@@ -58,12 +58,14 @@ class Coefficient(object):
 			Z22=0, Z23=0, Z24=0, Z25=0, Z26=0, Z27=0, Z28=0, \
 			Z29=0, Z30=0, Z31=0, Z32=0, Z33=0, Z34=0, Z35=0, Z36=0):
 		if type(Z1) == list:
-			self.__coefficients__ = Z1 + [0]*(37-len(Z1))
+			self.__coefficients__ = Z1 + [0]*(36-len(Z1))
 		else:
-			self.__coefficients__ = [Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9, Z10, \
-					Z11, Z12, Z13, Z14, Z15, Z16, Z17, Z18, Z19, \
-					Z20, Z21, Z22, Z23, Z24, Z25, Z26, Z27, Z28, \
-					Z29, Z30, Z31, Z32, Z33, Z34, Z35,Z36]
+			self.__coefficients__ = [Z1, Z2, Z3, Z4, Z5, Z6, Z7, 
+					Z8, Z9, Z10, Z11, Z12, Z13, Z14, Z15, Z16, Z17, 
+					Z18, Z19, Z20, Z21, Z22, Z23, Z24, Z25, Z26, 
+					Z27, Z28, Z29, Z30, Z31, Z32, Z33, Z34, Z35, Z36]
+	def outputcoefficient(self):
+		return self.__coefficients__
 	def listcoefficient(self):
 		"""
 		------------------------------------------------
@@ -133,7 +135,7 @@ class Coefficient(object):
 			__plt__.title('Zernike Polynomials Surface',fontsize=12)
 			ax.text2D(0.02, 0.1, label_1, transform=ax.transAxes)
 		__plt__.show()
-		return [X,Y,Z]
+		#return [X,Y,Z]
 
 	def zernikemap(self, label = True):
 		"""
@@ -185,15 +187,24 @@ class Coefficient(object):
 		__plt__.plot(Y,ZY)
 		__plt__.grid()
 		__plt__.show()
-def fitting(Z):
+def fitting(Z,n):
+	fitlist = []
 	l = len(Z)
-	theta = __np__.linspace(0, 2*__np__.pi, l)
-	rho = __np__.linspace(0, 1, l)
-	a = 0
-	for i in range(l):       #theta
-		for j in range(l):   #rho
-			a = a + Z[j][i]*(1-6*rho[j]**2+6*rho[j]**4)*rho[j]
-	return a
+	x2 = __np__.linspace(-1, 1, l)
+	y2 = __np__.linspace(-1, 1, l)
+	[X2,Y2] = __np__.meshgrid(x2,y2)
+	r = __np__.sqrt(X2**2 + Y2**2)
+	u = __np__.arctan2(Y2, X2)
+	for i in range(n):
+		C = [0]*i+[1]+[0]*(36-i-1)
+		ZF = __zernikepolar__(C,r,u)
+		for i in range(l):
+			for j in range(l):
+				if x2[i]**2+y2[j]**2>1:
+					ZF[i][j]=0
+		a = sum(sum(Z*ZF))*2*2/l/l/__np__.pi
+		fitlist.append(round(a,3))
+	return fitlist
 def peak2valley(Z):
 	return Z.max()-Z.min()
 
@@ -217,7 +228,7 @@ def __zernikepolar__(coefficient,r,u):
 	------------------------------------------------
 	"""
 	Z = [0]+coefficient
-	Z1  =  Z[1]  * 1                                 
+	Z1  =  Z[1]  * 1*(__cos__(u)**2+__sin__(u)**2)                                 
 	Z2  =  Z[2]  * 2*r*__cos__(u)
 	Z3  =  Z[3]  * 2*r*__sin__(u)
 	Z4  =  Z[4]  * __sqrt__(3)*(2*r**2-1)
@@ -276,52 +287,46 @@ def __zernikecartesian__(coefficient,x,y):
 	y: y in Cartesian coordinates
 	------------------------------------------------
 	"""
-	Z = coefficient
-	S = x**2 + y**2
-	Z0  =  Z[0]  * 1
-	Z1  =  Z[1]  * x
-	Z2  =  Z[2]  * y
-	Z3  =  Z[3]  * (-1+2*S)
-	Z4  =  Z[4]  * S
-	Z5  =  Z[5]  * (2*x*y)
-	Z6  =  Z[6]  * (-2*x+3*x*S)
-	Z7  =  Z[7]  * (1-2*y-6*S+3*y*S+6*S**2)
-	Z8  =  Z[8]  * (1-6*S+6*S**2)
-	Z9  =  Z[9]  * (x**3-3*x*y)
-	Z10 =  Z[10] * (3*x**2*y-y**3)
-	Z11 =  Z[11] * (-3*x**2+3*y**2+4*x**2*S-4*y**2*S)
-	Z12 =  Z[12] * (-6*x*y+8*x*y*(x**2+y**2))
-	Z13 =  Z[13] * (3*x-12*x*S+10*x*S**2)
-	Z14 =  Z[14] * (3*y-12*y*S+10*y*S**2)
-	Z15 =  Z[15] * (-1+12*S-30*S**2+20*S**3)
-	Z16 =  Z[16] * (x**4-6*x**2*y**2+y**4)
-	Z17 =  Z[17] * (4*x**3*y-4*x*y**3)
-	Z18 =  Z[18] * (-4*x**3+12*x*y**2+5*x**3*S-15*x*y**2*S)
-	Z19 =  Z[19] * (-12*x**2*y+4*y**3+15*x**2*y*S-5*y**3*S)
-	Z20 =  Z[20] * (6*x**2-6*y**2-20*x**2*S+20*y**2*S+\
-					15*x**2*S**2-15*y**2*S**2)
-	Z21 =  Z[21] * (12*x*y-40*x*y*S+30*x*y*S*2)
-	Z22 =  Z[22] * (-4*x+30*x*S-60*x*S**2+35*x*S**3)
-	Z23 =  Z[23] * (-4*y+30*y*S-60*y*S**2+35*y*S**3)
-	Z24 =  Z[24] * (1-20*S+90*S**2-140*S**3+70*S**4)
-	Z25 =  Z[25] * (x**5-10*x**3*y**2+5*x*y**4)
-	Z26 =  Z[26] * (5*x**4*y-10*x**2*y**3+y**5)
-	Z27 =  Z[27] * (-5*x**4+30*x**2*y**2-5*y**4+6*x**4*S-\
-					36*x**2*y**2*S+6*y**4*S)
-	Z28 =  Z[28] * (-20*x**3*y+20*x*y**3+24*x**3*y*S-24*x*y**3*S)
-	Z29 =  Z[29] * (10*x**3-30*x*y**2-30*x**3*S+90*x*y**2*S+\
-					21*x**3*S**2-63*x*y**2*S**2)
-	Z30 =  Z[30] * (30*x**2*y-10*y**3-90*x**2*y*S+30*y**3*S+\
-					63*x**2*y*S**2-21*y**3*S**2)
-	Z31 =  Z[31] * (-10*x**2+10*y**2+60*x**2*S-60*y**2*S-\
-					105*x**2*S**2+105*y**2*S**2+\
-					56*x**2*S**3-56*y**2*S**3)
-	Z32 =  Z[32] * (-20*x*y+120*x*y*S-210*x*y*S**2+112*x*y*S**3)
-	Z33 =  Z[33] * (5*x-60*x*S+210*x*S**2-280*x*S**3+126*x*S**4)
-	Z34 =  Z[34] * (5*y-60*y*S+210*y*S**2-280*y*S**3+126*y*S**4)
-	Z35 =  Z[35] * (-1+30*S-210*S**2+560*S**3-630*S**4+252*S**5)
-	Z = 	Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
+	Z = [0]+coefficient
+	r = __sqrt__(x**2 + y**2)
+	Z1  =  Z[1]  * 1
+	Z2  =  Z[2]  * 2*x
+	Z3  =  Z[3]  * 2*y
+	Z4  =  Z[4]  * __sqrt__(3)*(2*r**2-1)
+	Z5  =  Z[5]  * 2*__sqrt__(6)*x*y
+	Z6  =  Z[6]  * __sqrt__(6)*(x**2-y**2)
+	Z7  =  Z[7]  * __sqrt__(8)*y*(3*r**2-2)
+	Z8  =  Z[8]  * __sqrt__(8)*x*(3*r**2-2)
+	Z9  =  Z[9]  * __sqrt__(8)*y*(3*x**2-y**2)
+	Z10 =  Z[10] * __sqrt__(8)*x*(x**2-3*y**2)
+	Z11 =  Z[11] * __sqrt__(5)*(6*r**4-6*r**2+1)
+	Z12 =  Z[12] * __sqrt__(10)*(x**2-y**2)*(4*r**2-3)
+	Z13 =  Z[13] * 2*__sqrt__(10)*x*y*(4*r**2-3)
+	Z14 =  Z[14] * __sqrt__(10)*(r**4-8*x**2*y**2)
+	Z15 =  Z[15] * 4*__sqrt__(10)*x*y*(x**2-y**2)
+	Z16 =  Z[16] * __sqrt__(12)*x*(10*r**4-12*r**2+3)
+	Z17 =  Z[17] * __sqrt__(12)*y*(10*r**4-12*r**2+3)
+	Z18 =  Z[18] * __sqrt__(12)*x*(x**2-3*y**2)*(5*r**2-4)
+	Z19 =  Z[19] * __sqrt__(12)*y*(3*x**2-y**2)*(5*r**2-4)
+	Z20 =  Z[20] * __sqrt__(12)*x*(16*x**4-20*x**2*r**2+5*r**4)
+	Z21 =  Z[21] * __sqrt__(12)*y*(16*y**4-20*y**2*r**2+5*r**4)
+	Z22 =  Z[22] * __sqrt__(7)*(20*r**6-30*r**4+12*r**2-1)
+	Z23 =  Z[23] * 2*__sqrt__(14)*x*y*(15*r**4-20*r**2+6)
+	Z24 =  Z[24] * __sqrt__(14)*(x**2-y**2)*(15*r**4-20*r**2+6)
+	Z25 =  Z[25] * 4*__sqrt__(14)*x*y*(x**2-y**2)*(6*r**2-5)
+	Z26 =  Z[26] * __sqrt__(14)*(8*x**4-8*x**2*r**2+r**4)*(6*r**2-5)
+	Z27 =  Z[27] * __sqrt__(14)*x*y*(32*x**4-32*x**2*r**2+6*r**4)
+	Z28 =  Z[28] * __sqrt__(14)*(32*x**6-48*x**4*r**2+18*x**2*r**4-r**6)
+	Z29 =  Z[29]
+	Z30 =  Z[30]
+	Z31 =  Z[31]
+	Z32 =  Z[32]
+	Z33 =  Z[33]
+	Z34 =  Z[34]
+	Z35 =  Z[35]
+	Z36 =  Z[36]
+	Z = 	Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
 			Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
 			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
-			Z30+ Z31+ Z32+ Z33+ Z34+ Z35
+			Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36
 	return Z
