@@ -187,7 +187,28 @@ class Coefficient(object):
 		__plt__.plot(Y,ZY)
 		__plt__.grid()
 		__plt__.show()
-def fitting(Z,n):
+def fitting(Z,n,remain=False):
+	"""
+	------------------------------------------------
+	fitting(Z,n)
+
+	Fitting an aberration to several orthonormal Zernike
+	polynomials.
+
+	Return: zernike coefficient for fitting surface
+
+	Input: 
+	Z: A surface or aberration matrix measure from inteferometer
+	   or something else.
+
+	n: How many order of Zernike Polynomials you want to fit
+
+	reamin(default==Flase): show the surface after remove fitting
+	aberrations. 
+	------------------------------------------------
+	"""
+
+
 	fitlist = []
 	l = len(Z)
 	x2 = __np__.linspace(-1, 1, l)
@@ -204,7 +225,33 @@ def fitting(Z,n):
 					ZF[i][j]=0
 		a = sum(sum(Z*ZF))*2*2/l/l/__np__.pi
 		fitlist.append(round(a,3))
-	return fitlist
+	if remain == True:
+		l1 = len(fitlist)
+		fitlist = fitlist+[0]*(36-l1)
+		Z_new = Z - __zernikepolar__(fitlist,r,u)
+		for i in range(l):
+			for j in range(l):
+				if x2[i]**2+y2[j]**2>1:
+					Z_new[i][j]=0
+		fig = __plt__.figure()
+		ax = fig.gca(projection='3d')
+		surf = ax.plot_surface(X2, Y2, Z_new, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
+	        linewidth=0, antialiased=False, alpha = 0.6)
+		v = max(abs(Z.max()),abs(Z.min()))
+		ax.set_zlim(-v, v)
+		ax.zaxis.set_major_locator(__LinearLocator__(10))
+		ax.zaxis.set_major_formatter(__FormatStrFormatter__('%.02f'))
+		cset = ax.contourf(X2, Y2, Z_new, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
+		fig.colorbar(surf, shrink=1, aspect=30)
+		__plt__.title('Remaining Aberration',fontsize=12)
+		p2v = round(peak2valley(Z_new),5)
+		rms1 = round(rms(Z_new),5)
+		label_new = "P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
+		ax.text2D(0.02, 0.1,label_new, transform=ax.transAxes)
+		__plt__.show()
+		return fitlist		
+	else:
+		return fitlist
 def peak2valley(Z):
 	return Z.max()-Z.min()
 
