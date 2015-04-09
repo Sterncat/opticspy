@@ -1,6 +1,7 @@
 import numpy as __np__
 from numpy import cos as __cos__
 from numpy import sin as __sin__
+from numpy import sqrt as __sqrt__
 import matplotlib.pyplot as __plt__
 from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
@@ -51,16 +52,18 @@ class Coefficient(object):
 						"Quaternary Spherical"]
 
 	def __init__(self, 
-			Z0=0, Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, \
+			Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, \
 			Z8=0, Z9=0, Z10=0, Z11=0, Z12=0, Z13=0, Z14=0, \
 			Z15=0, Z16=0, Z17=0, Z18=0, Z19=0, Z20=0, Z21=0, \
 			Z22=0, Z23=0, Z24=0, Z25=0, Z26=0, Z27=0, Z28=0, \
-			Z29=0, Z30=0, Z31=0, Z32=0, Z33=0, Z34=0, Z35=0):
-
-		self.__coefficients__ = [Z0, Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9, Z10, \
+			Z29=0, Z30=0, Z31=0, Z32=0, Z33=0, Z34=0, Z35=0, Z36=0):
+		if type(Z1) == list:
+			self.__coefficients__ = Z1 + [0]*(37-len(Z1))
+		else:
+			self.__coefficients__ = [Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9, Z10, \
 					Z11, Z12, Z13, Z14, Z15, Z16, Z17, Z18, Z19, \
 					Z20, Z21, Z22, Z23, Z24, Z25, Z26, Z27, Z28, \
-					Z29, Z30, Z31, Z32, Z33, Z34, Z35,]
+					Z29, Z30, Z31, Z32, Z33, Z34, Z35,Z36]
 	def listcoefficient(self):
 		"""
 		------------------------------------------------
@@ -130,6 +133,7 @@ class Coefficient(object):
 			__plt__.title('Zernike Polynomials Surface',fontsize=12)
 			ax.text2D(0.02, 0.1, label_1, transform=ax.transAxes)
 		__plt__.show()
+		return [X,Y,Z]
 
 	def zernikemap(self, label = True):
 		"""
@@ -181,6 +185,21 @@ class Coefficient(object):
 		__plt__.plot(Y,ZY)
 		__plt__.grid()
 		__plt__.show()
+def fitting(Z):
+	l = len(Z)
+	theta = __np__.linspace(0, 2*__np__.pi, l)
+	rho = __np__.linspace(0, 1, l)
+	a = 0
+	for i in range(l):       #theta
+		for j in range(l):   #rho
+			a = a + Z[j][i]*(1-6*rho[j]**2+6*rho[j]**4)*rho[j]
+	return a
+def peak2valley(Z):
+	return Z.max()-Z.min()
+
+def rms(Z):
+	rms = __np__.sqrt(__np__.mean(__np__.square(Z)))
+	return rms
 
 def __zernikepolar__(coefficient,r,u):
 	"""
@@ -197,48 +216,50 @@ def __zernikepolar__(coefficient,r,u):
 
 	------------------------------------------------
 	"""
-	Z = coefficient
-	Z0  =  Z[0]  * 1                                 
-	Z1  =  Z[1]  * r*__cos__(u)
-	Z2  =  Z[2]  * r*__sin__(u)
-	Z3  =  Z[3]  * (2*r**2-1)
-	Z4  =  Z[4]  * r**2*__cos__(2*u)
-	Z5  =  Z[5]  * r**2*__sin__(2*u)
-	Z6  =  Z[6]  * (3*r**2-2)*r*__cos__(u)
-	Z7  =  Z[7]  * (3*r**2-2)*r*__sin__(u)
-	Z8  =  Z[8]  * (1-6*r**2+6*r**4)
-	Z9  =  Z[9]  * r**3*__cos__(3*u)
-	Z10 =  Z[10] * r**3*__sin__(3*u)
-	Z11 =  Z[11] * (4*r**2-3)*r**2*__cos__(2*u)
-	Z12 =  Z[12] * (4*r**2-3)*r**2*__sin__(2*u)
-	Z13 =  Z[13] * (10*r**4-12*r**2+3)*r*__cos__(u)
-	Z14 =  Z[14] * (10*r**4-12*r**2+3)*r*__sin__(u)
-	Z15 =  Z[15] * (20*r**6-30*r**4+12*r**2-1)
-	Z16 =  Z[16] * r**4*__cos__(4*u)
-	Z17 =  Z[17] * r**4*__sin__(4*u)
-	Z18 =  Z[18] * (5*r**2-4)*r**3*__cos__(3*u)
-	Z19 =  Z[19] * (5*r**2-4)*r**3*__sin__(3*u)
-	Z20 =  Z[20] * (15*r**4-20*r**2+6)*r**2*__cos__(2*u)
-	Z21 =  Z[21] * (15*r**4-20*r**2+6)*r**2*__sin__(2*u)
-	Z22 =  Z[22] * (35*r**6-60*r**4+30*r**2-4)*r*__cos__(u)
-	Z23 =  Z[23] * (35*r**6-60*r**4+30*r**2-4)*r*__sin__(u)
-	Z24 =  Z[24] * (70*r**8-140*r**6+90*r**4-20*r**2+1)
-	Z25 =  Z[25] * r**5*__cos__(5*u)
-	Z26 =  Z[26] * r**5*__sin__(5*u)
-	Z27 =  Z[27] * (6*r**2-5)*r**4*__cos__(4*u)
-	Z28 =  Z[28] * (6*r**2-5)*r**4*__sin__(4*u)
-	Z29 =  Z[29] * (21*r**4-30*r**2+10)*r**3*__cos__(3*u)
-	Z30 =  Z[30] * (21*r**4-30*r**2+10)*r**3*__sin__(3*u)
-	Z31 =  Z[31] * (56*r**6-105*r**4+60*r**2-10)*r**2*__cos__(2*u)
-	Z32 =  Z[32] * (56*r**6-105*r**4+60*r**2-10)*r**2*__sin__(2*u)
-	Z33 =  Z[33] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*__cos__(u)
-	Z34 =  Z[34] * (126*r**8-280*r**6+210*r**4-60*r**2+5)*r*__sin__(u)
-	Z35 =  Z[35] * (252*r**10-630*r**8+560*r**6-210*r**4+30*r**2-1)
+	Z = [0]+coefficient
+	Z1  =  Z[1]  * 1                                 
+	Z2  =  Z[2]  * 2*r*__cos__(u)
+	Z3  =  Z[3]  * 2*r*__sin__(u)
+	Z4  =  Z[4]  * __sqrt__(3)*(2*r**2-1)
+	Z5  =  Z[5]  * __sqrt__(6)*r**2*__sin__(2*u)
+	Z6  =  Z[6]  * __sqrt__(6)*r**2*__cos__(2*u)
+	Z7  =  Z[7]  * __sqrt__(8)*(3*r**2-2)*r*__sin__(u)
+	Z8  =  Z[8]  * __sqrt__(8)*(3*r**2-2)*r*__cos__(u)
+	Z9  =  Z[9]  * __sqrt__(8)*r**3*__sin__(3*u)
+	Z10 =  Z[10] * __sqrt__(8)*r**3*__cos__(3*u)
+	Z11 =  Z[11] * __sqrt__(5)*(1-6*r**2+6*r**4)
+	Z12 =  Z[12] * __sqrt__(10)*(4*r**2-3)*r**2*__cos__(2*u)
+	Z13 =  Z[13] * __sqrt__(10)*(4*r**2-3)*r**2*__sin__(2*u)
+	Z14 =  Z[14] * __sqrt__(10)*r**4*__cos__(4*u)
+	Z15 =  Z[15] * __sqrt__(10)*r**4*__sin__(4*u)
+	Z16 =  Z[16] * __sqrt__(12)*(10*r**4-12*r**2+3)*r*__cos__(u)
+	Z17 =  Z[17] * __sqrt__(12)*(10*r**4-12*r**2+3)*r*__sin__(u)
+	Z18 =  Z[18] * __sqrt__(12)*(5*r**2-4)*r**3*__cos__(3*u)
+	Z19 =  Z[19] * __sqrt__(12)*(5*r**2-4)*r**3*__sin__(3*u)
+	Z20 =  Z[20] * __sqrt__(12)*r**5*__cos__(5*u)
+	Z21 =  Z[21] * __sqrt__(12)*r**5*__sin__(5*u)
+	Z22 =  Z[22] * __sqrt__(7)*(20*r**6-30*r**4+12*r**2-1)
+	Z23 =  Z[23] * __sqrt__(14)*(15*r**4-20*r**2+6)*r**2*__sin__(2*u)
+	Z24 =  Z[24] * __sqrt__(14)*(15*r**4-20*r**2+6)*r**2*__cos__(2*u)
+	Z25 =  Z[25] * __sqrt__(14)*(6*r**2-5)*r**4*__sin__(4*u)
+	Z26 =  Z[26] * __sqrt__(14)*(6*r**2-5)*r**4*__cos__(4*u)
+	Z27 =  Z[27] * __sqrt__(14)*r**6*__sin__(6*u)
+	Z28 =  Z[28] * __sqrt__(14)*r**6*__cos__(6*u)
+	Z29 =  Z[29] * 4*(35*r**6-60*r**4+30*r**2-4)*r*__sin__(u)
+	Z30 =  Z[30] * 4*(35*r**6-60*r**4+30*r**2-4)*r*__cos__(u)
+	Z31 =  Z[31] * 4*(21*r**4-30*r**2+10)*r**3*__sin__(3*u)
+	Z32 =  Z[32] * 4*(21*r**4-30*r**2+10)*r**3*__cos__(3*u)
+	Z33 =  Z[33] * 4*(7*r**2-6)*r**5*__sin__(5*u)
+	Z34 =  Z[34] * 4*(7*r**2-6)*r**5*__cos__(5*u)
+	Z35 =  Z[35] * 4*r**7*__sin__(7*u)
+	Z36 =  Z[36] * 4*r**7*__cos__(7*u)
+	#Z37 =  Z[37] * 3*(70*r**8-140*r**6+90*r**4-20*r**2+1)
 
-	Z = Z0 + Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
+
+	Z = Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
 		Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
 		Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
-		Z30+ Z31+ Z32+ Z33+ Z34+ Z35
+		Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36
 	return Z
 
 def __zernikecartesian__(coefficient,x,y):
