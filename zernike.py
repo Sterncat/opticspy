@@ -14,42 +14,42 @@ class Coefficient(object):
 	Return a set of Zernike Polynomials Coefficient
 	"""
 	__coefficients__ = []
-	__zernikelist__ = [ "Piston or Bias",
-						"Tilt x",
-						"Tilt y",
-						"Power",
-						"Astigmatism x",
-						"Astigmatism y",
-						"Coma x",
-						"Coma y",
-						"Primary Spherical",
-						"Trefoil x",
-						"Trefoil y",
-						"Secondary Astigmatism x",
-						"Secondary Astigmatism y",
-						"Secondary Coma x",
-						"Secondary Coma y",
-						"Secondary Spherical",
-						"Tetrafoil x",
-						"Tetrafoil y",
-						"Secondary Trefoil x",
-						"Secondary Trefoil y",
-						"Tertiary Astigmatism x",
-						"Tertiary Astigmatism y",
-						"Tertiary Coma x",
-						"Tertiary Coma y",
-						"Tertiary Spherical",
-						"Pentafoil x",
-						"Pentafoil y",
-						"Secondary Trefoil x",
-						"Secondary Trefoil y",
-						"Tertiary Trefoil x",
-						"Tertiary Trefoil y",
-						"Quaternary Astigmatism x",
-						"Quaternary Astigmatism y",
-						"Quaternary Coma x",
-						"Quaternary Coma y",
-						"Quaternary Spherical"]
+	__zernikelist__ = [ "Z00 Piston or Bias",
+						"Z11 x Tilt",
+						"Z11 y Tilt",
+						"Z20 Defocus",
+						"Z22 Primary Astigmatism at 45",
+						"Z22 Primary Astigmatism at 0",
+						"Z31 Primary y Coma",
+						"Z31 Primary x Coma",
+						"Z33 y Trefoil",
+						"Z33 x Trefoil",
+						"Z40 Primary Spherical",
+						"Z42 Secondary Astigmatism at 0",
+						"Z42 Secondary Astigmatism at 45",
+						"Z44 x Tetrafoil",
+						"Z44 y Tetrafoil",
+						"Z51 Secondary x Coma",
+						"Z51 Secondary y Coma",
+						"Z53 Secondary x Trefoil",
+						"Z53 Secondary y Trefoil",
+						"Z55 x Pentafoil",
+						"Z55 y Pentafoil",
+						"Z60 Secondary Spherical",
+						"Z62 Tertiary Astigmatism at 45",
+						"Z62 Tertiary Astigmatism at 0",
+						"Z64 Secondary x Trefoil",
+						"Z64 Secondary y Trefoil",
+						"Z66 a",
+						"Z66 b",
+						"Z71 Tertiary y Coma",
+						"Z71 Tertiary x Coma",
+						"Z73 Tertiary y Trefoil",
+						"Z73 Tertiary x Trefoil",
+						"Z75 a",
+						"Z75 b",
+						"Z77 a",
+						"Z77 b"]
 
 	def __init__(self, 
 			Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, \
@@ -80,9 +80,9 @@ class Coefficient(object):
 		label2 = ""
 		for i in self.__coefficients__:
 			if i != 0:
-				print 'Z'+str(m)+' = ',i,self.__zernikelist__[m]
-				label1 = label1 + 'Z'+str(m)+' = '+str(i)+"\n"
-				label2 = label2 + 'Z'+str(m)+' = '+str(i)+"  "
+				print 'Z'+str(m+1)+' = ',i,self.__zernikelist__[m]
+				label1 = label1 + 'Z'+str(m+1)+' = '+str(i)+"\n"
+				label2 = label2 + 'Z'+str(m+1)+' = '+str(i)+"  "
 			m = m + 1
 		return [label1,label2]
 
@@ -111,8 +111,8 @@ class Coefficient(object):
 
 		------------------------------------------------
 		"""
-		theta = __np__.linspace(0, 2*__np__.pi, 50)
-		rho = __np__.linspace(0, 1, 50)
+		theta = __np__.linspace(0, 2*__np__.pi, 100)
+		rho = __np__.linspace(0, 1, 100)
 		[u,r] = __np__.meshgrid(theta,rho)
 		X = r*__cos__(u)
 		Y = r*__sin__(u)
@@ -150,8 +150,8 @@ class Coefficient(object):
 		"""
 
 
-		theta = __np__.linspace(0, 2*__np__.pi, 100)
-		rho = __np__.linspace(0, 1, 100)
+		theta = __np__.linspace(0, 2*__np__.pi, 400)
+		rho = __np__.linspace(0, 1, 400)
 		[u,r] = __np__.meshgrid(theta,rho)
 		X = r*__cos__(u)
 		Y = r*__sin__(u)
