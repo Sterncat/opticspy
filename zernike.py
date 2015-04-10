@@ -100,7 +100,7 @@ class Coefficient(object):
 			print "Z"+str(m)+":"+i
 			m = m + 1
 
-	def zernikesurface(self, label = True):
+	def zernikesurface(self, label = True, zlim=[]):
 		"""
 		------------------------------------------------
 		zernikesurface(self, label_1 = True):
@@ -121,18 +121,26 @@ class Coefficient(object):
 		ax = fig.gca(projection='3d')
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
-		v = max(abs(Z.max()),abs(Z.min()))
-		ax.set_zlim(-v, v)
+		
+		if zlim == []:
+			v = max(abs(Z.max()),abs(Z.min()))
+			ax.set_zlim(-v*5, v*5)
+			cset = ax.contourf(X, Y, Z, zdir='z', offset=-v*5, cmap=__cm__.RdYlGn)
+		else:
+			ax.set_zlim(zlim[0], zlim[1])
+			cset = ax.contourf(X, Y, Z, zdir='z', offset=zlim[0], cmap=__cm__.RdYlGn)
+
 		ax.zaxis.set_major_locator(__LinearLocator__(10))
 		ax.zaxis.set_major_formatter(__FormatStrFormatter__('%.02f'))
-
-		cset = ax.contourf(X, Y, Z, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
-
 		fig.colorbar(surf, shrink=1, aspect=30)
 
-		label_1 = self.listcoefficient()[0]
+
+		p2v = round(peak2valley(Z),5)
+		rms1 = round(rms(Z),5)
+
+		label_1 = self.listcoefficient()[0]+"P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
 		if label == True:
-			__plt__.title('Zernike Polynomials Surface',fontsize=12)
+			__plt__.title('Zernike Polynomials Surface',fontsize=16)
 			ax.text2D(0.02, 0.1, label_1, transform=ax.transAxes)
 		__plt__.show()
 		#return [X,Y,Z]
@@ -161,7 +169,7 @@ class Coefficient(object):
 		im = __plt__.pcolormesh(X, Y, Z, cmap=__cm__.RdYlGn)
 
 		if label == True:
-			__plt__.title('Zernike Polynomials Surface Map',fontsize=12)
+			__plt__.title('Zernike Polynomials Surface Heat Map',fontsize=16)
 			ax.set_xlabel(self.listcoefficient()[1])
 		__plt__.colorbar()
 		ax.set_aspect('equal', 'datalim')
@@ -187,7 +195,7 @@ class Coefficient(object):
 		__plt__.plot(Y,ZY)
 		__plt__.grid()
 		__plt__.show()
-def fitting(Z,n,remain=False):
+def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 	"""
 	------------------------------------------------
 	fitting(Z,n)
@@ -195,8 +203,10 @@ def fitting(Z,n,remain=False):
 	Fitting an aberration to several orthonormal Zernike
 	polynomials.
 
-	Return: zernike coefficient for fitting surface
-
+	Return: n-th Zernike coefficients for a fitting surface aberration
+			Zernike coefficients barchart
+			Remaining aberration
+			Fiting surface plot
 	Input: 
 	Z: A surface or aberration matrix measure from inteferometer
 	   or something else.
@@ -225,14 +235,36 @@ def fitting(Z,n,remain=False):
 					ZF[i][j]=0
 		a = sum(sum(Z*ZF))*2*2/l/l/__np__.pi
 		fitlist.append(round(a,3))
-	if remain == True:
-		l1 = len(fitlist)
-		fitlist = fitlist+[0]*(36-l1)
-		Z_new = Z - __zernikepolar__(fitlist,r,u)
-		for i in range(l):
-			for j in range(l):
-				if x2[i]**2+y2[j]**2>1:
-					Z_new[i][j]=0
+
+
+	l1 = len(fitlist)
+	fitlist = fitlist+[0]*(36-l1)
+	Z_new = Z - __zernikepolar__(fitlist,r,u)
+	for i in range(l):
+		for j in range(l):
+			if x2[i]**2+y2[j]**2>1:
+				Z_new[i][j]=0
+	#plot bar chart of zernike
+	if barchart == True:
+		index = __np__.arange(len(fitlist))
+		fig = __plt__.figure()
+		xticklist = []
+		width = 0.6
+		for i in index:
+			xticklist.append('Z'+str(i+1))
+		barfigure = __plt__.bar(index, fitlist, width,color = '#2E9AFE',edgecolor = '#2E9AFE')
+		__plt__.xticks( index+width/2, xticklist )
+		__plt__.xlabel('Zernike Polynomials',fontsize=16)  
+		__plt__.ylabel('Coefficient',fontsize=16)  
+		__plt__.title('Fitting Zernike Polynomials Coefficient',fontsize=16)  
+
+		__plt__.show()  
+	else:
+		pass
+
+
+	if remain3D == True:
+		
 		fig = __plt__.figure()
 		ax = fig.gca(projection='3d')
 		surf = ax.plot_surface(X2, Y2, Z_new, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
@@ -248,10 +280,23 @@ def fitting(Z,n,remain=False):
 		rms1 = round(rms(Z_new),5)
 		label_new = "P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
 		ax.text2D(0.02, 0.1,label_new, transform=ax.transAxes)
-		__plt__.show()
-		return fitlist		
+		__plt__.show()		
 	else:
-		return fitlist
+		pass
+
+	if remain2D == True:
+		fig = __plt__.figure()
+		ax = fig.gca()
+		im = __plt__.pcolormesh(X2, Y2, Z_new, cmap=__cm__.RdYlGn)
+		__plt__.colorbar()
+		__plt__.title('Remaining Aberration',fontsize=16)
+		ax.set_aspect('equal', 'datalim')
+		__plt__.show()
+	else:
+		pass
+
+
+	return fitlist
 def peak2valley(Z):
 	return Z.max()-Z.min()
 
