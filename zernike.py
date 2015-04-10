@@ -117,7 +117,7 @@ class Coefficient(object):
 		X = r*__cos__(u)
 		Y = r*__sin__(u)
 		Z = __zernikepolar__(self.__coefficients__,r,u)
-		fig = __plt__.figure()
+		fig = __plt__.figure(figsize=(12, 8), dpi=80)
 		ax = fig.gca(projection='3d')
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
@@ -164,7 +164,7 @@ class Coefficient(object):
 		X = r*__cos__(u)
 		Y = r*__sin__(u)
 		Z = __zernikepolar__(self.__coefficients__,r,u)
-		fig = __plt__.figure()
+		fig = __plt__.figure(figsize=(12, 8), dpi=80)
 		ax = fig.gca()
 		im = __plt__.pcolormesh(X, Y, Z, cmap=__cm__.RdYlGn)
 
@@ -244,15 +244,17 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 		for j in range(l):
 			if x2[i]**2+y2[j]**2>1:
 				Z_new[i][j]=0
+
 	#plot bar chart of zernike
 	if barchart == True:
-		index = __np__.arange(len(fitlist))
-		fig = __plt__.figure()
+		fitlist1 = fitlist[0:n]
+		index = __np__.arange(n)
+		fig = __plt__.figure(figsize=(12, 8), dpi=80)
 		xticklist = []
 		width = 0.6
 		for i in index:
 			xticklist.append('Z'+str(i+1))
-		barfigure = __plt__.bar(index, fitlist, width,color = '#2E9AFE',edgecolor = '#2E9AFE')
+		barfigure = __plt__.bar(index, fitlist1, width,color = '#2E9AFE',edgecolor = '#2E9AFE')
 		__plt__.xticks( index+width/2, xticklist )
 		__plt__.xlabel('Zernike Polynomials',fontsize=16)  
 		__plt__.ylabel('Coefficient',fontsize=16)  
@@ -265,7 +267,7 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 
 	if remain3D == True:
 		
-		fig = __plt__.figure()
+		fig = __plt__.figure(figsize=(12, 8), dpi=80)
 		ax = fig.gca(projection='3d')
 		surf = ax.plot_surface(X2, Y2, Z_new, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
@@ -275,7 +277,7 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 		ax.zaxis.set_major_formatter(__FormatStrFormatter__('%.02f'))
 		cset = ax.contourf(X2, Y2, Z_new, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
 		fig.colorbar(surf, shrink=1, aspect=30)
-		__plt__.title('Remaining Aberration',fontsize=12)
+		__plt__.title('Remaining Aberration',fontsize=16)
 		p2v = round(peak2valley(Z_new),5)
 		rms1 = round(rms(Z_new),5)
 		label_new = "P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
@@ -285,7 +287,7 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 		pass
 
 	if remain2D == True:
-		fig = __plt__.figure()
+		fig = __plt__.figure(figsize=(12, 8), dpi=80)
 		ax = fig.gca()
 		im = __plt__.pcolormesh(X2, Y2, Z_new, cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
