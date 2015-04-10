@@ -57,7 +57,7 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
 	__makecircle__(Ixy, r, PR) 
 #======================================================
-	fig = __plt__.figure(1)
+	fig = __plt__.figure(figsize=(9, 6), dpi=80)
 	__plt__.imshow(Ixy, extent=[-PR,PR,-PR,PR])
 	__plt__.set_cmap('Greys')
 
@@ -83,8 +83,8 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 			label = label + ' ' + 'no aberration'
 		return label
 	label = labelgenerate(coefficients)
-	__plt__.xlabel(label,fontsize=15)
-	__plt__.title('Twyman Green Interferogram',fontsize=15)
+	__plt__.xlabel(label,fontsize=16)
+	__plt__.title('Twyman Green Interferogram',fontsize=16)
 	fig.set_tight_layout(True)
 	__plt__.show()
 
@@ -159,7 +159,7 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 					rec[j,i] = min*2/10
 		return rec
 	Ixy_new = doublecircle(Ixy, PR, S) 
-	fig = __plt__.figure(1)
+	fig = __plt__.figure(figsize=(9, 6), dpi=80)
 	__plt__.imshow(Ixy_new, extent=[-PR-S/2,PR+S/2,-PR,PR])
 	__plt__.set_cmap('Greys')
 
@@ -184,8 +184,8 @@ def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 		return label
 	label = labelgenerate(coefficients)
 
-	__plt__.xlabel(label,fontsize=15)
-	__plt__.title('Lateral Shear Interferogram',fontsize=15)
+	__plt__.xlabel(label,fontsize=16)
+	__plt__.title('Lateral Shear Interferogram',fontsize=16)
 	fig.set_tight_layout(True)
 	__plt__.show()
 

@@ -45,7 +45,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
 	__makecircle__(Ixy, r, PR) 
 #======================================================
-	fig = __plt__.figure(1)
+	fig = __plt__.figure(figsize=(9, 6), dpi=80)
 	__plt__.imshow(-Ixy, extent=[-PR,PR,-PR,PR])
 	__plt__.set_cmap('Greys')
 
@@ -55,8 +55,8 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 		if i!=0:
 			label = label + "Z" + str(m) + "=" + str(i) +" "
 		m = m + 1	
-	__plt__.xlabel(label,fontsize=15)
-	__plt__.title('Twyman Green Interferogram',fontsize=15)
+	__plt__.xlabel(label,fontsize=16)
+	__plt__.title('Twyman Green Interferogram',fontsize=16)
 	fig.set_tight_layout(True)
 	__plt__.show()
 

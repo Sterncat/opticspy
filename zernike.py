@@ -140,8 +140,8 @@ class Coefficient(object):
 
 		label_1 = self.listcoefficient()[0]+"P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
 		if label == True:
-			__plt__.title('Zernike Polynomials Surface',fontsize=16)
-			ax.text2D(0.02, 0.1, label_1, transform=ax.transAxes)
+			__plt__.title('Zernike Polynomials Surface',fontsize=18)
+			ax.text2D(0.02, 0.1, label_1, transform=ax.transAxes,fontsize=14)
 		__plt__.show()
 		#return [X,Y,Z]
 
@@ -169,8 +169,8 @@ class Coefficient(object):
 		im = __plt__.pcolormesh(X, Y, Z, cmap=__cm__.RdYlGn)
 
 		if label == True:
-			__plt__.title('Zernike Polynomials Surface Heat Map',fontsize=16)
-			ax.set_xlabel(self.listcoefficient()[1])
+			__plt__.title('Zernike Polynomials Surface Heat Map',fontsize=18)
+			ax.set_xlabel(self.listcoefficient()[1],fontsize=18)
 		__plt__.colorbar()
 		ax.set_aspect('equal', 'datalim')
 		__plt__.show()
@@ -256,9 +256,9 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 			xticklist.append('Z'+str(i+1))
 		barfigure = __plt__.bar(index, fitlist1, width,color = '#2E9AFE',edgecolor = '#2E9AFE')
 		__plt__.xticks( index+width/2, xticklist )
-		__plt__.xlabel('Zernike Polynomials',fontsize=16)  
-		__plt__.ylabel('Coefficient',fontsize=16)  
-		__plt__.title('Fitting Zernike Polynomials Coefficient',fontsize=16)  
+		__plt__.xlabel('Zernike Polynomials',fontsize=18)  
+		__plt__.ylabel('Coefficient',fontsize=18)  
+		__plt__.title('Fitting Zernike Polynomials Coefficient',fontsize=18)  
 
 		__plt__.show()  
 	else:
@@ -277,7 +277,7 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 		ax.zaxis.set_major_formatter(__FormatStrFormatter__('%.02f'))
 		cset = ax.contourf(X2, Y2, Z_new, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
 		fig.colorbar(surf, shrink=1, aspect=30)
-		__plt__.title('Remaining Aberration',fontsize=16)
+		__plt__.title('Remaining Aberration',fontsize=18)
 		p2v = round(peak2valley(Z_new),5)
 		rms1 = round(rms(Z_new),5)
 		label_new = "P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
@@ -291,7 +291,7 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 		ax = fig.gca()
 		im = __plt__.pcolormesh(X2, Y2, Z_new, cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
-		__plt__.title('Remaining Aberration',fontsize=16)
+		__plt__.title('Remaining Aberration',fontsize=18)
 		ax.set_aspect('equal', 'datalim')
 		__plt__.show()
 	else:
