@@ -250,7 +250,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 	if barchart == True:
 		fitlist1 = fitlist[0:n]
 		index = __np__.arange(n)
-		fig = __plt__.figure(figsize=(12, 8), dpi=80)
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		xticklist = []
 		width = 0.6
 		for i in index:
