@@ -288,7 +288,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 		pass
 
 	if remain2D == True:
-		fig = __plt__.figure(figsize=(12, 8), dpi=80)
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		ax = fig.gca()
 		im = __plt__.pcolormesh(X2, Y2, Z_new, cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
