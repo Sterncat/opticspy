@@ -9,7 +9,9 @@ Opticspy is a python module for optics application. I want to this for a long ti
   
 ####2. [Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html)  
   
-####3. [Zernike Methods](http://sterncat.github.io/files/Zernike_Method.html)    
+####3. [Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
+
+####4. [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)    
   
 ####This is the [Opticspy project page](http://sterncat.github.io/opticspy/)
 
@@ -52,6 +54,7 @@ I think the module should contain bunch of things in optics.
   <li>4. Lateral Shear interferogram with aberration</li>
   <li>5. Zernike Coefficient calculation</li>
   <li>6. Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D)</li>
+  <li>7. Zernike Polynomials Fitting Method</li>
 </ul>
 
 ##Authors and Contributors
@@ -61,8 +64,6 @@ And this is my personal blog [Marvin's Neverland!](http://sterncat.github.io)
 
 ##Support or Contact
 If you have questions and advice, or want to participate in this project, contact me at marvin.fanxing@gmail.com. I would be very happy to find some one have the same interest!
-
-
 
 ###MIT License
 -----------
@@ -88,4 +89,5 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+
 		
