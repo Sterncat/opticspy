@@ -1,4 +1,5 @@
 import numpy as __np__
+import interferometer_zenike as __interferometer__
 from numpy import cos as __cos__
 from numpy import sin as __sin__
 from numpy import sqrt as __sqrt__
@@ -195,7 +196,7 @@ class Coefficient(object):
 		__plt__.plot(Y,ZY)
 		__plt__.grid()
 		__plt__.show()
-def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
+def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False):
 	"""
 	------------------------------------------------
 	fitting(Z,n)
@@ -294,6 +295,12 @@ def fitting(Z,n,remain3D=False, remain2D=False,barchart=False):
 		__plt__.title('Remaining Aberration',fontsize=18)
 		ax.set_aspect('equal', 'datalim')
 		__plt__.show()
+	else:
+		pass
+
+	if interferogram == True:
+		zernike_coefficient = Coefficient(fitlist)
+		__interferometer__.twyman_green(zernike_coefficient)
 	else:
 		pass
 
