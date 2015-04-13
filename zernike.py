@@ -50,21 +50,22 @@ class Coefficient(object):
 						"Z75 a",
 						"Z75 b",
 						"Z77 a",
-						"Z77 b"]
+						"Z77 b",
+						"Z80 Tertiary Spherical"]
 
 	def __init__(self, 
 			Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, \
 			Z8=0, Z9=0, Z10=0, Z11=0, Z12=0, Z13=0, Z14=0, \
 			Z15=0, Z16=0, Z17=0, Z18=0, Z19=0, Z20=0, Z21=0, \
 			Z22=0, Z23=0, Z24=0, Z25=0, Z26=0, Z27=0, Z28=0, \
-			Z29=0, Z30=0, Z31=0, Z32=0, Z33=0, Z34=0, Z35=0, Z36=0):
+			Z29=0, Z30=0, Z31=0, Z32=0, Z33=0, Z34=0, Z35=0, Z36=0, Z37=0):
 		if type(Z1) == list:
-			self.__coefficients__ = Z1 + [0]*(36-len(Z1))
+			self.__coefficients__ = Z1 + [0]*(37-len(Z1))
 		else:
 			self.__coefficients__ = [Z1, Z2, Z3, Z4, Z5, Z6, Z7, 
 					Z8, Z9, Z10, Z11, Z12, Z13, Z14, Z15, Z16, Z17, 
 					Z18, Z19, Z20, Z21, Z22, Z23, Z24, Z25, Z26, 
-					Z27, Z28, Z29, Z30, Z31, Z32, Z33, Z34, Z35, Z36]
+					Z27, Z28, Z29, Z30, Z31, Z32, Z33, Z34, Z35, Z36, Z37]
 	def outputcoefficient(self):
 		return self.__coefficients__
 	def listcoefficient(self):
@@ -228,7 +229,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 	r = __np__.sqrt(X2**2 + Y2**2)
 	u = __np__.arctan2(Y2, X2)
 	for i in range(n):
-		C = [0]*i+[1]+[0]*(36-i-1)
+		C = [0]*i+[1]+[0]*(37-i-1)
 		ZF = __zernikepolar__(C,r,u)
 		for i in range(l):
 			for j in range(l):
@@ -239,7 +240,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 
 
 	l1 = len(fitlist)
-	fitlist = fitlist+[0]*(36-l1)
+	fitlist = fitlist+[0]*(37-l1)
 	Z_new = Z - __zernikepolar__(fitlist,r,u)
 	for i in range(l):
 		for j in range(l):
@@ -365,13 +366,13 @@ def __zernikepolar__(coefficient,r,u):
 	Z34 =  Z[34] * 4*(7*r**2-6)*r**5*__cos__(5*u)
 	Z35 =  Z[35] * 4*r**7*__sin__(7*u)
 	Z36 =  Z[36] * 4*r**7*__cos__(7*u)
-	#Z37 =  Z[37] * 3*(70*r**8-140*r**6+90*r**4-20*r**2+1)
+	Z37 =  Z[37] * 3*(70*r**8-140*r**6+90*r**4-20*r**2+1)
 
 
 	Z = Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
 		Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
 		Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
-		Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36
+		Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36+ Z37
 	return Z
 
 def __zernikecartesian__(coefficient,x,y):
@@ -426,8 +427,9 @@ def __zernikecartesian__(coefficient,x,y):
 	Z34 =  Z[34]
 	Z35 =  Z[35]
 	Z36 =  Z[36]
+	Z37 =  Z[37]
 	Z = 	Z1 + Z2 +  Z3+  Z4+  Z5+  Z6+  Z7+  Z8+  Z9+ \
 			Z10+ Z11+ Z12+ Z13+ Z14+ Z15+ Z16+ Z17+ Z18+ Z19+ \
 			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
-			Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36
+			Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36+ Z37
 	return Z
