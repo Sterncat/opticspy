@@ -17,6 +17,7 @@ x = __np__.linspace(-1, 1, l1)
 y = __np__.linspace(-1, 1, l1)
 [X,Y] = __np__.meshgrid(x,y)
 r = __sqrt__(X**2+Y**2)
+#Z = 20*X
 Z = __sqrt__(14)*(8*X**4-8*X**2*r**2+r**4)*(6*r**2-5)
 for i in range(len(Z)):
 	for j in range(len(Z)):
