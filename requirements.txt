@@ -1,2 +1,0 @@
-Numpy==1.9.1
-Matplotlib==1.4.3
