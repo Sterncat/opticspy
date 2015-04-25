@@ -1,3 +1,5 @@
 language: python
 python:
   - "2.7"
+pip install numpy
+pip install matplotlib
