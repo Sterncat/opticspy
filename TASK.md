@@ -1,10 +1,15 @@
 
 #opticspy TASK
 
-- [ ] Figure out wormholes
-  - [ ] Call @arfon
-  - [ ] Research ([docs](http://en.wikipedia.org/wiki/Wormhole#Time_travel))
-  - [ ] Build prototype #15
-  - [ ] Test run #43 @world-domination/time-travel
-- [ ] ...?
-- [ ] Profit!
+- [ ] Polynomials 
+  - [ ] Different aperture shape
+  - [ ] Different polynomials
+  - [ ] PSF
+- [ ] Interferometer
+  - [ ] Analysis interferogram (with noise), rebuild wavefront and surface
+  - [ ] phase shift interferogram
+  - [ ] Asphere measure analysis
+- [ ] Wave propagation
+- [ ] Freeform
+- [ ] Adaptive optics
+- [ ] Shape from shading
