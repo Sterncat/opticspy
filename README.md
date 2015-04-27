@@ -32,30 +32,24 @@ And just have fun with it!
   <li>4. I even hope one day it will become a part of online optics design application, who knows?</li>
 </ul>
 
+##TODO:
+* ✓ Rectangular, circle diffraction pattern, OTF
+* ✓ Third order ray aberration plot
+* ✓ Twyman_Green interferogram with aberration
+* ✓ Lateral Shear interferogram with aberration
+* ✓ Zernike Coefficient calculation
+* ✓ Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D)
+* ✓ Zernike Polynomials Fitting Method
+* ✓ Diffraction: generate diffraction pattern
+* Geometric matrix calculation
+* PSF, OTF and MTF calculation
+* Several interferogram(Twyman Green, Shearing, etc)
+* Ray tracing
+* Zernike coefficients, surface and surface fitting
+* Third and high order aberration calculation
+* Make it rock!
 
-## What I want to contain in the module
-I think the module should contain bunch of things in optics.
-<ul>
-  <li>1. Diffraction: generate diffraction pattern</li>
-  <li>2. Geometric matrix calculation</li>
-  <li>3. PSF, OTF and MTF calculation</li>
-  <li>4. Several interferogram(Twyman Green, Shearing, etc)</li>
-  <li>5. Ray tracing</li>
-  <li>6. Zernike coefficients, surface and surface fitting</li>
-  <li>7. Third and high order aberration calculation</li>
-</ul>
 
-## What I have done
-
-<ul>
-  <li>1. Rectangular, circle diffraction pattern, OTF</li>
-  <li>2. Third order ray aberration plot</li>
-  <li>3. Twyman_Green interferogram with aberration</li>
-  <li>4. Lateral Shear interferogram with aberration</li>
-  <li>5. Zernike Coefficient calculation</li>
-  <li>6. Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D)</li>
-  <li>7. Zernike Polynomials Fitting Method</li>
-</ul>
 
 ##Authors and Contributors
 I am Xing Fan. An optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/). 
