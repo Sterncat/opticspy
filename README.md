@@ -42,6 +42,7 @@ And just have fun with it!
 * ✓ Zernike Polynomials Fitting Method
 * ✓ Diffraction: generate diffraction pattern
 * Geometric matrix calculation
+* Some freeform theory
 * PSF, OTF and MTF calculation
 * Several interferogram(Twyman Green, Shearing, etc)
 * Ray tracing
