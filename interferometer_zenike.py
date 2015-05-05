@@ -35,11 +35,11 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	x, y = __np__.meshgrid(r,r) 
 	rr = __np__.sqrt(x**2 + y**2)
 	def wavenumber(n):
-	     return n*lambda_1/PR
+	    return n*lambda_1/PR
 	coefficients_new =  map(wavenumber, coefficients)
 	OPD = 	__zernike__.__zernikecartesian__(coefficients_new,x,y)
-	ph = 2 * __np__.pi / lambda_1 * OPD
 
+	ph = 2 * __np__.pi / lambda_1 * OPD
 	I1 = 1
 	I2 = 1
 	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
@@ -50,7 +50,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	__plt__.set_cmap('Greys')
 
 	label = 'Zernike Coefficients:'
-	m = 0
+	m = 1
 	for i in coefficients:
 		if i!=0:
 			label = label + "Z" + str(m) + "=" + str(i) +" "

@@ -49,7 +49,6 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	  		E * (x**2 + 3 * y**2) + \
 	  		F * y * (x**2 + y**2) + \
 	  		G * (x**2 + y**2)**2
-
 	ph = 2 * __np__.pi / lambda_1 * OPD
 
 	I1 = 1
