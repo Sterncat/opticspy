@@ -8,6 +8,9 @@ from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
+from numpy.fft import fftshift as __fftshift__
+from numpy.fft import ifftshift as __ifftshift__
+from numpy.fft import fft2 as __fft2__
 
 
 class Coefficient(object):
@@ -202,6 +205,59 @@ class Coefficient(object):
 		__plt__.plot(Y,ZY)
 		__plt__.grid()
 		__plt__.show()
+
+
+
+	def psf(self,pupil=100,background=400):
+		"""
+		------------------------------------------------
+		psf()
+
+		Return the point spread function of a wavefront described by
+		Zernike Polynomials
+		------------------------------------------------
+		Input: 
+
+		pupil: pupil size(points)
+
+		background: background size(points)
+
+		"""
+		l1 = pupil
+		#Generate test surface matrix from a detector
+		x = __np__.linspace(-1, 1, l1)
+		[X,Y] = __np__.meshgrid(x,x)
+		Z = __zernikecartesian__(self.__coefficients__,X,Y)
+		for i in range(len(Z)):
+			for j in range(len(Z)):
+				if x[i]**2+x[j]**2>1:
+					Z[i][j]=0	
+		d = background
+		A = __np__.zeros([d,d])
+		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
+
+		__plt__.imshow(A)
+		__plt__.show()
+		abbe = __np__.exp(1j*2*__np__.pi*A)
+		for i in range(len(abbe)):
+			for j in range(len(abbe)):
+				if abbe[i][j]==1:
+					abbe[i][j]=0
+		fig = __plt__.figure(2)
+		AP = abs(__fftshift__(__fft2__(__fftshift__(abbe))))**2
+		#AP = AP/AP.max()
+		#print AP.max()
+		#print AP.min()
+		#AP = 100*(AP-AP.max()/2)
+		#print AP.max()
+		#print AP.min()
+		__plt__.imshow(AP)
+		__plt__.show()		
+		return 0
+
+
+
+
 def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False):
 	"""
 	------------------------------------------------

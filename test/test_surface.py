@@ -8,9 +8,9 @@ from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 #generate test surface figure
-def spherical_surf():
+def spherical_surf(l1):
 	R = 1.02
-	l1 = 200  #surface matrix length
+	l1 = l1  #surface matrix length
 	theta = __np__.linspace(0, 2*__np__.pi, l1)
 	rho = __np__.linspace(0, 1, l1)
 	[u,r] = __np__.meshgrid(theta,rho)
