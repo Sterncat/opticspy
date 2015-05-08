@@ -235,15 +235,15 @@ class Coefficient(object):
 		d = background
 		A = __np__.zeros([d,d])
 		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
-
-		__plt__.imshow(A)
+		fig = __plt__.figure(1,figsize=(12, 8), dpi=80)
+		__plt__.imshow(A,cmap=__cm__.RdYlGn)
 		__plt__.show()
 		abbe = __np__.exp(1j*2*__np__.pi*A)
 		for i in range(len(abbe)):
 			for j in range(len(abbe)):
 				if abbe[i][j]==1:
 					abbe[i][j]=0
-		fig = __plt__.figure(2)
+		fig = __plt__.figure(2,figsize=(12, 8), dpi=80)
 		AP = abs(__fftshift__(__fft2__(__fftshift__(abbe))))**2
 		#AP = AP/AP.max()
 		#print AP.max()
@@ -251,9 +251,8 @@ class Coefficient(object):
 		#AP = 100*(AP-AP.max()/2)
 		#print AP.max()
 		#print AP.min()
-		__plt__.imshow(AP)
+		__plt__.imshow(-AP,cmap=__cm__.RdYlGn)
 		__plt__.show()		
-		return 0
 
 
 
