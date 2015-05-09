@@ -56,7 +56,6 @@ class Coefficient(object):
 		
 
 
-
 def __seidelpolar__(coefficient,r,u):
 	h = coefficient[0]
 	W = coefficient

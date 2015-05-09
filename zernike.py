@@ -3,6 +3,7 @@ import interferometer_zenike as __interferometer__
 from numpy import cos as __cos__
 from numpy import sin as __sin__
 from numpy import sqrt as __sqrt__
+from numpy import arctan2 as __arctan2__
 import matplotlib.pyplot as __plt__
 from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
@@ -254,8 +255,33 @@ class Coefficient(object):
 		__plt__.imshow(-AP,cmap=__cm__.RdYlGn)
 		__plt__.show()		
 
+	def zernike2seidel(self):
+		a = [0]+self.__coefficients__
+		#Piston
+		Ap = a[1]-__sqrt__(3)*a[4]+__sqrt__(5)*a[11]
+		#tilt
+		At = 2*__sqrt__((a[2]-__sqrt__(8)*a[8])**2+(a[3]-__sqrt__(8)*a[7])**2)
+		Bt = __arctan2__(a[3]-__sqrt__(8)*a[7],a[2]-__sqrt__(8)*a[8])*180/__np__.pi
+		#defocus
+		Ad = 2*(__sqrt__(3)*a[4]-3*__sqrt__(5)*a[11])
+		#Astigmatism 
+		Aa = 2*__sqrt__(6*(a[5]**2+a[6]**2))
+		Ba = __arctan2__(a[5],a[6])*180/__np__.pi
+		#Coma
+		Ac = 6*__sqrt__(2*(a[7]**2+a[8]**2))
+		Bc = __arctan2__(a[7],a[8])*180/__np__.pi
+		#Spherical
+		As = 6*__sqrt__(5)*a[11]
+		A = [Ap,At,Bt,Ad,Aa,Ba,Ac,Bc,As]
 
 
+		seidellist=["Piston",
+				 	"Tilt",
+				 	"Defocus",
+				 	"Astigmatism",
+				 	"Coma",
+				 	"Spherical"]
+		return A
 
 def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False):
 	"""
