@@ -13,7 +13,6 @@ from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
 import seidel2 as __seidel2__
-import interferometer_zenike as __interferometer_zernike__
 import tools as __tools__
 
 
@@ -260,7 +259,7 @@ class Coefficient(object):
 
 
 	def twyman_green(self,lambda_1=632,PR=1):
-		__interferometer_zernike__.twyman_green(self,lambda_1=lambda_1,PR=PR)
+		__interferometer__.twyman_green(self,lambda_1=lambda_1,PR=PR)
 
 
 
