@@ -50,7 +50,7 @@ class Coefficient(object):
 	def twyman_green(self, lambda_1 = 632, PR = 1):
 		lambda_1 = lambda_1*(10**-9)
 		A = self.__coefficients__
-		r = __np__.linspace(-PR, PR, 200)
+		r = __np__.linspace(-PR, PR, 400)
 		x, y = __np__.meshgrid(r,r) 
 		OPD = __seidelcartesian__(A,x,y)*2/PR
 		ph = 2 * __np__.pi * OPD

@@ -13,6 +13,8 @@ from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
 import seidel2 as __seidel2__
+import interferometer_zenike as __interferometer_zernike__
+import tools as __tools__
 
 
 class Coefficient(object):
@@ -142,8 +144,8 @@ class Coefficient(object):
 		fig.colorbar(surf, shrink=1, aspect=30)
 
 
-		p2v = round(peak2valley(Z),5)
-		rms1 = round(rms(Z),5)
+		p2v = round(__tools__.peak2valley(Z),5)
+		rms1 = round(__tools__.rms(Z),5)
 
 		label_1 = self.listcoefficient()[0]+"P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
 		if label == True:
@@ -254,7 +256,14 @@ class Coefficient(object):
 		#print AP.max()
 		#print AP.min()
 		__plt__.imshow(-AP,cmap=__cm__.RdYlGn)
-		__plt__.show()		
+		__plt__.show()
+
+
+	def twyman_green(self,lambda_1=632,PR=1):
+		__interferometer_zernike__.twyman_green(self,lambda_1=lambda_1,PR=PR)
+
+
+
 
 	def zernike2seidel(self):
 		a = [0]+self.__coefficients__
@@ -401,12 +410,6 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 
 
 	return fitlist
-def peak2valley(Z):
-	return Z.max()-Z.min()
-
-def rms(Z):
-	rms = __np__.sqrt(__np__.mean(__np__.square(Z)))
-	return rms
 
 def __zernikepolar__(coefficient,r,u):
 	"""
