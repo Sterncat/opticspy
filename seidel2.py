@@ -8,6 +8,16 @@ from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
+def __makecircle__(a, r, PR):
+	max = a.max()
+	size = __np__.sqrt(a.size)
+	for i in range(int(size)):
+		for j in range(int(size)):
+			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
+				a[i,j] = max
+
+
+
 class Coefficient(object):
 	"""
 	Return a set of Seidel wavsfront aberrations Coefficient
@@ -49,16 +59,14 @@ class Coefficient(object):
 		A = self.__coefficients__
 		r = __np__.linspace(-PR, PR, 200)
 		x, y = __np__.meshgrid(r,r) 
-		#def wavenumber(n):
-		#     return n*lambda_1*2/PR
-		OPD = __seidelcartesian__(A,x,y)
-		ph = 2 * __np__.pi / lambda_1 * OPD
+		OPD = __seidelcartesian__(A,x,y)*2/PR
+		ph = 2 * __np__.pi * OPD
 		I1 = 1
 		I2 = 1
 		Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
-		#__makecircle__(Ixy, r, PR) 
+		__makecircle__(Ixy, r, PR) 
 		fig = __plt__.figure(figsize=(9, 6), dpi=80)
-		__plt__.imshow(Ixy, extent=[-PR,PR,-PR,PR])
+		__plt__.imshow(-Ixy, extent=[-PR,PR,-PR,PR])
 		__plt__.set_cmap('Greys')
 		__plt__.show()
 
@@ -76,27 +84,10 @@ def __seidelpolar__(coefficient,r,u):
 	W = Ap+At+Ad+Aa+Ac+As
 	return W
 
-	__seidellist___=["W200 piston",
-					 "W111 tilt",
-					 "W020 defocus",
-					 "W040 spherical",
-					 "W131 coma",
-					 "W222 astigmatism",
-					 "W220 field curvature",
-					 "W311 distortion"]
-
-
 def __seidelcartesian__(coefficient,x,y):
 	W = coefficient
 	h = 1
 	u = __arctan2__(y,x)
 	r = __sqrt__(x**2+y**2)
-	Ap = W[0][0] * h**2
-	At = W[1][0] * h*r**2*__cos__(u-W[1][1]*__np__.pi/180)
-	Ad = W[2][0] * h**2*r**2*__cos__(u-W[3][1]*__np__.pi/180)
-	Aa = W[3][0] * h**2*r**2*__cos__(u-W[3][1]*__np__.pi/180)
-	Ac = W[4][0] * h*r*__cos__(u-W[4][1]*__np__.pi/180)
-	As = W[5][0] * r**4
-
-	W = Ap+At+Ad+Aa+Ac+As
+	W = __seidelpolar__(coefficient,r,u)
 	return W

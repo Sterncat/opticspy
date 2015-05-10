@@ -9,7 +9,7 @@ def __makecircle__(a, r, PR):
 			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
 				a[i,j] = max
 
-def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
+def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	"""
 	Genertate Twyman_Green Interferogram based on Seidel aberration
 	=============================================
@@ -34,14 +34,13 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	----------------------------------------------
 	Interferogram of aberration
 	"""
-	lambda_1 = lambda_1*(10**-9)
-	coefficients = [A*2,B*2,C*2,D*2,E*2,F*2,G*2]
+	lambda_1 = lambda_1*(1e-9)
+	coefficients = [A,B,C,D,E,F,G]
 	r = __np__.linspace(-PR, PR, 400)
 	x, y = __np__.meshgrid(r,r) 
 	rr = __np__.sqrt(x**2 + y**2)
-	def wavenumber(n):
-	     return n*lambda_1*2/PR
-	[A,B,C,D,E,F,G] =  map(wavenumber, [A,B,C,D,E,F,G])
+	wavemap = lambda n: n*lambda_1*2/PR
+	[A,B,C,D,E,F,G] =  map(wavemap, [A,B,C,D,E,F,G])
 	OPD = 	A + \
 			B * x + \
 			C * y + \
@@ -49,15 +48,14 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 	  		E * (x**2 + 3 * y**2) + \
 	  		F * y * (x**2 + y**2) + \
 	  		G * (x**2 + y**2)**2
-	ph = 2 * __np__.pi / lambda_1 * OPD
-
+	ph = 2 * __np__.pi/lambda_1 * OPD
 	I1 = 1
 	I2 = 1
 	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
 	__makecircle__(Ixy, r, PR) 
 #======================================================
 	fig = __plt__.figure(figsize=(9, 6), dpi=80)
-	__plt__.imshow(Ixy, extent=[-PR,PR,-PR,PR])
+	__plt__.imshow(-Ixy, extent=[-PR,PR,-PR,PR])
 	__plt__.set_cmap('Greys')
 
 	label = ''
@@ -74,7 +72,7 @@ def twyman_green(A, B, C, D, E, F, G, lambda_1 = 632, PR = 1):
 		'G: Primary spherical aberration']
 		for i in b:
 			if i != 0:
-				label = label + str(i/2) + r'$\lambda$' + ' ' + labellist[count] + '\n'
+				label = label + str(i) + r'$\lambda$' + ' ' + labellist[count] + '\n'
 			else:
 				count_1 = count_1 + 1
 			count = count + 1
