@@ -38,15 +38,16 @@ And just have fun with it!
 * ✓ Twyman_Green interferogram with aberration
 * ✓ Lateral Shear interferogram with aberration
 * ✓ Zernike Coefficient calculation
-* ✓ Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D)
+* ✓ Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D), PSF
 * ✓ Zernike Polynomials Fitting Method
 * ✓ Diffraction: generate diffraction pattern
+* ✓ Convert Zernike to Seidel coefficient
+* ✓ Seidel aberrations surface and interferogram
 * Geometric matrix calculation
 * Some freeform theory
 * PSF, OTF and MTF calculation
-* Several interferogram(Twyman Green, Shearing, etc)
+* More interferogram
 * Ray tracing
-* Zernike coefficients, surface and surface fitting
 * Third and high order aberration calculation
 * Make it rock!
 
