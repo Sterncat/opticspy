@@ -294,7 +294,8 @@ class Coefficient(object):
 		print"             Magnitude  Angle (Degrees)"
 		print"---------------------------------------"
 		for i in range(len(seidellist)):
-			print "%11s |  %3.2f    |   %3.1f" % (seidellist[i],Atable[i][0],Atable[i][1])
+			print "{0:>11s} |  {1:>6s}  | {2:>6s}     |".\
+			format(seidellist[i],str(round(Atable[i][0],3)),str(round(Atable[i][1],3)))
 
 		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
 		return SeidelCoefficient
