@@ -9,6 +9,7 @@
  *  Copyright (c) 2014-2015 Xing fan
 """
 
-import aper, aberration, interferometer_seidel,interferometer_zenike, seidel,zernike, test
+import aper, aberration, interferometer_seidel,interferometer_zenike
+import seidel, seidel2, zernike, test
 import warnings as __warnings__
 __warnings__.filterwarnings("ignore")

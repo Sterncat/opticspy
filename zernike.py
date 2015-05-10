@@ -12,6 +12,7 @@ from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
+import seidel2 as __seidel2__
 
 
 class Coefficient(object):
@@ -281,7 +282,14 @@ class Coefficient(object):
 				 	"Astigmatism",
 				 	"Coma",
 				 	"Spherical"]
-		return A
+		Atable = [[Ap,0.0],[At,Bt],[Ad,0.0],[Aa,Ba],[Ac,Bc],[As,0.0]]
+		print"             Magnitude  Angle (Degrees)"
+		print"---------------------------------------"
+		for i in range(len(seidellist)):
+			print "%11s |  %3.2f    |   %3.1f" % (seidellist[i],Atable[i][0],Atable[i][1])
+
+		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
+		return SeidelCoefficient
 
 def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False):
 	"""
