@@ -1,13 +1,6 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-
-def __makecircle__(a, r, PR):
-	max = a.max()
-	size = __np__.sqrt(a.size)
-	for i in range(int(size)):
-		for j in range(int(size)):
-			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
-				a[i,j] = max
+import tools as __tools__
 
 def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	"""
@@ -52,7 +45,7 @@ def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	I1 = 1
 	I2 = 1
 	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
-	__makecircle__(Ixy, r, PR) 
+	__tools__.makecircle(Ixy, r, PR) 
 #======================================================
 	fig = __plt__.figure(figsize=(9, 6), dpi=80)
 	__plt__.imshow(-Ixy, extent=[-PR,PR,-PR,PR])

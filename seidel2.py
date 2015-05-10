@@ -8,14 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
-def __makecircle__(a, r, PR):
-	max = a.max()
-	size = __np__.sqrt(a.size)
-	for i in range(int(size)):
-		for j in range(int(size)):
-			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
-				a[i,j] = max
-
+import tools as __tools__
 
 
 class Coefficient(object):
@@ -64,7 +57,7 @@ class Coefficient(object):
 		I1 = 1
 		I2 = 1
 		Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
-		__makecircle__(Ixy, r, PR) 
+		__tools__.makecircle(Ixy, r, PR) 
 		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		__plt__.imshow(-Ixy, extent=[-PR,PR,-PR,PR])
 		__plt__.set_cmap('Greys')
