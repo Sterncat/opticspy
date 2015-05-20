@@ -10,6 +10,6 @@
 """
 
 import aper, aberration, interferometer_seidel,interferometer_zenike
-import seidel, seidel2, zernike, test, tools
+import seidel, seidel2, zernike, test, tools, diffraction
 import warnings as __warnings__
 __warnings__.filterwarnings("ignore")
