@@ -29,7 +29,9 @@ def doubleslit(b=0.1,a=0.4,lambda_1=632,z=0.5):
     beta = __np__.pi*(b/1000)/(lambda_1/(10**9))*__sin__(theta)
     alpha = __np__.pi*(a/1000)/(lambda_1/(10**9))*__sin__(theta)
     y = 4*(__sin__(beta)**2/(beta**2)*__cos__(alpha)**2)
+    y1 = 4*__sin__(beta)**2/(beta**2)
     fig = __plt__.figure(2,figsize=(12, 8), dpi=80)
     __plt__.plot(theta*z*1000,y)
+    __plt__.plot(theta*z*1000,y1,"g--")
     __plt__.show()
 
