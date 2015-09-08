@@ -82,7 +82,7 @@ def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 ################################################################
 
 
-def lateral_shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
+def lateral_shear(A=0, B=0, C=0, D=0, E=0, S=0.1, lambda_1 = 632, PR = 1):
 	"""
 	Genertate Lateral_Shear Interferogram
 	=============================================
