@@ -24,7 +24,7 @@ def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 	"Wavelength, lambda (um)",	
 	"Half Beam Diameter, w(z) (mm)",
 	"Radius of Curvature, R(z) (mm)",
-	"Rayleigh Range, z0 (mm)",
+	"Rayleigh Range, z0 (mm)",# [1]
 	"Rayleigh Half Diameter, w0 (mm)",
 	"Half Angle Divergence, theta (mrad)"]	
 	print"               Gaussian Beams Calculator"
@@ -33,18 +33,36 @@ def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 		print "| {0:>35s} |  {1:<6s}".format(list2[i],list3[i])
 	print"--------------------------------------------------------"
 	return list1
-
-def gaussbeam():
+	#[1] In optics and especially laser science, the Rayleigh length or Rayleigh 
+	# range is the distance along the propagation direction of a beam from the 
+	# waist to the place where the area of the cross section is doubled.
+def gaussbeam(w0 = 1,P = 5,z0 = 5, z = 10):
+	# w0 Beam Waist
+	# P total power
+    # z0 Rayleigh Range
+    # z Axial Distance
 	x1 = __np__.linspace(-4,4,100)
 	y1 = __np__.linspace(-4,4,100)
 	[x,y] = __np__.meshgrid(x1,y1)
-	w = 1
-	P = 5
-	I = 2*P/__np__.pi/w**2*__np__.exp(-2*(x**2+y**2)/w**2)
+	wz = w0*__np__.sqrt(1+(z/z0)**2)
+	I = 2*P/__np__.pi/(wz**2)*__np__.exp(-2*(x**2+y**2)/(wz**2))
 	fig = __plt__.figure(figsize=(12, 8), dpi=80)
 	ax = fig.gca(projection='3d')
 	surf = ax.plot_surface(x, y, I, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 		        linewidth=0, antialiased=False, alpha = 0.6)
+	__plt__.title('Gaussian Beam Intensity Distribution',fontsize=18)
+	label_1 = "Beam Waist = " + str(w0) + "\n" +\
+			  "Total Power = " + str(P) + "\n" +\
+			  "Rayleigh Range = " + str(z0) + "\n" +\
+			  "Axial Distance = " + str(z)	
+	ax.text2D(0.02, 0.01, label_1, transform=ax.transAxes,fontsize=14)
 	__plt__.show()
+	return I
+
+
+
+
+
+
 
 	
