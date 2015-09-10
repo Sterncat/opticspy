@@ -58,11 +58,3 @@ def gaussbeam(w0 = 1,P = 5,z0 = 5, z = 10):
 	ax.text2D(0.02, 0.01, label_1, transform=ax.transAxes,fontsize=14)
 	__plt__.show()
 	return I
-
-
-
-
-
-
-
-	
