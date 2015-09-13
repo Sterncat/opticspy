@@ -1,5 +1,6 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
+import diffraction as __diffraction__
 
 def __apershow__(obj):
 	obj = -abs(obj)
@@ -24,8 +25,7 @@ class Aperture():
 		"""
 
 		print "---------show aperture--------"
-		#print self.aper
-		__apershow__(self.aper)
+		__apershow__(self.__aper__)
 
 	def diffraction(self):
 		"""
@@ -37,7 +37,7 @@ class Aperture():
 
 		"""
 		print "---------diffraction----------"
-		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.aper))
+		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.__aper__))
 		__apershow__(aperfft)
 
 	def otf(self):
@@ -45,7 +45,7 @@ class Aperture():
 		Compute an aperture's otf
 		"""
 		print "-------------OTF---------------"
-		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.aper))**2
+		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.__aper__))**2
 		aper_OTF = __np__.fft.fftshift(__np__.fft.fft2(aperfft))
 		__apershow__(aper_OTF)
 
@@ -63,21 +63,25 @@ class Circle(Aperture):
 	background: int
 				Square background
 
-	radius: int
-				aperture radius
+	d: int
+				aperture pixel diameter
+	D: int
+				aperture real diameter
 
 	"""
-	def __init__(self, background, radius):
-		#self.background = background
-		#self.radius = radius
-
+	def __init__(self, background=500, d=250, D=0.05):
+		self.__background__ = background
+		self.__d__ = d
+		self.__D__ = D
+		self.__scale__ = D/d
 		n = background
-		Aperture.aper = __np__.zeros([n,n])
+		radius = d/2
+		Aperture.__aper__ = __np__.zeros([n,n])
 		for i in range(n):
 			for j in range(n):
 				r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
 				if r < radius:
-					Aperture.aper[i,j] = 1
+					Aperture.__aper__[i,j] = 1
 
 class Rectangle(Aperture):
 	def __init__(self, background, height, width):
