@@ -112,7 +112,8 @@ class Rectangle(Aperture):
 		matrix_1 = [height,width]
 		aper1 = __np__.ones(matrix_1)
 		self.__aper__ = __np__.zeros([n,n])
-		self.__aper__[(n/2-height/2):(n/2+height/2),(n/2-width/2):(n/2+width/2)] = aper1
+		self.__aper__[(n/2-height/2):(n/2-height/2+height),(n/2-width/2):(n/2-width/2+width)] = aper1
+
 
 
 
