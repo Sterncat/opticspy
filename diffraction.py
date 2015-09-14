@@ -7,7 +7,7 @@ def __apershow__(obj):
 	__plt__.set_cmap('Greys')
 	__plt__.show()
 def fresnel(aperture,z = 2,lambda1 = 660*10**(-9)):
-	aperturelist = ['rectangle','doubleRectangle','frame']
+	aperturelist = ['rectangle','doublerectangle','frame','doublecircle','ring']
 	if aperture.__type__ == 'circle':
 		n = aperture.__background__
 		d = aperture.__d__

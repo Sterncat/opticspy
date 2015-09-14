@@ -96,6 +96,39 @@ class Circle(Aperture):
 				r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
 				if r < radius:
 					self.__aper__[i,j] = 1
+class DoubleCircle(Aperture):
+	def __init__(self, background=500, d=50, D=0.01, separation = 100, scale=0.01/200):
+		self.__type__ = 'doublecircle'
+		self.__background__ = n = background
+		self.__d__ = DoubleRectangle
+		self.__D__ = D
+		self.__scale__ = scale
+		self.__separation__ = s = separation
+		radius = d/2
+		self.__aper__ = __np__.zeros([n,n])
+		for i in range(n):
+			for j in range(n):
+				r1 = __np__.sqrt((i-(n/2-s/2-d/2))**2+(j-n/2)**2)
+				r2 = __np__.sqrt((i-(n/2+s/2+d/2))**2+(j-n/2)**2)
+				if r1 < radius or r2 < radius:
+					self.__aper__[j,i] = 1
+
+class Ring(Aperture):
+	def __init__(self, background=500, outside=200, inside=100, scale=0.01/200):
+		self.__type__ = 'ring'
+		self.__background__ = n = background
+		self.__outside__ = outside
+		self.__inside__ = inside
+		self.__scale__ = scale
+		self.__aper__ = __np__.zeros([n,n])
+		for i in range(n):
+			for j in range(n):
+				r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
+				if r < outside/2 and r > inside/2:
+					self.__aper__[i,j] = 1
+
+
+
 
 class Rectangle(Aperture):
 	def __init__(self, background=500, height=200, width=200, scale=0.01/200):
@@ -130,7 +163,7 @@ class DoubleRectangle(Aperture):
 		"""
 		Build a DoubleRectangle aperture instance, could use as a doubleslit aperture
 		"""
-		self.__type__ = "doubleRectangle"
+		self.__type__ = "doublerectangle"
 		n = self.__background__ = background
 		self.__height__ = height
 		self.__width__ = width
