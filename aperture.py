@@ -1,6 +1,7 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 import diffraction as __diffraction__
+import tools as __tools__
 
 def __apershow__(obj):
 	obj = -abs(obj)
@@ -91,11 +92,9 @@ class Circle(Aperture):
 		n = background
 		radius = d/2
 		self.__aper__ = __np__.zeros([n,n])
-		for i in range(n):
-			for j in range(n):
-				r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
-				if r < radius:
-					self.__aper__[i,j] = 1
+		aper1 = __tools__.circle_aperture(d)
+		self.__aper__[(n/2-d/2):(n/2-d/2+d),(n/2-d/2):(n/2-d/2+d)] = aper1
+
 class DoubleCircle(Aperture):
 	def __init__(self, background=500, d=50, D=0.01, separation = 100, scale=0.01/200):
 		self.__type__ = 'doublecircle'
@@ -106,12 +105,10 @@ class DoubleCircle(Aperture):
 		self.__separation__ = s = separation
 		radius = d/2
 		self.__aper__ = __np__.zeros([n,n])
-		for i in range(n):
-			for j in range(n):
-				r1 = __np__.sqrt((i-(n/2-s/2-d/2))**2+(j-n/2)**2)
-				r2 = __np__.sqrt((i-(n/2+s/2+d/2))**2+(j-n/2)**2)
-				if r1 < radius or r2 < radius:
-					self.__aper__[j,i] = 1
+
+		aper1 = __tools__.circle_aperture(d)
+		self.__aper__[(n/2-d/2):(n/2-d/2+d),(n/2-s/2-d/2):(n/2-s/2+d/2)] = aper1
+		self.__aper__[(n/2-d/2):(n/2-d/2+d),(n/2+s/2-d/2):(n/2+s/2+d/2)] = aper1
 
 class Ring(Aperture):
 	def __init__(self, background=500, outside=200, inside=100, scale=0.01/200):
@@ -121,14 +118,12 @@ class Ring(Aperture):
 		self.__inside__ = inside
 		self.__scale__ = scale
 		self.__aper__ = __np__.zeros([n,n])
-		for i in range(n):
-			for j in range(n):
-				r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
-				if r < outside/2 and r > inside/2:
-					self.__aper__[i,j] = 1
 
+		aper1 = __tools__.circle_aperture(inside)
+		aper2 = __tools__.circle_aperture(outside)
 
-
+		aper2[(outside/2-inside/2):(outside/2-inside/2+inside),(outside/2-inside/2):(outside/2-inside/2+inside)] = -1*(aper1-1)
+		self.__aper__[(n/2-outside/2):(n/2-outside/2+outside),(n/2-outside/2):(n/2-outside/2+outside)] = aper2
 
 class Rectangle(Aperture):
 	def __init__(self, background=500, height=200, width=200, scale=0.01/200):
@@ -186,7 +181,3 @@ class Frame(Aperture):
 		aper2 = __np__.zeros([inside,inside])
 		self.__aper__[(n/2-outside/2):(n/2-outside/2+outside),(n/2-outside/2):(n/2-outside/2+outside)] = aper1
 		self.__aper__[(n/2-inside/2):(n/2-inside/2+inside),(n/2-inside/2):(n/2-inside/2+inside)] = aper2
-
-
-
-

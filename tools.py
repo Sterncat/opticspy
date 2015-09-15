@@ -7,6 +7,15 @@ def makecircle(a, r, PR):
 			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
 				a[i,j] = max
 
+def circle_aperture(n):
+	aperture = __np__.zeros([n,n])
+	for i in range(n):
+		for j in range(n):
+			r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
+			if r < n/2:
+				aperture[i,j] = 1
+	return aperture
+
 def peak2valley(Z):
 	return Z.max()-Z.min()
 

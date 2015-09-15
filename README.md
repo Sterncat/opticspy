@@ -33,7 +33,7 @@ And just have fun with it!
 </ul>
 
 ##TODO:
-* ✓ Rectangular, circle diffraction pattern, OTF
+* ✓ Rectangular, circle, double circle, frame, etc aperture
 * ✓ Third order ray aberration plot
 * ✓ Twyman_Green interferogram with aberration
 * ✓ Lateral Shear interferogram with aberration
@@ -43,6 +43,7 @@ And just have fun with it!
 * ✓ Diffraction: generate diffraction pattern
 * ✓ Convert Zernike to Seidel coefficient
 * ✓ Seidel aberrations surface and interferogram
+* ✓ Fresnel and Fraunhofer diffraction 
 * Geometric matrix calculation
 * Some freeform theory
 * PSF, OTF and MTF calculation
