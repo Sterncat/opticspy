@@ -36,4 +36,4 @@ def fraunhofer(aperture, z = 2, lambda1 = 660*10**(-9)):
 	"""
 	diffraction = 1j*__np__.exp(1j*2*__np__.pi/lambda1*z)/lambda1/z*__np__.fft.fftshift(__np__.fft.fft2(aperture.__aper__))
 	__apershow__(diffraction)
-	return 0
+	return diffraction

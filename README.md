@@ -5,7 +5,7 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ###There are some examples opticspy module:   
    
-####1. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Aperture_Method.html)    
+####1. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)    
   
 ####2. [Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html)  
   
