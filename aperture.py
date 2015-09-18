@@ -3,13 +3,6 @@ import matplotlib.pyplot as __plt__
 import diffraction as __diffraction__
 import tools as __tools__
 
-def __apershow__(obj):
-	obj = -abs(obj)
-	__plt__.imshow(obj)
-	__plt__.set_cmap('Greys')
-	__plt__.show()
-
-
 class Aperture():
 	def __init__(self, background):
 		self.background = background
@@ -26,7 +19,8 @@ class Aperture():
 		"""
 
 		print "---------show aperture--------"
-		__apershow__(self.__aper__)
+		extent = self.__scale__ * self.__background__
+		__tools__.__apershow__(self.__aper__, extent)
 
 	def fresnel(self,z = 2,lambda1 = 660*10**(-9)):
 		"""
@@ -60,7 +54,7 @@ class Aperture():
 		print "-------------OTF---------------"
 		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.__aper__))**2
 		aper_OTF = __np__.fft.fftshift(__np__.fft.fft2(aperfft))
-		__apershow__(aper_OTF)
+		__tools__.__apershow__(self.__aper__)
 		return 0
 
 
@@ -83,13 +77,12 @@ class Circle(Aperture):
 				aperture real diameter
 
 	"""
-	def __init__(self, background=500, d=250, D=0.01):
+	def __init__(self, background=500, d=200, scale = 0.01/200):
 		self.__type__ = 'circle'
-		self.__background__ = background
+		self.__background__ = n = background
 		self.__d__ = d
-		self.__D__ = D
-		self.__scale__ = D/d
-		n = background
+		self.__D__ = d*scale
+		self.__scale__ = scale
 		radius = d/2
 		self.__aper__ = __np__.zeros([n,n])
 		aper1 = __tools__.circle_aperture(d)
