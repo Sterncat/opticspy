@@ -209,7 +209,11 @@ class Coefficient(object):
 		__plt__.grid()
 		__plt__.show()
 
-
+	def zernikematrix(self,l = 100):
+		x = __np__.linspace(-1, 1, l)
+		[X,Y] = __np__.meshgrid(x,x)
+		Z = __zernikecartesian__(self.__coefficients__,X,Y)
+		return Z
 
 	def psf(self,pupil=100,background=400):
 		"""
@@ -383,8 +387,8 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 		cset = ax.contourf(X2, Y2, Z_new, zdir='z', offset=-v, cmap=__cm__.RdYlGn)
 		fig.colorbar(surf, shrink=1, aspect=30)
 		__plt__.title('Remaining Aberration',fontsize=18)
-		p2v = round(peak2valley(Z_new),5)
-		rms1 = round(rms(Z_new),5)
+		p2v = round(__tools__.peak2valley(Z_new),5)
+		rms1 = round(__tools__.rms(Z_new),5)
 		label_new = "P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
 		ax.text2D(0.02, 0.1,label_new, transform=ax.transAxes)
 		__plt__.show()		

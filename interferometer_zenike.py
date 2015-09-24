@@ -2,6 +2,7 @@ import numpy as __np__
 import matplotlib.pyplot as __plt__
 import zernike as __zernike__
 import tools as __tools__
+from matplotlib import cm as __cm__
 
 def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	"""
@@ -51,3 +52,67 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	__plt__.show()
 
 ################################################################
+
+def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step',sample = 200):
+	"""
+	Genertate phase_shift Interferogram from interferometer
+	based on zernike polynomials and twyman_green interferometer
+	===========================================================
+	
+	input
+	----------------------------------------------
+	
+	Class zernike polynomials coefficients in wavenumber
+	 
+	see Class:opticspy.zernike.Coefficients
+	
+	lambda_1: wavelength in nanometer, default = 632nm
+	PR: pupil radius, default = 1
+	type: PSI algorithm default:'4-step'
+	sample: sample points
+
+	output
+	----------------------------------------------
+	Interferogram of aberration
+	"""
+	if type == "4-step":
+		lambda_1 = lambda_1*(10**-9)
+		coefficients = coefficients.__coefficients__
+		r = __np__.linspace(-PR, PR, sample)
+		x, y = __np__.meshgrid(r,r) 
+		rr = __np__.sqrt(x**2 + y**2)
+		OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
+
+		im = __plt__.pcolormesh(OPD,cmap=__cm__.RdYlGn)
+		__plt__.colorbar()
+		__plt__.title('Surface figure',fontsize=16)
+		__plt__.show()
+
+		ph = 2 * __np__.pi * OPD
+		Ia = 1
+		Ib = 1
+		I1 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph)
+		I2 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+90.0/180*__np__.pi)
+		I3 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+180.0/180*__np__.pi)
+		I4 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+270.0/180*__np__.pi)
+		I = [I1,I2,I3,I4]
+		
+		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
+		axarr[0, 0].imshow(-I1, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 0].set_title(r'$Phase\ shift: 0$',fontsize=16)
+		axarr[0, 1].imshow(-I2, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 1].set_title(r'$Phase\ shift: 1/2\pi$',fontsize=16)
+		axarr[1, 0].imshow(-I3, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 0].set_title(r'$Phase\ shift: \pi$',fontsize=16)
+		axarr[1, 1].imshow(-I4, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
+		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
+		__plt__.show()
+			
+		return I
+	else:
+		print "No this type of PSI"
+
+
+
+
