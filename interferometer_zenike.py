@@ -2,7 +2,9 @@ import numpy as __np__
 import matplotlib.pyplot as __plt__
 import zernike as __zernike__
 import tools as __tools__
+from phaseunwrap import unwrap2D as __unwrap2D__
 from matplotlib import cm as __cm__
+
 
 def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	"""
@@ -83,7 +85,7 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step',sample = 20
 		rr = __np__.sqrt(x**2 + y**2)
 		OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
 
-		im = __plt__.pcolormesh(OPD,cmap=__cm__.RdYlGn)
+		im = __plt__.imshow(OPD,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
 		__plt__.title('Surface figure',fontsize=16)
 		__plt__.show()
@@ -108,10 +110,39 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step',sample = 20
 		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
 		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
 		__plt__.show()
-			
-		return I
+		return [I,PR]
 	else:
 		print "No this type of PSI"
+
+def rebuild_surface(data, shifttype = "4-step", unwraptype = "simple"):
+	I = data[0]
+	PR = data[1]
+	if shifttype == "4-step":
+		ph = __np__.arctan2((I[3]-I[1]),(I[0]-I[2]))
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
+		im = __plt__.imshow(ph,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
+		__plt__.title('Wrapped phase',fontsize=16)
+		__plt__.colorbar()
+		__plt__.show()
+		#-----------------------Phase unwrap-------------------------
+		rebuild_ph = __unwrap2D__(ph,type = "simple")
+		rebuild_surface = rebuild_ph/2/__np__.pi
+		#------------------------------------------------------------
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
+		im = __plt__.imshow(rebuild_surface,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
+		__plt__.title('Rebuild Surface',fontsize=16)
+		__plt__.colorbar()
+		__plt__.show()
+		return rebuild_surface
+	else:
+		print "No this kind of phase shift type"
+		return 0
+
+
+
+
+
+
 
 
 
