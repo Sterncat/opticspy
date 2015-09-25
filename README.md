@@ -11,7 +11,9 @@ Opticspy is a python module for optics application. I want to this for a long ti
   
 ####3. [Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
 
-####4. [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)    
+####4. [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)  
+
+####5. [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)    
   
 ####This is the [Opticspy project page](http://sterncat.github.io/opticspy/)
 
