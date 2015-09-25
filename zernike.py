@@ -418,6 +418,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 	else:
 		pass
 	C = Coefficient(fitlist)  #output zernike Coefficient class
+	__tools__.zernikeprint(fitlist)
 	return fitlist,C
 
 def __zernikepolar__(coefficient,r,u):
