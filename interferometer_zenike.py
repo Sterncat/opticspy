@@ -126,7 +126,7 @@ def rebuild_surface(data, shifttype = "4-step", unwraptype = "simple"):
 		__plt__.show()
 		#-----------------------Phase unwrap-------------------------
 		rebuild_ph = __unwrap2D__(ph,type = "simple")
-		rebuild_surface = rebuild_ph/2/__np__.pi
+		rebuild_surface = rebuild_ph/2/__np__.pi*PR/2
 		#------------------------------------------------------------
 		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		im = __plt__.imshow(rebuild_surface,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)

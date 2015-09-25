@@ -304,7 +304,7 @@ class Coefficient(object):
 		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
 		return SeidelCoefficient
 
-def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False):
+def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False,removepiston=True):
 	"""
 	------------------------------------------------
 	fitting(Z,n)
@@ -323,7 +323,9 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 	n: How many order of Zernike Polynomials you want to fit
 
 	reamin(default==Flase): show the surface after remove fitting
-	aberrations. 
+	aberrations.
+
+	removepiston: if remove piston, default = True
 	------------------------------------------------
 	"""
 
@@ -411,9 +413,12 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 		__interferometer__.twyman_green(zernike_coefficient)
 	else:
 		pass
-
-
-	return fitlist
+	if removepiston == True:
+		fitlist[0] = 0
+	else:
+		pass
+	C = Coefficient(fitlist)  #output zernike Coefficient class
+	return fitlist,C
 
 def __zernikepolar__(coefficient,r,u):
 	"""
