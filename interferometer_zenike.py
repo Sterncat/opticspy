@@ -55,7 +55,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 
 ################################################################
 
-def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step', boudary = False, sample = 200):
+def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', boundary = False, sample = 200):
 	"""
 	Genertate phase_shift Interferogram from interferometer
 	based on zernike polynomials and twyman_green interferometer
@@ -87,7 +87,7 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step', boudary = 
 	Ib = 1
 	ph = 2 * __np__.pi * OPD
 
-	if type == "4-step" and boudary == False:
+	if type == "4-step" and boundary == False:
 	
 		im = __plt__.imshow(OPD,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
@@ -99,21 +99,10 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step', boudary = 
 		I3 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+180.0/180*__np__.pi)
 		I4 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+270.0/180*__np__.pi)
 		I = [I1,I2,I3,I4]
-		
-		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
-		axarr[0, 0].imshow(-I1, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[0, 0].set_title(r'$Phase\ shift: 0$',fontsize=16)
-		axarr[0, 1].imshow(-I2, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[0, 1].set_title(r'$Phase\ shift: 1/2\pi$',fontsize=16)
-		axarr[1, 0].imshow(-I3, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[1, 0].set_title(r'$Phase\ shift: \pi$',fontsize=16)
-		axarr[1, 1].imshow(-I4, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
-		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
-		__plt__.show()
+		__tools__.phase_shift_figure(I,PR,type = "4-step")
 		return [I,PR]
 
-	elif type == "4-step" and boudary == True:
+	elif type == "4-step" and boundary == True:
 
 		__tools__.makecircle_boundary(OPD, r, PR, 0)
 		im = __plt__.imshow(OPD,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
@@ -131,22 +120,14 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step', boudary = 
 		__tools__.makecircle_boundary(I3, r, PR, 0)
 		__tools__.makecircle_boundary(I4, r, PR, 0)
 		I = [I1,I2,I3,I4]
-
-		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
-		axarr[0, 0].imshow(I1, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[0, 0].set_title(r'$Phase\ shift: 0$',fontsize=16)
-		axarr[0, 1].imshow(I2, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[0, 1].set_title(r'$Phase\ shift: 1/2\pi$',fontsize=16)
-		axarr[1, 0].imshow(I3, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[1, 0].set_title(r'$Phase\ shift: \pi$',fontsize=16)
-		axarr[1, 1].imshow(I4, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
-		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
-		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
-		__plt__.show()
-
+		__tools__.phase_shift_figure(I,PR,type = "4-step")
 		M = __np__.ones([sample,sample])	 #map matrix, which is boundary
 		__tools__.makecircle_boundary(M, r, PR, 0)
+
+
+		fig = __plt__.figure(figsize=(8, 6), dpi=80)
 		im = __plt__.pcolormesh(M)
+		__plt__.title('Phase value map',fontsize=16)
 		__plt__.colorbar()
 		__plt__.show()
 

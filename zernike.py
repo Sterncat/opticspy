@@ -252,21 +252,12 @@ class Coefficient(object):
 					abbe[i][j]=0
 		fig = __plt__.figure(2,figsize=(12, 8), dpi=80)
 		AP = abs(__fftshift__(__fft2__(__fftshift__(abbe))))**2
-		#AP = AP/AP.max()
-		#print AP.max()
-		#print AP.min()
-		#AP = 100*(AP-AP.max()/2)
-		#print AP.max()
-		#print AP.min()
 		__plt__.imshow(-AP,cmap=__cm__.RdYlGn)
 		__plt__.show()
 
 
 	def twyman_green(self,lambda_1=632,PR=1):
 		__interferometer__.twyman_green(self,lambda_1=lambda_1,PR=PR)
-
-
-
 
 	def zernike2seidel(self):
 		a = [0]+self.__coefficients__
@@ -296,11 +287,11 @@ class Coefficient(object):
 				 	"Spherical"]
 		Atable = [[Ap,0.0],[At,Bt],[Ad,0.0],[Aa,Ba],[Ac,Bc],[As,0.0]]
 		print"             Magnitude  Angle (Degrees)"
-		print"---------------------------------------"
+		print"-------------------------------------"
 		for i in range(len(seidellist)):
 			print "{0:>11s} |  {1:>6s}  | {2:>6s}     |".\
 			format(seidellist[i],str(round(Atable[i][0],3)),str(round(Atable[i][1],3)))
-
+		print"-------------------------------------"
 		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
 		return SeidelCoefficient
 

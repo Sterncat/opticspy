@@ -1,5 +1,7 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
+from matplotlib import cm as __cm__
+
 def __apershow__(obj, extent):
 	if extent != 0:
 		obj = -abs(obj)
@@ -68,3 +70,32 @@ def zernikeprint(Z):
 	print "|{0:^7.3f}|{1:^7.3f}|{2:^7.3f}|{3:^7.3f}|{4:^7.3f}|{5:^7.3f}|{6:^7.3f}|                       |".format\
 			(Z[31],Z[32],Z[33],Z[34],Z[35],Z[36],Z[37])
 	print "----------------------------------------------------------------------------------"
+
+
+def phase_shift_figure(I,PR,type):
+	if type == "4-step":
+		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
+		axarr[0, 0].imshow(-I[0], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 0].set_title(r'$Phase\ shift: 0$',fontsize=16)
+		axarr[0, 1].imshow(-I[1], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 1].set_title(r'$Phase\ shift: 1/2\pi$',fontsize=16)
+		axarr[1, 0].imshow(-I[2], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 0].set_title(r'$Phase\ shift: \pi$',fontsize=16)
+		axarr[1, 1].imshow(-I[3], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
+		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
+		__plt__.show()
+	else:
+		print "No this type of figure"
+
+
+
+
+
+
+
+
+
+
+
+
