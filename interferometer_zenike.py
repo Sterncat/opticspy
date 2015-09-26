@@ -55,7 +55,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 
 ################################################################
 
-def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step',sample = 200):
+def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step', boudary = False, sample = 200):
 	"""
 	Genertate phase_shift Interferogram from interferometer
 	based on zernike polynomials and twyman_green interferometer
@@ -77,22 +77,23 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step',sample = 20
 	----------------------------------------------
 	Interferogram of aberration
 	"""
-	if type == "4-step":
-		lambda_1 = lambda_1*(10**-9)
-		coefficients = coefficients.__coefficients__
-		r = __np__.linspace(-PR, PR, sample)
-		x, y = __np__.meshgrid(r,r) 
-		rr = __np__.sqrt(x**2 + y**2)
-		OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
+	lambda_1 = lambda_1*(10**-9)
+	coefficients = coefficients.__coefficients__
+	r = __np__.linspace(-PR, PR, sample)
+	x, y = __np__.meshgrid(r,r) 
+	rr = __np__.sqrt(x**2 + y**2)
+	OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
+	Ia = 1
+	Ib = 1
+	ph = 2 * __np__.pi * OPD
 
+	if type == "4-step" and boudary == False:
+	
 		im = __plt__.imshow(OPD,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
 		__plt__.title('Surface figure',fontsize=16)
 		__plt__.show()
 
-		ph = 2 * __np__.pi * OPD
-		Ia = 1
-		Ib = 1
 		I1 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph)
 		I2 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+90.0/180*__np__.pi)
 		I3 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+180.0/180*__np__.pi)
@@ -111,13 +112,52 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1,type = '4-step',sample = 20
 		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
 		__plt__.show()
 		return [I,PR]
+
+	elif type == "4-step" and boudary == True:
+
+		__tools__.makecircle_boundary(OPD, r, PR, 0)
+		im = __plt__.imshow(OPD,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
+		__plt__.colorbar()
+		__plt__.title('Surface figure',fontsize=16)
+		__plt__.show()
+
+		I1 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph)
+		I2 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+90.0/180*__np__.pi)
+		I3 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+180.0/180*__np__.pi)
+		I4 = Ia + Ib + 2 * __np__.sqrt(Ia*Ib) * __np__.cos(ph+270.0/180*__np__.pi)
+
+		__tools__.makecircle_boundary(I1, r, PR, 0)
+		__tools__.makecircle_boundary(I2, r, PR, 0)
+		__tools__.makecircle_boundary(I3, r, PR, 0)
+		__tools__.makecircle_boundary(I4, r, PR, 0)
+		I = [I1,I2,I3,I4]
+
+		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
+		axarr[0, 0].imshow(I1, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 0].set_title(r'$Phase\ shift: 0$',fontsize=16)
+		axarr[0, 1].imshow(I2, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 1].set_title(r'$Phase\ shift: 1/2\pi$',fontsize=16)
+		axarr[1, 0].imshow(I3, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 0].set_title(r'$Phase\ shift: \pi$',fontsize=16)
+		axarr[1, 1].imshow(I4, extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
+		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
+		__plt__.show()
+
+		M = __np__.ones([sample,sample])	 #map matrix, which is boundary
+		__tools__.makecircle_boundary(M, r, PR, 0)
+		im = __plt__.pcolormesh(M)
+		__plt__.colorbar()
+		__plt__.show()
+
+		return [I,PR,M,sample]
 	else:
 		print "No this type of PSI"
 
 def rebuild_surface(data, shifttype = "4-step", unwraptype = "simple"):
-	I = data[0]
-	PR = data[1]
-	if shifttype == "4-step":
+	if shifttype == "4-step" and unwraptype == "simple":
+		I = data[0]
+		PR = data[1]
 		ph = __np__.arctan2((I[3]-I[1]),(I[0]-I[2]))
 		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		im = __plt__.imshow(ph,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
@@ -134,16 +174,33 @@ def rebuild_surface(data, shifttype = "4-step", unwraptype = "simple"):
 		__plt__.colorbar()
 		__plt__.show()
 		return rebuild_surface
+
+	elif shifttype == "4-step" and unwraptype == "boundary":
+		I = data[0]
+		PR = data[1]
+		M = data[2]
+		s = data[3]
+		ph = __np__.arctan2((I[3]-I[1]),(I[0]-I[2]))
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
+		im = __plt__.imshow(ph,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
+		__plt__.title('Wrapped phase',fontsize=16)
+		__plt__.colorbar()
+		__plt__.show()
+		#-----------------------Phase unwrap-------------------------
+		ph1 = [ph,M,s]
+		rebuild_ph = __unwrap2D__(ph1,type = "boundary")
+		rebuild_surface = rebuild_ph/2/__np__.pi*PR/2
+		#------------------------------------------------------------
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
+		im = __plt__.imshow(rebuild_surface,extent=[-PR,PR,-PR,PR],cmap=__cm__.RdYlGn)
+		__plt__.title('Rebuild Surface',fontsize=16)
+		__plt__.colorbar()
+		__plt__.show()
+		return rebuild_surface
+
 	else:
 		print "No this kind of phase shift type"
 		return 0
-
-
-
-
-
-
-
 
 
 
