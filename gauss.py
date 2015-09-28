@@ -37,10 +37,21 @@ def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 	# range is the distance along the propagation direction of a beam from the 
 	# waist to the place where the area of the cross section is doubled.
 def gaussbeam(w0 = 1,P = 5,z0 = 5, z = 10):
-	# w0 Beam Waist
-	# P total power
-    # z0 Rayleigh Range
-    # z Axial Distance
+	"""
+	Generate a gaussbeam
+	========================================
+	input
+	----------------------------------------
+	w0 Beam Waist
+	P total power
+    z0 Rayleigh Range
+    z Axial Distance
+
+    output
+    ----------------------------------------
+    gaussbeam matrix
+
+    """
 	x1 = __np__.linspace(-4,4,100)
 	y1 = __np__.linspace(-4,4,100)
 	[x,y] = __np__.meshgrid(x1,y1)

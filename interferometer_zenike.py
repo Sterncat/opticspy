@@ -71,6 +71,7 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', boundary 
 	lambda_1: wavelength in nanometer, default = 632nm
 	PR: pupil radius, default = 1
 	type: PSI algorithm default:'4-step'
+	boundary: if have a aperture
 	sample: sample points
 
 	output
@@ -136,6 +137,19 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', boundary 
 		print "No this type of PSI"
 
 def rebuild_surface(data, shifttype = "4-step", unwraptype = "simple"):
+	"""
+	Rebuild surface function
+	============================================
+	input 
+	--------------------------------------------
+	data: Interferogram data from PSI
+	shifttype: PSI type, default 4-step PSI
+	unwraptype: phaseunwrap type, default "simple"
+
+	output
+	--------------------------------------------
+	rebuild surface matrix
+	"""
 	if shifttype == "4-step" and unwraptype == "simple":
 		I = data[0]
 		PR = data[1]

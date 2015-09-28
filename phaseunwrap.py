@@ -7,7 +7,7 @@ import numpy as __np__
 v = lambda x: __np__.arctan2(__np__.sin(x), __np__.cos(x))
 wrap_diff = lambda x: v(__np__.diff(x)) 
 
-#Depth first search algorithm, use to find phase map
+#Depth first search algorithm, use to find phase map(where )
 def DFS(M,ph1,m,n,s):
 	stack = []
 	stack.append([m,n])
@@ -53,6 +53,9 @@ def DFS(M,ph1,m,n,s):
 	return ph
 
 def unwrap1D(x):
+	"""
+	1D phase unwrap function. 
+	"""
 	y = x
 	y[0] = x[0]
 	diff = wrap_diff(x)
@@ -62,6 +65,24 @@ def unwrap1D(x):
 	return __np__.array(y)
 
 def unwrap2D(wraped_phase,type):
+	"""
+	2D unwarp function. There are several type to 
+	use in several different situation.
+
+	Type:
+	-----------------------------------------------
+	Simple: The very simple algorithm to unwrap 2D warpped phase
+			just scan the whole matrix to unwrap phase. Very noise 
+			sensitive
+
+	boundary: 2D phase unwrap method for phase map with aperture, 
+			  for example, circle, rectangular, ring or slit. It 
+			  use a DFS(deep first search) algorithm to traverse
+			  the phase map, then unwarp the phase.It is also very 
+			  noise sensitive
+	etc: still have more, to be continue
+
+	"""
 	if type == "simple":
 		l = len(wraped_phase)
 		b = []

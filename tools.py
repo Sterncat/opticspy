@@ -42,6 +42,8 @@ def peak2valley(Z):
 def rms(Z):
 	rms = __np__.sqrt(__np__.mean(__np__.square(Z)))
 	return rms
+
+	
 def zernikeprint(Z):
 	"""
 	Format output the Zernike Polynomials
@@ -73,6 +75,9 @@ def zernikeprint(Z):
 
 
 def phase_shift_figure(I,PR,type):
+	"""
+	Draw PSI Interferograms, several types.
+	"""
 	if type == "4-step":
 		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
 		axarr[0, 0].imshow(-I[0], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
