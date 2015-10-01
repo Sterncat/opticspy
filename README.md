@@ -4,16 +4,16 @@
 Opticspy is a python module for optics application. I want to this for a long time. One reason is I know both optics and python, so why no develop some optics tools? The second reason is that there is not much opensource, easy-to-use optics program module(matlab has great fuctions but do not specify to optics application). I want this could be developed in to a core for a future web application for optics.
 
 ###There are some examples opticspy module:   
-   
-####1. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)    
   
-####2. [Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html)  
-  
-####3. [Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
+####1. [Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
 
-####4. [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)  
+####2. [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)  
 
-####5. [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)    
+####3. [Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html) 
+
+####4. [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)
+
+####5. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)      
   
 ####This is the [Opticspy project page](http://sterncat.github.io/opticspy/)
 
