@@ -12,6 +12,7 @@ from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
+from numpy.fft import ifft2 as __ifft2__
 import seidel2 as __seidel2__
 import tools as __tools__
 
@@ -215,7 +216,36 @@ class Coefficient(object):
 		Z = __zernikecartesian__(self.__coefficients__,X,Y)
 		return Z
 
-	def psf(self,pupil=100,background=400):
+	def __psfcaculator__(self,pupil=200,background=400,lambda_1 = 632*10**(-9), z=0.1):
+		"""
+		pupil: Exit pupil diameter
+		z: Distance from exit pupil to image plane
+		"""
+		l1 = pupil
+		x = __np__.linspace(-1, 1, l1)
+		[X,Y] = __np__.meshgrid(x,x)
+		Z = __zernikecartesian__(self.__coefficients__,X,Y)
+		for i in range(len(Z)):
+			for j in range(len(Z)):
+				if x[i]**2+x[j]**2>1:
+					Z[i][j]=0	
+		d = background
+		A = __np__.zeros([d,d])
+		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
+
+		# __plt__.imshow(A,cmap=__cm__.RdYlGn)
+		# __plt__.colorbar()
+		# __plt__.show()
+		abbe = __np__.exp(1j*2*__np__.pi*A)
+		for i in range(len(abbe)):
+			for j in range(len(abbe)):
+				if abbe[i][j]==1:
+					abbe[i][j]=0
+		PSF = __fftshift__(__fft2__(__fftshift__(abbe)))**2
+		PSF = PSF/PSF.max()
+		return PSF
+
+	def psf(self,pupil=200,background=400):
 		"""
 		------------------------------------------------
 		psf()
@@ -230,30 +260,45 @@ class Coefficient(object):
 		background: background size(points)
 
 		"""
-		l1 = pupil
-		#Generate test surface matrix from a detector
-		x = __np__.linspace(-1, 1, l1)
-		[X,Y] = __np__.meshgrid(x,x)
-		Z = __zernikecartesian__(self.__coefficients__,X,Y)
-		for i in range(len(Z)):
-			for j in range(len(Z)):
-				if x[i]**2+x[j]**2>1:
-					Z[i][j]=0	
-		d = background
-		A = __np__.zeros([d,d])
-		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
-		fig = __plt__.figure(1,figsize=(12, 8), dpi=80)
-		__plt__.imshow(A,cmap=__cm__.RdYlGn)
+		PSF = self.__psfcaculator__(pupil,background)
+		__plt__.imshow(abs(PSF),cmap=__cm__.RdYlGn)
+		__plt__.colorbar()
 		__plt__.show()
-		abbe = __np__.exp(1j*2*__np__.pi*A)
-		for i in range(len(abbe)):
-			for j in range(len(abbe)):
-				if abbe[i][j]==1:
-					abbe[i][j]=0
-		fig = __plt__.figure(2,figsize=(12, 8), dpi=80)
-		AP = abs(__fftshift__(__fft2__(__fftshift__(abbe))))**2
-		__plt__.imshow(-AP,cmap=__cm__.RdYlGn)
+		return PSF
+
+	def otf(self,pupil=200,background=400):
+		PSF = self.__psfcaculator__(pupil,background)
+		OTF = __fftshift__(__fft2__(PSF))
+		return OTF
+
+
+	def mtf(self,pupil=200,background=400):
+		PSF = self.__psfcaculator__(pupil,background)
+		MTF = __fftshift__(__fft2__(PSF))
+		MTF = MTF/MTF.max()
+		__plt__.imshow(abs(MTF))
+		__plt__.colorbar()
 		__plt__.show()
+		return MTF
+
+	def ptf(self,pupil=200,background=400):
+		"""
+		Phase transfer function
+		"""
+		PSF = self.__psfcaculator__(pupil,background)
+		PTF = __fftshift__(__fft2__(PSF))
+		PTF = __np__.angle(PTF)
+		b = background
+		R = (pupil)**2
+		for i in range(b):
+			for j in range(b):
+				if (i-b/2)**2+(j-b/2)**2>R:
+					PTF[i][j] = 0
+		__plt__.imshow(abs(PTF))
+		__plt__.colorbar()
+		__plt__.show()
+		return PTF
+
 
 
 	def twyman_green(self,lambda_1=632,PR=1):
