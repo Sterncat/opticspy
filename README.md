@@ -15,7 +15,7 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ####5. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)      
   
-####This is the [Opticspy project page](http://sterncat.github.io/opticspy/)
+####This is the [Opticspy project page](http://opticspy.org)
 
 ####This project is hosted on github in [https://github.com/Sterncat/opticspy](https://github.com/Sterncat/opticspy)
 
