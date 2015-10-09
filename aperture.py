@@ -54,7 +54,7 @@ class Aperture():
 		print "-------------OTF---------------"
 		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.__aper__))**2
 		aper_OTF = __np__.fft.fftshift(__np__.fft.fft2(aperfft))
-		__tools__.__apershow__(self.__aper__)
+		__tools__.__apershow__(aper_OTF,extent = 0)
 		return 0
 
 

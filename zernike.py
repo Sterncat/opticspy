@@ -1,3 +1,4 @@
+from __future__ import division
 import numpy as __np__
 import interferometer_zenike as __interferometer__
 from numpy import cos as __cos__
@@ -237,7 +238,7 @@ class Coefficient(object):
 		fig = __plt__.figure()
 		ax = fig.gca()
 		__plt__.imshow(A,extent=[-axis_1,axis_1,-axis_1,axis_1],cmap=__cm__.RdYlGn)
-		ax.set_xlabel('unit wavelength',fontsize=14)
+		ax.set_xlabel('mm',fontsize=14)
 		__plt__.colorbar()
 		__plt__.show()
 
@@ -260,9 +261,11 @@ class Coefficient(object):
 		------------------------------------------------
 		Input: 
 
-		pupil: pupil size(points)
+		r: exit pupil radius(mm)
 
-		background: background size(points)
+		lambda_1: wavelength(m)
+
+		z: exit pupil to image plane distance(m)
 
 		"""
 		print r,lambda_1,z
@@ -282,6 +285,8 @@ class Coefficient(object):
 		PSF = self.__psfcaculator__(r=r,lambda_1=lambda_1,z=z)
 		MTF = __fftshift__(__fft2__(PSF))
 		MTF = MTF/MTF.max()
+		f0 = r/1000/lambda_1/z/10000   # cutoff frequency?
+		print f0
 		__plt__.imshow(abs(MTF))
 		__plt__.colorbar()
 		__plt__.show()
@@ -294,8 +299,8 @@ class Coefficient(object):
 		PSF = self.__psfcaculator__()
 		PTF = __fftshift__(__fft2__(PSF))
 		PTF = __np__.angle(PTF)
-		b = background
-		R = (pupil)**2
+		b = 400
+		R = (200)**2
 		for i in range(b):
 			for j in range(b):
 				if (i-b/2)**2+(j-b/2)**2>R:

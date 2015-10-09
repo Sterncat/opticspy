@@ -11,6 +11,7 @@ def __apershow__(obj, extent):
 	else:
 		obj = -abs(obj)
 		__plt__.imshow(obj)
+		__plt__.set_cmap('Greys')
 		__plt__.show()
 
 def makecircle(a, r, PR):
