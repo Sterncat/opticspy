@@ -13,7 +13,9 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ####4. [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)
 
-####5. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)      
+####5. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)
+
+####6. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)    
   
 ####This is the [Opticspy project page](http://opticspy.org)
 
