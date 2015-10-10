@@ -2,6 +2,7 @@
 see http://en.wikipedia.org/wiki/Jones_calculus
 currently does not normalize the output
 """
+from __future__ import division as __division__
 import numpy as __np__
 from numpy import pi as __pi__
 
@@ -9,6 +10,7 @@ def rotator(angle):
     s = __np__.sin(angle)
     c = __np__.cos(angle)
     rotator = __np__.matrix([[c,-s],[s,c]])
+    return rotator
 
 class Component(object):
     """Base Class for Waveplates and Filters"""

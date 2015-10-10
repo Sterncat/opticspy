@@ -30,7 +30,7 @@ def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 	print"               Gaussian Beams Calculator"
 	print"--------------------------------------------------------"
 	for i in range(8):
-		print "| {0:>35s} |  {1:<6s}".format(list2[i],list3[i])
+		print "| {0:>35s} |  {1:<6s} ".format(list2[i],list3[i])
 	print"--------------------------------------------------------"
 	return list1
 	#[1] In optics and especially laser science, the Rayleigh length or Rayleigh 

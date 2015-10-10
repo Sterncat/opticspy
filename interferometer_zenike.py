@@ -19,7 +19,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	see Class:opticspy.zernike.Coefficients
 	
 	lambda_1: wavelength in nanometer, default = 632nm
-	PR: pupil radius, default = 1
+	PR: pupil radius, default = 1mm
 
 	output
 	----------------------------------------------
@@ -127,7 +127,7 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', boundary 
 
 
 		fig = __plt__.figure(figsize=(8, 6), dpi=80)
-		im = __plt__.pcolormesh(M)
+		im = __plt__.pcolormesh(M,cmap=__cm__.RdYlGn)
 		__plt__.title('Phase value map',fontsize=16)
 		__plt__.colorbar()
 		__plt__.show()

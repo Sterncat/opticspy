@@ -8,9 +8,9 @@
  *
  *  Copyright (c) 2014-2015 Xing fan
 """
-from __future__ import division
-import aperture, aberration, interferometer_seidel,interferometer_zenike
+from __future__ import division as __division__
+import aperture, interferometer_seidel,interferometer_zenike
 import seidel, seidel2, zernike, test, tools, diffraction, jones, gauss
-import phaseunwrap
+import phaseunwrap, lens
 import warnings as __warnings__
 __warnings__.filterwarnings("ignore")

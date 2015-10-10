@@ -77,7 +77,7 @@ class Circle(Aperture):
 				aperture real diameter
 
 	"""
-	def __init__(self, background=500, d=200, scale = 0.01/200):
+	def __init__(self, background=500, d=200, D = 0.01, scale = 0.01/200):
 		self.__type__ = 'circle'
 		self.__background__ = n = background
 		self.__d__ = d

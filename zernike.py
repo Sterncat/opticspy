@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import division as __division__
 import numpy as __np__
 import interferometer_zenike as __interferometer__
 from numpy import cos as __cos__
@@ -343,11 +343,11 @@ class Coefficient(object):
 				 	"Spherical"]
 		Atable = [[Ap,0.0],[At,Bt],[Ad,0.0],[Aa,Ba],[Ac,Bc],[As,0.0]]
 		print"             Magnitude  Angle (Degrees)"
-		print"-------------------------------------"
+		print"-------------------------------------------"
 		for i in range(len(seidellist)):
-			print "{0:>11s} |  {1:>6s}  | {2:>6s}     |".\
+			print "| {0:>13s} |  {1:>8s}  | {2:>8s}   |".\
 			format(seidellist[i],str(round(Atable[i][0],3)),str(round(Atable[i][1],3)))
-		print"-------------------------------------"
+		print"-------------------------------------------"
 		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
 		return SeidelCoefficient
 
