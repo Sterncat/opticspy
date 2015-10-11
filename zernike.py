@@ -236,11 +236,11 @@ class Coefficient(object):
 		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
 		axis_1 = d/pupil*r
 		fig = __plt__.figure()
-		ax = fig.gca()
-		__plt__.imshow(A,extent=[-axis_1,axis_1,-axis_1,axis_1],cmap=__cm__.RdYlGn)
-		ax.set_xlabel('mm',fontsize=14)
-		__plt__.colorbar()
-		__plt__.show()
+		# ax = fig.gca()
+		# __plt__.imshow(A,extent=[-axis_1,axis_1,-axis_1,axis_1],cmap=__cm__.RdYlGn)
+		# ax.set_xlabel('mm',fontsize=14)
+		# __plt__.colorbar()
+		# __plt__.show()
 
 		abbe = __np__.exp(-1j*2*__np__.pi*A)
 		for i in range(len(abbe)):
@@ -286,8 +286,7 @@ class Coefficient(object):
 		MTF = __fftshift__(__fft2__(PSF))
 		MTF = MTF/MTF.max()
 		f0 = r/1000/lambda_1/z/10000   # cutoff frequency?
-		print f0
-		__plt__.imshow(abs(MTF))
+		__plt__.imshow(abs(MTF),cmap=__cm__.bwr)
 		__plt__.colorbar()
 		__plt__.show()
 		return 0
@@ -305,7 +304,7 @@ class Coefficient(object):
 			for j in range(b):
 				if (i-b/2)**2+(j-b/2)**2>R:
 					PTF[i][j] = 0
-		__plt__.imshow(abs(PTF))
+		__plt__.imshow(abs(PTF),cmap=__cm__.rainbow)
 		__plt__.colorbar()
 		__plt__.show()
 		return 0

@@ -86,6 +86,9 @@ def zoom_cal2(f1,f2,L,Mhigh,Mlow):
 	__plt__.title("Solution 1",fontsize=18)  
 	__plt__.grid(b=True, which='both', color='0.65',linestyle='--')
 	legend = __plt__.legend(loc='lower right', shadow=True, fontsize='medium')
+	min_1 = min(min(P1a),min(P2a),min(P3a))
+	max_1 = max(max(P1a),max(P2a),max(P3a))
+	__plt__.axis([min(M), max(M), min_1-50, max_1+50])
 	__plt__.show()
 	
 	__plt__.figure(2,figsize=(8, 6), dpi=80)
@@ -97,9 +100,60 @@ def zoom_cal2(f1,f2,L,Mhigh,Mlow):
 	__plt__.title("Solution 2",fontsize=18)  
 	__plt__.grid(b=True, which='both', color='0.65',linestyle='--')
 	legend = __plt__.legend(loc='lower left', shadow=True, fontsize='medium')
+	min_2 = min(min(P1b),min(P2b),min(P3b))
+	max_2 = max(max(P1b),max(P2b),max(P3b))
+	__plt__.axis([min(M), max(M), min_2-50, max_2+50])
 	__plt__.show()
 	return 0
 
+def zoom_cal3(f0,f1,f2,flong,fshort,L_prime):
+	Mhigh = flong/f0
+	Mlow = fshort/f0
+	L = L_prime - f0
+	points = 20
+	F = __np__.linspace(fshort,flong,points)
+	M = __np__.linspace(Mlow,Mhigh,points)
+	M = __np__.asarray(M)
+	[t1,t2] = __solve__(f1,f2,L,M)
+	
+	s1a = ((M-1)*t1+L)/((M-1)-M*t1/f1)
+	P0a = [L + f0]*points
+	P1a = L + s1a
+	P2a = L + s1a - t1
+	
+	s1b = ((M-1)*t2+L)/((M-1)-M*t2/f1)
+	P0b = [L + f0]*points
+	P1b = L + s1b
+	P2b = L + s1b - t2
+	
+	__plt__.figure(1,figsize=(8, 6), dpi=80)
+	__plt__.plot(F,P0a,'b-d',label='Lens #1')
+	__plt__.plot(F,P1a,'b-s',label='Lens #2')
+	__plt__.plot(F,P2a,'b-*',label='Lens #3')
+	__plt__.xlabel('Focal length(mm)',fontsize=18)  
+	__plt__.ylabel('Position from Image Plane(mm)',fontsize=18)
+	__plt__.title("Lens Position Solution 1",fontsize=18)  
+	__plt__.grid(b=True, which='both', color='0.65',linestyle='--')
+	legend = __plt__.legend(loc='lower right', shadow=True, fontsize='medium')
+	min_1 = min(min(P0a),min(P1a),min(P2a))
+	max_1 = max(max(P0a),max(P1a),max(P2a))
+	__plt__.axis([min(F), max(F), min_1-50, max_1+50])
+	__plt__.show()
+	
+	__plt__.figure(1,figsize=(8, 6), dpi=80)
+	__plt__.plot(F,P0b,'b-d',label='Lens #1')
+	__plt__.plot(F,P1b,'b-s',label='Lens #2')
+	__plt__.plot(F,P2b,'b-*',label='Lens #3')
+	__plt__.xlabel('Focal length(mm)',fontsize=18)  
+	__plt__.ylabel('Position from Image Plane(mm)',fontsize=18)
+	__plt__.title("Lens Position Solution 2",fontsize=18)  
+	__plt__.grid(b=True, which='both', color='0.65',linestyle='--')
+	legend = __plt__.legend(loc='lower right', shadow=True, fontsize='medium')
+	min_2 = min(min(P0b),min(P1b),min(P2b))
+	max_2 = max(max(P0b),max(P1b),max(P2b))
+	__plt__.axis([min(F), max(F), min_2-50, max_2+50])
+	__plt__.show()
+	return 0
 
 
 
