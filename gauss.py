@@ -3,9 +3,15 @@ import matplotlib.pyplot as __plt__
 from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
-	# Axial Distance, z (mm)
-	# Beam Waist, w0 (mm)
-	# Wavelength, lambda (um)
+	"""
+	Gauss beam Calculator
+	==========================================
+	input
+	------------------------------------------
+	# z: Axial Distance(mm)
+	# w0: Beam Waist(mm)
+	# lambda1: Wavelength(um)
+	"""
 	theta = lambda1/__np__.pi/w0 # Half Angle Divergence, theta (mrad)
 	z0 = w0/theta*1000 # Rayleigh Range, z0 (mm)
 	wz = w0*__np__.sqrt(1+(z/z0)**2) # Half Beam Diameter, w(z) (mm)

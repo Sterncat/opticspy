@@ -167,7 +167,7 @@ class Coefficient(object):
 
 		Return a 2D Zernike Polynomials map figure
 
-		label_1: default show label
+		label: default show label
 
 		------------------------------------------------
 		"""
@@ -282,6 +282,9 @@ class Coefficient(object):
 
 
 	def mtf(self,r=1,lambda_1=632*10**(-9),z=0.1):
+		"""
+		Modulate Transfer function
+		"""
 		PSF = self.__psfcaculator__(r=r,lambda_1=lambda_1,z=z)
 		MTF = __fftshift__(__fft2__(PSF))
 		MTF = MTF/MTF.max()
@@ -349,6 +352,36 @@ class Coefficient(object):
 		print"-------------------------------------------"
 		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
 		return SeidelCoefficient
+	def removepiston(self):
+		"""
+		Remove piston, it is just same value for whole aberration map
+		"""
+		Z = self.__coefficients__
+		Z[0] = 0
+		return Z
+	def removetilt(self):
+		"""
+		Remove tilt, it is mainly caused by system tilt, not aberration 
+		on surface
+		"""
+		tilt = [2,3]
+		Z = self.__coefficients__
+		for i in tilt:
+			Z[i-1] = 0
+		return Z
+	def removecoma(self):
+		"""
+		Remove coma, most of coma is caused by misalinement
+		??? Is high order coma also caused by misalinement
+		"""
+		coma = [7,8,16,17,29,30]
+		Z = self.__coefficients__
+		for i in coma:
+			Z[i-1] = 0
+		return Z
+
+
+
 
 def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False,removepiston=True):
 	"""
