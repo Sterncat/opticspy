@@ -372,7 +372,7 @@ class Coefficient(object):
 	def removecoma(self):
 		"""
 		Remove coma, most of coma is caused by misalinement
-		??? Is high order coma also caused by misalinement
+		??? Is high order coma also caused by misalinement ???
 		"""
 		coma = [7,8,16,17,29,30]
 		Z = self.__coefficients__
