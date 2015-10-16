@@ -15,7 +15,11 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ####5. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)
 
-####6. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)    
+####6. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)
+
+###There are some interesting gifs from opticspy:
+
+####1. [Zernike Surface](http://sterncat.github.io/images/zernikegif.gif)
   
 ####This is the [Opticspy project page](http://opticspy.org)
 
