@@ -4,7 +4,6 @@ from numpy import sin as __sin__
 from numpy import arctan2 as __arctan2__
 from numpy import sqrt as __sqrt__
 import matplotlib.pyplot as __plt__
-from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
