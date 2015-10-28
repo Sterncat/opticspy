@@ -34,4 +34,3 @@ def doubleslit(b=0.1,a=0.4,lambda_1=632,z=0.5):
     __plt__.plot(theta*z*1000,y)
     __plt__.plot(theta*z*1000,y1,"g--")
     __plt__.show()
-

@@ -1,9 +1,6 @@
 import numpy as __np__
+from unwrap import unwrap as __unwrap__
 
-# def V(x):
-# 	return __np__.arctan2(__np__.sin(x), __np__.cos(x))
-# def wrap_diff(x):
-# 	return V(np.diff(x))
 v = lambda x: __np__.arctan2(__np__.sin(x), __np__.cos(x))
 wrap_diff = lambda x: v(__np__.diff(x)) 
 
@@ -64,7 +61,7 @@ def unwrap1D(x):
 		y[i] = y[i - 1] + diff[i - 1]
 	return __np__.array(y)
 
-def unwrap2D(wraped_phase,type):
+def unwrap2D(wraped_phase,type="boundary",noise = True):
 	"""
 	2D unwarp function. There are several type to 
 	use in several different situation.
@@ -83,7 +80,7 @@ def unwrap2D(wraped_phase,type):
 	etc: still have more, to be continue
 
 	"""
-	if type == "simple":
+	if type == "simple" and noise == False:
 		l = len(wraped_phase)
 		b = []
 		b = __np__.array(b)
@@ -103,7 +100,7 @@ def unwrap2D(wraped_phase,type):
 				ph1 = ph1[l:]
 		return ph
 		
-	elif type == "boundary":
+	elif type == "boundary" and noise == False:
 		ph1 = wraped_phase[0]
 		M = wraped_phase[1]
 		s = wraped_phase[2]
@@ -112,6 +109,15 @@ def unwrap2D(wraped_phase,type):
 		n = start_pixel[1][0]
 		print "start pixel",m,n
 		ph = DFS(M,ph1,m,n,s)
+		return ph
+
+	elif noise == True:
+		ph1 = wraped_phase[0]
+		M = wraped_phase[1]
+		s = wraped_phase[2]
+		ph = __unwrap__(ph1,wrap_around_axis_0=False,\
+							wrap_around_axis_1=False,\
+							wrap_around_axis_2=False)
 		return ph
 
 	else:
