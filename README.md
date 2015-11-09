@@ -17,9 +17,14 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ####6. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)
 
-###There are some interesting gifs from opticspy:
+###There are some interesting derivative from opticspy:
 
-####1. [Zernike Surface](http://sterncat.github.io/images/zernikegif.gif)
+####1. [A Zernike Polynomial GUI app based on PyQt5](https://github.com/Sterncat/zernikeapp) 
+####It is very easy to reuse or "wrap" opticspy module with a GUI(e.g. PyQt)
+
+<p><img src="http://sterncat.github.io/images/panelpic.png" height="300" width="480" /></p>
+
+####2. [Zernike Surface gif show](http://sterncat.github.io/images/zernikegif.gif)
   
 ####This is the [Opticspy project page](http://opticspy.org)
 
@@ -35,7 +40,7 @@ $ pip install opticspy
 ```
 $ python2.7 setup.py install
 ```
-####Some trouble shooting please read troubleshooting.md
+####Some trouble shooting please read [troubleshooting.md](https://github.com/Sterncat/opticspy/blob/master/troubleshooting.md)
 ##How to use
 ```
 >>> import opticspy
