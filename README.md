@@ -19,7 +19,7 @@ Opticspy is a python module for optics application. I want to this for a long ti
 
 ###There are some interesting derivative from opticspy:
 
-####1. [A Zernike Polynomial GUI app based on PyQt5](https://github.com/Sterncat/zernikeapp) 
+####1. [A Zernike Polynomial GUI app based on opticspy and PyQt5](https://github.com/Sterncat/zernikeapp) 
 ####It is very easy to reuse or "wrap" opticspy module with a GUI(e.g. PyQt)
 
 <p><img src="http://sterncat.github.io/images/panelpic.png" height="300" width="480" /></p>
