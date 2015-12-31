@@ -1,0 +1,56 @@
+     Cooke Triplet f/4.5
+                RDY             THI     RMD       GLA           CCY   THC   GLC
+  OBJ:        INFINITY        INFINITY                          100   100
+    1:        21.48138        2.000000       SK16_SCHOTT        100   100
+    2:      -124.10000        5.260000                          100   100
+  STO:       -19.10000        1.250000       F4_HOYA            100   100
+    4:        22.00000        4.690000                          100   100
+    5:       328.90000        2.250000       SK16_SCHOTT        100   100
+    6:       -16.70000       43.050484                          100   PIM
+> IMG:        INFINITY        0.028933                          100     0
+
+SPECIFICATION DATA
+   FNO        4.50000
+   DIM             MM
+   WL          656.30    546.10    486.10
+   REF              2
+   WTW              1         2         1
+   XAN        0.00000       0.00000       0.00000
+   YAN        0.00000      14.00000      20.00000
+   WTF        1.00000       1.00000       1.00000
+   VUY        0.00000      -0.01406       0.16171
+   VLY        0.00000       0.06883       0.24355
+   POL            N
+
+APERTURE DATA/EDGE DEFINITIONS
+   CA
+   CIR S1                   7.000000
+   CIR S5                   6.500000
+
+REFRACTIVE INDICES
+    GLASS CODE                    656.30       546.10       486.10
+   SK16_SCHOTT                  1.617271     1.622861     1.627559
+   F4_HOYA                      1.611640     1.620577     1.628487
+
+SOLVES
+   PIM
+
+No pickups defined in system
+
+
+INFINITE CONJUGATES
+   EFL        50.0004
+   BFL        43.0505
+   FFL       -39.5680
+   FNO         4.5000
+   IMG DIS    43.0794
+   OAL        15.4500
+   PARAXIAL IMAGE
+    HT        18.1986
+   ANG        20.0000
+   ENTRANCE PUPIL
+    DIA       11.1112
+    THI        8.2156
+   EXIT PUPIL
+    DIA       11.6267
+    THI       -9.2694

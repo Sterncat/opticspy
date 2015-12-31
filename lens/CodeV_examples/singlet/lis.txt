@@ -1,0 +1,49 @@
+lis
+     Singlet
+                RDY             THI     RMD       GLA           CCY   THC   GLC
+> OBJ:        INFINITY        INFINITY                          100   100
+  STO:        50.00000        5.000000       BK7_SCHOTT           0   100
+    2:      1175.71107       96.572831                          UMY   PIM
+  IMG:        INFINITY        0.000000                          100     0
+
+SPECIFICATION DATA
+   EPD       20.00000
+   DIM             MM
+   WL          500.00
+   REF              1
+   WTW              1
+   INI            ORA
+   XAN        0.00000
+   YAN        0.00000
+   WTF        1.00000
+   VUY        0.00000
+   VLY        0.00000
+   POL            N
+
+REFRACTIVE INDICES
+    GLASS CODE                    500.00
+   BK7_SCHOTT                   1.521414
+
+SOLVES
+   PIM
+   CUY S2   UMY     -0.100000
+
+No pickups defined in system
+
+
+INFINITE CONJUGATES
+   EFL       100.0000
+   BFL        96.5728
+   FFL      -100.1457
+   FNO         5.0000
+   IMG DIS    96.5728
+   OAL         5.0000
+   PARAXIAL IMAGE
+    HT         0.0000
+   ANG         0.0000
+   ENTRANCE PUPIL
+    DIA       20.0000
+    THI        0.0000
+   EXIT PUPIL
+    DIA       19.9709
+    THI       -3.2816

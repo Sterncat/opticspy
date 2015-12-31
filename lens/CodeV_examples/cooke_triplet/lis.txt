@@ -1,0 +1,53 @@
+     Cooke Triplet f/5.0 - Available Glasses
+                RDY             THI     RMD       GLA           CCY   THC   GLC
+> OBJ:        INFINITY        INFINITY                          100   100
+    1:        16.87831        3.250000       NSK16_SCHOTT         0   100
+    2:       247.02634        4.984142                            0     0
+  STO:       -35.95718        1.250000       NF2_SCHOTT           0   100
+    4:        15.88615        6.099225                            0     0
+    5:        49.08083        3.250000       NSK16_SCHOTT         0   100
+    6:       -27.62109       38.898042                            0   PIM
+  IMG:        INFINITY       -0.183758                          100     0
+
+SPECIFICATION DATA
+   FNO        5.00000
+   DIM             MM
+   WL          656.30    546.10    486.10
+   REF              2
+   WTW              1         2         1
+   XAN        0.00000       0.00000       0.00000
+   YAN        0.00000      14.00000      20.00000
+   WTF        1.00000       1.00000       1.00000
+   VUX        0.00000      -0.01029      -0.02273
+   VLX        0.00000      -0.01029      -0.02273
+   VUY        0.00000      -0.05776      -0.11444
+   VLY        0.00000      -0.01014      -0.04826
+   POL            N
+
+REFRACTIVE INDICES
+    GLASS CODE                    656.30       546.10       486.10
+   NSK16_SCHOTT                 1.617271     1.622861     1.627559
+   NF2_SCHOTT                   1.615056     1.624078     1.632083
+
+SOLVES
+   PIM
+
+No pickups defined in system
+
+
+INFINITE CONJUGATES
+   EFL        50.0000
+   BFL        38.8980
+   FFL       -39.7285
+   FNO         5.0000
+   IMG DIS    38.7143
+   OAL        18.8334
+   PARAXIAL IMAGE
+    HT        18.1985
+   ANG        20.0000
+   ENTRANCE PUPIL
+    DIA       10.0000
+    THI        9.3021
+   EXIT PUPIL
+    DIA       10.1977
+    THI      -12.0906

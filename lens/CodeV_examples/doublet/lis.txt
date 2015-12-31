@@ -1,0 +1,49 @@
+     Doublet
+                RDY             THI     RMD       GLA           CCY   THC   GLC
+> OBJ:        INFINITY        INFINITY                          100   100
+  STO:        61.07222       10.345634       BSM24_OHARA          0   100
+    2:       -42.17543        2.351280       SF1_SCHOTT           0   100
+    3:      -316.13853       92.451433                            0   PIM
+  IMG:        INFINITY        0.000000                          100     0
+
+SPECIFICATION DATA
+   EPD       33.33333
+   DIM             MM
+   WL          656.30    587.60    486.10
+   REF              2
+   WTW              1         1         1
+   INI            ORA
+   XAN        0.00000       0.00000       0.00000
+   YAN        0.00000       2.00000       3.00000
+   WTF        1.00000       1.00000       1.00000
+   VUY        0.00000       0.00000       0.00000
+   VLY        0.00000       0.00000       0.00000
+   POL            N
+
+REFRACTIVE INDICES
+    GLASS CODE                    656.30       587.60       486.10
+   BSM24_OHARA                  1.614254     1.617644     1.625478
+   SF1_SCHOTT                   1.710311     1.717355     1.734628
+
+SOLVES
+   PIM
+
+No pickups defined in system
+
+
+INFINITE CONJUGATES
+   EFL       100.0014
+   BFL        92.4514
+   FFL       -99.7469
+   FNO         3.0000
+   IMG DIS    92.4514
+   OAL        12.6969
+   PARAXIAL IMAGE
+    HT         5.2409
+   ANG         3.0000
+   ENTRANCE PUPIL
+    DIA       33.3333
+    THI        0.0000
+   EXIT PUPIL
+    DIA       33.4184
+    THI       -7.8052

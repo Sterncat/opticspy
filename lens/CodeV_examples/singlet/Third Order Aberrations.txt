@@ -1,0 +1,15 @@
+in cv_macro:PlotTho.seq  S3
+CODE V> out ^out
+
+Warning: This system is defined with an on-axis last field.  A paraxial
+               image height of 1.0 is assumed for the paraxial chief ray.
+    Singlet
+              Position  1, Wavelength =   500.0 NM
+         SA         TCO        TAS        SAS        PTB        DST        AX         LAT        PTZ
+
+SUM  -0.112457  -0.006179  -0.001807  -0.000821  -0.000328  -0.000001   0.000000   0.000000  -0.006563
+
+
+* Coefficient sums are plotted as surface 3
+
+CODE V>     out ^out

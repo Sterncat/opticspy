@@ -281,7 +281,7 @@ class Coefficient(object):
 		return 0
 
 
-	def mtf(self,r=1,lambda_1=632*10**(-9),z=0.1):
+	def mtf(self,r=1,lambda_1=632*10**(-9),z=0.1,matrix = False):
 		"""
 		Modulate Transfer function
 		"""
@@ -292,7 +292,10 @@ class Coefficient(object):
 		__plt__.imshow(abs(MTF),cmap=__cm__.bwr)
 		__plt__.colorbar()
 		__plt__.show()
-		return 0
+		if matrix == True:
+			return MTF
+		else:
+			return 0
 
 	def ptf(self):
 		"""

@@ -1,0 +1,52 @@
+GO
+
+
+
+    RAY STATISTICS FOR FIELD  1 ZOOM  1 ON PLOT:
+
+                                       POINTS     POINTS
+           WAVELENGTH         WEIGHT   TRACED   ATTEMPTED
+
+              656.3              1       112       140
+              587.6              1       112       140
+              486.1              1       112       140
+
+    All displacements are listed relative to the chief ray at the reference wavelength
+    for each field.
+
+       Field  1, (  0.00,  0.00) degrees.  Focus  0.00000      676 Rays
+       Displacement of centroid                    Minimum RMS spot diameter
+        X:   0.00000E+00     Y:   0.00000E+00         0.78031E-01 MM
+       Displacement of center of 100% Spot         Minimum 100% spot diameter
+        X:   0.00000E+00     Y:   0.00000E+00         0.32230E+00
+
+
+       Field  2, (  0.00, 14.00) degrees.  Focus  0.00000     1328 Rays
+       Displacement of centroid                    Minimum RMS spot diameter
+        X:   0.00000E+00     Y:  -0.25934E-01         0.21816E+00 MM
+       Displacement of center of 100% Spot         Minimum 100% spot diameter
+        X:   0.00000E+00     Y:  -0.10996E+00         0.54886E+00
+
+
+       Field  3, (  0.00, 20.00) degrees.  Focus  0.00000     1164 Rays
+       Displacement of centroid                    Minimum RMS spot diameter
+        X:   0.00000E+00     Y:  -0.24467E-01         0.32718E+00 MM
+       Displacement of center of 100% Spot         Minimum 100% spot diameter
+        X:   0.00000E+00     Y:  -0.18105E+00         0.84424E+00
+
+
+    The scale factor has been set such that one inch represents   0.30700 MM
+
+
+
+    Spot diagrams are not allowed to overlap.  Points lying outside a
+     0.75541 X  0.75541 MM rectangle centered at the chief ray are not plotted.
+
+
+
+        RELATIVE       DEFOCUSING   TOTAL POINTS       POINTS    PERCENTAGE OF
+      FIELD HEIGHT      POSITION     CALCULATED     NOT PLOTTED  POINTS PLOTTED
+
+       0.00, 0.00           1            336              0          100.0
+       0.00, 0.69           1            264              0          100.0
+       0.00, 1.00           1            216              0          100.0
