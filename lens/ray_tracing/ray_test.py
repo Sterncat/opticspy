@@ -2,8 +2,10 @@ from __future__ import division as __division__
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import cal_tools
+
 #1st surface object
-l1 = np.linspace(-5,5,10)
+l1 = np.linspace(-5,5,30)
 Pn1 = [];
 for i in l1:
 	for j in l1:
@@ -65,7 +67,7 @@ for i,j,k in zip(xyz_list,KLM,cosI):
 	Mp = (n*j[2] - c*sigma*i[2] + sigma)/npp
 	KLM1.append([Kp,Lp,Mp]) 
 
-print KLM1	
+#print KLM1	
 
 
 
@@ -88,11 +90,12 @@ for p,q in zip(xyz_list,KLM1):
 	y2.append(xyz_tmp[1])
 	z2.append(xyz_tmp[2])
 	
-print xyz_list2
+#print xyz_list2
 fig = plt.figure()
 plt.plot(x2,y2,'b*')
 plt.show()
 
-
+rms = cal_tools.rms()
+print 'rms = ',rms
 
 

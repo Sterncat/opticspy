@@ -1,16 +1,38 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+import surface
 
 # Ray Class
 
 class Lens(object):
-	def __init__(self):
-		self.curvature = curvature
-		self.index = index
-		self.thickness = thickness
-	def list(self):
-		print self.curvature,self.thickness,self.index
+	def __init__(self,lens_name='',creator=''):
+		self.surface_list = []
+		self.lens_name = lens_name
+		self.creator = creator
+	def lens_info(self):
+		print self.lens_name
+		print self.creator
 
+	def list_surface(self):
+		print 'list all surface information'
+		for i in self.surface_list:
+			print i
+
+	def list_fields(self):
+		print 'list all fields information'
+
+	def first_order(self):
+		print 'first order information'
+
+	def thickness(self,start_surface,end_surface):
+		print 'thickness between 2 surface'
+
+	def radius(self,surface_number):
+		print 'surface radius' 
+#-----------------------surface functions-----------------------
+	def add_surface(self,number,radius,thickness,index,STO=False):
+		surface.add(self,number,radius,thickness,index,STO)
+	# def update_surface(self,number,radius,thickness,index,STO):
+	# 	surface.update(self,number,radius,thickness,index,STO)
+	# def delete_surface(self,number,radius,thickness,index,STO):
+	# 	surface.delete(self,number,radius,thickness,index,STO)
 
 	

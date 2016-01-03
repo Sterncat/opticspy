@@ -5,6 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import ray
 import traceray
 import surface
+import cal_tools
 # test ray.py and traceray.py
 		
 
@@ -20,9 +21,9 @@ for i in Pos1:
 	KLM.append([0,0,1])
 
 # define surface
-surface1 = surface.Surface(curvature = 1/100000, thickness = 10, index = 1) #object
+surface1 = surface.Surface(curvature = 0, thickness = 10, index = 1) #object
 surface2 = surface.Surface(curvature = 1/20, thickness = 40, index = 2)  #surface i
-surface3 = surface.Surface(curvature = 1/100000, thickness = 0, index = 1) #image
+surface3 = surface.Surface(curvature = 0, thickness = 0, index = 1) #image
 
 raylist1 = []
 raylist2 = []
@@ -72,7 +73,8 @@ __plt__.show()
 
 
 
-
+rms = cal_tools.rms(Pos_new_list1)
+print rms
 
 
 

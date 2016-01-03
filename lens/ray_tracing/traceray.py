@@ -24,9 +24,9 @@ def trace(ray_list,surface1,surface2):
 		Pos_new = xyz + delta*KLM
 		Pos_new_list.append(Pos_new)
 		# calculate new ray direction
-		# if curvature == 1/100000, it is a stop, object or image plane
+		# if curvature == 0, it is a stop, object or image plane
 		# don't need to calculate the new ray direction
-		if c2 == 1/100000:
+		if c2 == 0:
 			KLM_new = KLM
 		else:
 			sigma = __np__.sqrt(n2**2-n1**2*(1-cosI**2)) - n1*cosI
