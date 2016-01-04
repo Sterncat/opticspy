@@ -1,10 +1,11 @@
-import surface
+import surface, field
 
 # Ray Class
 
 class Lens(object):
 	def __init__(self,lens_name='',creator=''):
 		self.surface_list = []
+		self.field_list = []
 		self.lens_name = lens_name
 		self.creator = creator
 	def lens_info(self):
@@ -18,6 +19,8 @@ class Lens(object):
 
 	def list_fields(self):
 		print 'list all fields information'
+		for i in self.field_list:
+			print i
 
 	def first_order(self):
 		print 'first order information'
@@ -34,5 +37,20 @@ class Lens(object):
 	# 	surface.update(self,number,radius,thickness,index,STO)
 	# def delete_surface(self,number,radius,thickness,index,STO):
 	# 	surface.delete(self,number,radius,thickness,index,STO)
+
+
+
+
+#-----------------------Field functions--------------------------
+	def add_field(self,angle):
+		field.add_field_YAN(self,angle)
+
+
+
+
+
+
+
+
 
 	

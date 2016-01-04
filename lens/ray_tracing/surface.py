@@ -23,7 +23,6 @@ def add(self,number,radius,thickness,index,STO):
 	print number,radius,thickness,index,STO
 	New_Surface = Surface(number=number,radius=radius,thickness=thickness,index=index,STO=STO)
 	self.surface_list.append(New_Surface)
-	print self.surface_list
 # def update(number,key,value):
 # 	if key = 'STO':
 
@@ -32,26 +31,3 @@ def add(self,number,radius,thickness,index,STO):
 
 # def delete(number):
 # 	print 'delete surface x'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

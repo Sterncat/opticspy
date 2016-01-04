@@ -1,14 +1,28 @@
 from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-
+import field
 
 # Function: trace rays
 # input a list of ray 
 # output [ray position and direction] on next surface
 
-def trace(ray_list, surface1, surface2):
+def trace_sys(Lens):
+	'''
+	trace all field through all surfaces, and give the spotgram
+	of the Image(last) surface
+	'''
+	surface_list = Lens.surface_list
+	field_list  = Lens.field_list
+
+	ray_list = field_list[0].ray_list
+	for i in range(len(surface_list)-1):
+		ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i])
+	return ray_list
+
+def traceray(ray_list, surface1, surface2):
     ray_num = len(ray_list)
+    new_ray_list = []
     Pos_new_list = []
     KLM_new_list = []
     for ray in ray_list:
@@ -37,7 +51,10 @@ def trace(ray_list, surface1, surface2):
             KLM_new = __np__.asarray([Kp, Lp, Mp])
         KLM_new_list.append(KLM_new)
 
-    return Pos_new_list, KLM_new_list
+    for Pos,KLM in zip(Pos_new_list,KLM_new_list):
+    	new_ray_list.append(field.Ray(Pos,KLM))
+
+    return new_ray_list
 
 
 def pos(Pos, KLM, curvature):

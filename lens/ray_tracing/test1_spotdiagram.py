@@ -2,7 +2,7 @@ from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 from mpl_toolkits.mplot3d import Axes3D
-import ray
+import field
 import traceray
 import surface
 import cal_tools
@@ -21,18 +21,18 @@ for i in Pos1:
 	KLM.append([0,0,1])
 
 # define surface
-surface1 = surface.Surface(curvature = 0, thickness = 10, index = 1) #object
-surface2 = surface.Surface(curvature = 1/20, thickness = 40, index = 2)  #surface i
-surface3 = surface.Surface(curvature = 0, thickness = 0, index = 1) #image
+surface1 = surface.Surface(number=1,radius = 10000000, thickness = 10, index = 1,STO=0) #object
+surface2 = surface.Surface(number=2,radius = 20, thickness = 40, index = 2,STO=0)  #surface i
+surface3 = surface.Surface(number=3,radius = 10000000, thickness = 0, index = 1,STO=0) #image
 
 raylist1 = []
 raylist2 = []
 
 for pos,klm in zip(Pos1,KLM):
-		ray1 = ray.Ray(Pos = pos, KLM = klm) 
+		ray1 = field.Field(Pos = pos, KLM = klm) 
 		raylist1.append(ray1)
 		
-Pos_new_list,KLM_new_list = traceray.trace(raylist1, surface1,surface2)
+Pos_new_list,KLM_new_list = traceray.trace(raylist1,surface1,surface2)
 
 
 x = []
@@ -53,7 +53,7 @@ __plt__.show()
 
 
 for pos,klm in zip(Pos_new_list,KLM_new_list):
-		ray2 = ray.Ray(Pos = pos, KLM = klm) 
+		ray2 = field.Field(Pos = pos, KLM = klm) 
 		raylist2.append(ray2)
 
 
