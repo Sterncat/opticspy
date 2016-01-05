@@ -117,7 +117,6 @@ C = M2[1,0]
 D = M2[1,1]
 
 print A*D-B*C
-
 print 'Front Focal Point F:',D/C
 print 'Rear Focal Point F\':',-A/C
 print 'Front Principal Point P:', (D-1)/C
@@ -137,7 +136,35 @@ print 'P',P
 print 'P\'',Pp
 print 'lp',lp
 print 'entrance pupil position l\' = ',l + P
+print
 
+print '-----start finding exit pupil location-----'
 
+back3_ABCD_list = [R6,T6,R7,T7,R8,T8,R9,T9,R10]
+M2 = ABCD(back3_ABCD_list)
+A = M2[0,0]
+B = M2[0,1]
+C = M2[1,0]
+D = M2[1,1]
 
+print A*D-B*C
+print 'Front Focal Point F:',D/C
+print 'Rear Focal Point F\':',-A/C
+print 'Front Principal Point P:', (D-1)/C
+print 'Rear Principal Point P\':',(1-A)/C
+print 'Front Nodal Point N:',(D-1)/C
+print 'Rear Nodal Point N\':',(1-A)/C
+print 'Front Focal Length f:',-1/C
+print 'Rear Focal Length f\':',-1/C
+
+phi = -C
+P = (D-1)/C
+Pp = (1-A)/C
+
+l = -(t5a+P)
+print 'power', phi
+print 'stop position:',l
+
+lp = 1/(1/l + phi)
+print 'exit pupil position l\' = ',lp+Pp
 

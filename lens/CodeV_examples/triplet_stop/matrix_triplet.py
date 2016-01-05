@@ -87,7 +87,7 @@ print 'image position:',Fp + zp
 
 
 
-print '-----start finding entrance pupil location-----\n'
+print '-----start finding entrance pupil location-----'
 front2_ABCD_list = [R1,T1,R2,T2,R3,T3,R4]
 M2 = ABCD(front2_ABCD_list)
 A = M2[0,0]
@@ -116,5 +116,48 @@ print 'stop position:',lp
 
 l = 1/(1/lp - phi)
 print 'entrance pupil position l\' = ',l + P
-# one reason that the value different from codev is we 
-# only use one wavelength only use one(but not the only reason)
+print 
+# use one or three wavelength?
+
+
+print '-----start finding exit pupil location-----'
+
+back1_ABCD_list = [R5,T5,R6]
+M2 = ABCD(back1_ABCD_list)
+A = M2[0,0]
+B = M2[0,1]
+C = M2[1,0]
+D = M2[1,1]
+
+print A*D-B*C
+
+print 'Front Focal Point F:',D/C
+print 'Rear Focal Point F\':',-A/C
+print 'Front Principal Point P:', (D-1)/C
+print 'Rear Principal Point P\':',(1-A)/C
+print 'Front Nodal Point N:',(D-1)/C
+print 'Rear Nodal Point N\':',(1-A)/C
+print 'Front Focal Length f:',-1/C
+print 'Rear Focal Length f\':',-1/C
+
+phi = -C
+P = (D-1)/C
+Pp = (1-A)/C
+
+l = -(t5+P)
+print 'power', phi
+print 'stop position:',l
+
+lp = 1/(1/l + phi)
+print lp
+print Pp
+print 'exit pupil position l\' = ',lp+Pp
+
+# use one or three wavelength?
+
+# P respect to the first surface of the system(original coordinate)
+# Pp respect to the last surface
+
+# code V calculate the exit pupil position not in a general coordinate, but in the coordinate of the system following stop
+
+

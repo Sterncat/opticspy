@@ -5,6 +5,9 @@ import matplotlib.pyplot as __plt__
 # Ray Class
 
 class Surface(object):
+	'''
+	Surface Class
+	'''
 	def __init__(self,number,radius,thickness,index,STO):
 		self.number = number
 		self.radius = radius

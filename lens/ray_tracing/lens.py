@@ -1,4 +1,4 @@
-import surface, field
+import surface, field, analysis
 
 # Ray Class
 
@@ -8,6 +8,7 @@ class Lens(object):
 		self.field_list = []
 		self.lens_name = lens_name
 		self.creator = creator
+		self.image_plane_ray_list = []
 	def lens_info(self):
 		print self.lens_name
 		print self.creator
@@ -39,13 +40,13 @@ class Lens(object):
 	# 	surface.delete(self,number,radius,thickness,index,STO)
 
 
-
-
 #-----------------------Field functions--------------------------
 	def add_field(self,angle):
 		field.add_field_YAN(self,angle)
 
-
+#-----------------------Spotdiagram------------------------------
+	def spotdiagram(self):
+		analysis.spotdiagram(self)
 
 
 

@@ -14,13 +14,19 @@ def trace_sys(Lens):
 	'''
 	surface_list = Lens.surface_list
 	field_list  = Lens.field_list
-
-	ray_list = field_list[0].ray_list
-	for i in range(len(surface_list)-1):
-		ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i])
-	return ray_list
+	for field in field_list:
+		ray_list = field.ray_list
+		for i in range(len(surface_list)-1):
+			ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i])
+		Lens.image_plane_ray_list.append(ray_list)
+	return 0
 
 def traceray(ray_list, surface1, surface2):
+	'''
+	Basic ray tracing function, tracing ray position and ray direction from
+	one surface to next surface
+	return ray position and ray direction
+	'''
     ray_num = len(ray_list)
     new_ray_list = []
     Pos_new_list = []
