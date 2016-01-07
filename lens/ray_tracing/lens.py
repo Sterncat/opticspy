@@ -4,11 +4,13 @@ import surface, field, analysis
 
 class Lens(object):
 	def __init__(self,lens_name='',creator=''):
-		self.surface_list = []
-		self.field_list = []
 		self.lens_name = lens_name
 		self.creator = creator
+		self.surface_list = []
+		self.field_list = []
 		self.image_plane_ray_list = []
+		self.wavelength = []
+		self.EPD_diameter = 30
 	def lens_info(self):
 		print self.lens_name
 		print self.creator
@@ -44,6 +46,11 @@ class Lens(object):
 	def add_field(self,angle):
 		field.add_field_YAN(self,angle)
 
+
+#-----------------------Wavelength Fucntions---------------------
+	def add_wavelength(self,wavelength):
+		print 'Add wavelength '+ str(wavelength) + 'nm done'
+		wavelength.add(self,wavelength)
 #-----------------------Spotdiagram------------------------------
 	def spotdiagram(self):
 		analysis.spotdiagram(self)

@@ -22,11 +22,11 @@ def trace_sys(Lens):
 	return 0
 
 def traceray(ray_list, surface1, surface2):
-	'''
+    '''
 	Basic ray tracing function, tracing ray position and ray direction from
-	one surface to next surface
-	return ray position and ray direction
-	'''
+	one surface to next surface 
+	Return ray position and ray direction
+    '''
     ray_num = len(ray_list)
     new_ray_list = []
     Pos_new_list = []

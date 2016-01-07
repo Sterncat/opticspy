@@ -21,12 +21,12 @@ class Field(object):
 def add_field_YAN(Lens,angle):
 	'''
 	Add field by object angle
-	diameter: Entrance pupil diameter
+	self.EPD.diameter: Entrance pupil diameter
 	angle: Object angle 
 	'''
 	print 'add field'
-	diameter = 5
-	l1 = __np__.linspace(-diameter,diameter,10)
+	diameter = Lens.EPD_diameter
+	l1 = __np__.linspace(-diameter,diameter,15)
 	Pos = []
 	for i in l1:
 		for j in l1:
