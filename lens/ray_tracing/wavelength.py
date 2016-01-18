@@ -4,8 +4,9 @@ import matplotlib.pyplot as __plt__
 
 # Wavelength related functions
 
-def add(Lens,wavelength):
-	Lens.wavelength.append(wavelength)
+def add(Lens,wl):
+	Lens.wavelength_list.append(wl)
+	Lens.wavelength_list.sort()
 
 
 

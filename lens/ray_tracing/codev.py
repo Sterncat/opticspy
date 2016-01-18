@@ -23,6 +23,7 @@ def readseq(filename):
 	lens_dict['Surface'] = surface_data
 	# for surf in lens_dict['Surface']:
 	# 	print surf
+	file.close()
 	return lens_dict
 
 def find_epd_pos(lens_dict):

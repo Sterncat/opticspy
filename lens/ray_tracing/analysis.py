@@ -9,7 +9,7 @@ def spotdiagram(Lens):
 	Show spotdiagram of image plane for different field
 	input: Lens Class
 	'''
-	fig = __plt__.figure()
+	fig = __plt__.figure(figsize=(5, 10), dpi=80)
 	m = len(Lens.image_plane_ray_list)
 	n = m + 1
 	for ray_list in Lens.image_plane_ray_list: 

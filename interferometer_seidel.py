@@ -155,7 +155,7 @@ def lateral_shear(A=0, B=0, C=0, D=0, E=0, S=0.1, lambda_1 = 632, PR = 1):
 
 	label = ''
 	def	labelgenerate(b):
-		label = 'Shaer Interferogram with ' + str(S) +' shearing in x' + '\n\n'
+		label = 'Shear Interferogram with ' + str(S) +' shearing in x' + '\n\n'
 		count = 0
 		count_1 = 0
 		labellist = ['A: Primary spherical aberration',

@@ -1,4 +1,4 @@
-import surface, field, analysis
+import surface, field, analysis, wavelength
 
 # Ray Class
 
@@ -9,8 +9,9 @@ class Lens(object):
 		self.surface_list = []
 		self.field_list = []
 		self.image_plane_ray_list = []
-		self.wavelength = []
+		self.wavelength_list = []
 		self.EPD_diameter = 30
+		
 	def lens_info(self):
 		print self.lens_name
 		print self.creator
@@ -34,8 +35,8 @@ class Lens(object):
 	def radius(self,surface_number):
 		print 'surface radius' 
 #-----------------------surface functions-----------------------
-	def add_surface(self,number,radius,thickness,index,STO=False):
-		surface.add(self,number,radius,thickness,index,STO)
+	def add_surface(self,number,radius,thickness,glass,STO=False):
+		surface.add(self,number,radius,thickness,glass,STO)
 	# def update_surface(self,number,radius,thickness,index,STO):
 	# 	surface.update(self,number,radius,thickness,index,STO)
 	# def delete_surface(self,number,radius,thickness,index,STO):
@@ -48,9 +49,15 @@ class Lens(object):
 
 
 #-----------------------Wavelength Fucntions---------------------
-	def add_wavelength(self,wavelength):
-		print 'Add wavelength '+ str(wavelength) + 'nm done'
-		wavelength.add(self,wavelength)
+	def add_wavelength(self,wl):
+		print 'Add wavelength '+ str(wl) + 'nm done'
+		wavelength.add(self,wl)
+
+	def list_wavelengths(self):
+		print 'list all wavelength information'
+		for i in self.wavelength_list:
+			print i
+
 #-----------------------Spotdiagram------------------------------
 	def spotdiagram(self):
 		analysis.spotdiagram(self)

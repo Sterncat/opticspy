@@ -270,6 +270,7 @@ class Coefficient(object):
 		"""
 		print r,lambda_1,z
 		PSF = self.__psfcaculator__(r=r,lambda_1=lambda_1,z=z)
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		__plt__.imshow(abs(PSF),cmap=__cm__.RdYlGn)
 		__plt__.colorbar()
 		__plt__.show()
@@ -289,6 +290,7 @@ class Coefficient(object):
 		MTF = __fftshift__(__fft2__(PSF))
 		MTF = MTF/MTF.max()
 		f0 = r/1000/lambda_1/z/10000   # cutoff frequency?
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		__plt__.imshow(abs(MTF),cmap=__cm__.bwr)
 		__plt__.colorbar()
 		__plt__.show()
@@ -347,7 +349,7 @@ class Coefficient(object):
 				 	"Coma",
 				 	"Spherical"]
 		Atable = [[Ap,0.0],[At,Bt],[Ad,0.0],[Aa,Ba],[Ac,Bc],[As,0.0]]
-		print"             Magnitude  Angle (Degrees)"
+		print"                 Magnitude  Angle (Degrees)"
 		print"-------------------------------------------"
 		for i in range(len(seidellist)):
 			print "| {0:>13s} |  {1:>8s}  | {2:>8s}   |".\
