@@ -14,14 +14,18 @@ def trace_sys(Lens):
 	'''
 	surface_list = Lens.surface_list
 	field_list  = Lens.field_list
+	wavelength_list = Lens.wavelength_list
 	for field in field_list:
-		ray_list = field.ray_list
-		for i in range(len(surface_list)-1):
-			ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i])
-		Lens.image_plane_ray_list.append(ray_list)
+		field_info = []
+		for wave_num in range(len(wavelength_list)):
+			ray_list = field.ray_list
+			for i in range(len(surface_list)-1):
+				ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
+			field_info.append(ray_list)
+		Lens.image_plane_ray_list.append(field_info)
 	return 0
 
-def traceray(ray_list, surface1, surface2):
+def traceray(ray_list, surface1, surface2, wave_num):
     '''
 	Basic ray tracing function, tracing ray position and ray direction from
 	one surface to next surface 
@@ -36,8 +40,8 @@ def traceray(ray_list, surface1, surface2):
         KLM = ray.KLM
         c1 = 1 / surface1.radius
         c2 = 1 / surface2.radius
-        n1 = surface1.index
-        n2 = surface2.index
+        n1 = surface1.indexlist[wave_num]
+        n2 = surface2.indexlist[wave_num]
         tn1 = surface1.thickness
         tn2 = surface2.thickness
         xyz = __np__.asarray([Pos[0], Pos[1], Pos[2] - tn1])

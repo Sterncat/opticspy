@@ -62,6 +62,8 @@ class Lens(object):
 	def spotdiagram(self):
 		analysis.spotdiagram(self)
 
+	def list_image_ray_info(self):
+		print self.image_plane_ray_list
 
 
 
