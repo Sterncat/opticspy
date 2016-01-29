@@ -323,17 +323,21 @@ class Coefficient(object):
 		__interferometer__.twyman_green(self,lambda_1=lambda_1,PR=PR)
 
 	def zernike2seidel(self):
+		'''
+		Ap is the piston aberration,coefficients Ai represent the 
+		peak value of the corresponding Seidel aberration term,
+		'''
 		a = [0]+self.__coefficients__
 		#Piston
 		Ap = a[1]-__sqrt__(3)*a[4]+__sqrt__(5)*a[11]
 		#tilt
 		At = 2*__sqrt__((a[2]-__sqrt__(8)*a[8])**2+(a[3]-__sqrt__(8)*a[7])**2)
 		Bt = __arctan2__(a[3]-__sqrt__(8)*a[7],a[2]-__sqrt__(8)*a[8])*180/__np__.pi
-		#defocus
-		Ad = 2*(__sqrt__(3)*a[4]-3*__sqrt__(5)*a[11])
 		#Astigmatism 
 		Aa = 2*__sqrt__(6*(a[5]**2+a[6]**2))
-		Ba = __arctan2__(a[5],a[6])*180/__np__.pi
+		Ba = 0.5*__arctan2__(a[5],a[6])*180/__np__.pi
+		#defocus
+		Ad = 2*(__sqrt__(3)*a[4]-3*__sqrt__(5)*a[11]-Aa)
 		#Coma
 		Ac = 6*__sqrt__(2*(a[7]**2+a[8]**2))
 		Bc = __arctan2__(a[7],a[8])*180/__np__.pi

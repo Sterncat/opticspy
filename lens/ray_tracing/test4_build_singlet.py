@@ -2,10 +2,10 @@
 import lens, trace, cal_tools
 import matplotlib.pyplot as __plt__
 New_Lens = lens.Lens(lens_name='singlet',creator='XF')
-New_Lens.add_surface(number=1,radius=10000000,thickness=10,index=1)
-New_Lens.add_surface(number=2,radius=50,thickness=5,index=1.521,STO=True)
-New_Lens.add_surface(number=3,radius=1175.71,thickness=96.672,index=1)
-New_Lens.add_surface(number=4,radius=10000000,thickness=0,index=1)
+New_Lens.add_surface(number=1,radius=10000000,thickness=10,glass='air')
+New_Lens.add_surface(number=2,radius=50,thickness=5,glass='BK7_SCHOTT',STO=True)
+New_Lens.add_surface(number=3,radius=1175.71,thickness=96.672,s='air')
+New_Lens.add_surface(number=4,radius=10000000,thickness=0,s='air')
 
 New_Lens.lens_info()
 

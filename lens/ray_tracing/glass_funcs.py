@@ -23,7 +23,7 @@ def glass2indexlist(wavelength_list,glassname):
 		dir = 'glass/' + glass_catalog_name+'/'+glassname
 		#print dir
 		e = os.path.exists(dir)
-		
+
 		if e == False:
 			print 'No This Kind Of Glass'
 			return None

@@ -15,7 +15,7 @@ New_Lens.add_field(angle=2)
 New_Lens.add_field(angle=3)
 New_Lens.list_fields()
 
-New_Lens.add_surface(number=1,radius=10000000,thickness=1,glass='air')
+New_Lens.add_surface(number=1,radius=10000000,thickness=-10,glass='air')
 New_Lens.add_surface(number=2,radius=61.07222,thickness=10.345634,glass='BSM24_OHARA',STO=True)
 New_Lens.add_surface(number=3,radius=-42.17543,thickness=2.351280,glass='SF1_SCHOTT')
 New_Lens.add_surface(number=4,radius=-316.13853,thickness=92.451433,glass='air')

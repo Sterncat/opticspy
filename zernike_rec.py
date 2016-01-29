@@ -93,6 +93,91 @@ class Coefficient(object):
 
 		return 0
 
+	def __psfcaculator__(self,lambda_1=632*10**(-9),z=0.1):
+		"""
+		height: Exit pupil height
+		width: Exit pupil width
+		z: Distance from exit pupil to image plane
+		"""
+		a = self.__a__
+		b = __sqrt__(1-a**2)
+		l1 = 100;
+		x1 = __np__.linspace(-a, a, l1)
+		y1 = __np__.linspace(-b, b, l1)
+		[X,Y] = __np__.meshgrid(x1,y1)
+		Z = __zernikecartesian__(self.__coefficients__,a,X,Y)
+		d = 400 # background
+		A = __np__.zeros([d,d])
+		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
+		# fig = __plt__.figure()
+		# __plt__.imshow(A)
+		# __plt__.colorbar()
+		# __plt__.show()
+		abbe = __np__.exp(-1j*2*__np__.pi*A)
+		for i in range(len(abbe)):
+			for j in range(len(abbe)):
+				if abbe[i][j]==1:
+					abbe[i][j]=0
+		PSF = __fftshift__(__fft2__(__fftshift__(abbe)))**2
+		PSF = PSF/PSF.max()
+		return PSF
+
+	def psf(self,lambda_1=632*10**(-9),z=0.1):
+		"""
+		------------------------------------------------
+		psf()
+
+		Return the point spread function of a wavefront described by
+		Orthonormal Rectangular Polynomials
+		------------------------------------------------
+		Input: 
+
+		r: exit pupil radius(mm)
+
+		lambda_1: wavelength(m)
+
+		z: exit pupil to image plane distance(m)
+
+		"""
+		PSF = self.__psfcaculator__(lambda_1=lambda_1,z=z)
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
+		__plt__.imshow(abs(PSF),cmap=__cm__.RdYlGn)
+		__plt__.colorbar()
+		__plt__.show()
+		return 0
+
+	def mtf(self,lambda_1=632*10**(-9),z=0.1,matrix = False):
+		"""
+		Modulate Transfer function
+		"""
+		PSF = self.__psfcaculator__(lambda_1=lambda_1,z=z)
+		MTF = __fftshift__(__fft2__(PSF))
+		MTF = MTF/MTF.max()
+		fig = __plt__.figure(figsize=(9, 6), dpi=80)
+		__plt__.imshow(abs(MTF),cmap=__cm__.bwr)
+		__plt__.colorbar()
+		__plt__.show()
+		if matrix == True:
+			return MTF
+		else:
+			return 0
+
+	def ptf(self):
+		"""
+		Phase transfer function
+		"""
+		PSF = self.__psfcaculator__()
+		PTF = __fftshift__(__fft2__(PSF))
+		PTF = __np__.angle(PTF)
+		l1 = 100
+		d = 400
+		A = __np__.zeros([d,d])
+		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = PTF[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1]
+		__plt__.imshow(abs(A),cmap=__cm__.rainbow)
+		__plt__.colorbar()
+		__plt__.show()
+		return 0
+
 def __zernikepolar__(coefficient,a,r,u):
 	"""
 	------------------------------------------------
@@ -100,9 +185,9 @@ def __zernikepolar__(coefficient,a,r,u):
 
 	Return combined aberration
 
-	Zernike Rectangle Aperture Polynomials Caculation in polar coordinates
+	Orthonormal Rectangle Aperture Polynomials Caculation in polar coordinates
 
-	coefficient: Zernike Rectangle Aperture Polynomials Coefficient from input
+	coefficient: Orthonormal Rectangle Aperture Polynomials Coefficient from input
 	r: rho in polar coordinates
 	u: theta in polar coordinates
 	------------------------------------------------
@@ -152,13 +237,15 @@ def __zernikepolar__(coefficient,a,r,u):
 def __zernikecartesian__(coefficient,a,x,y):
 	"""
 	------------------------------------------------
-	__zernikecartesian__(coefficient,x,y):
+	__zernikecartesian__(coefficient,a,x,y):
 
 	Return combined aberration
 
-	Zernike Polynomials Caculation in Cartesian coordinates
+	Orthonormal Rectangle Aperture Polynomials Caculation for 
+	Rectangle aperture in Cartesian coordinates
 
 	coefficient: Zernike Polynomials Coefficient from input
+	a: 1/2 aperture width in a circle(See reference)
 	x: x in Cartesian coordinates
 	y: y in Cartesian coordinates
 	------------------------------------------------
@@ -189,7 +276,7 @@ def __zernikecartesian__(coefficient,a,x,y):
 					27*a**4*y**2-a**2*(21-51*a**2+30*a**4))*x
 	R11 =  R[11] * 1/8/mu*(315*r**4+30*(7+2*a**2)*x**2-30*(9-2*a**2)*y**2+27+16*a**2-16*a**4)
 
-	R12 =  R[12] * (3*mu/(8*a**2*v*eta))*(35*(1-a**2)**2*(18-36*a*82+67*a**4)*x**4+\
+	R12 =  R[12] * (3*mu/(8*a**2*v*eta))*(35*(1-a**2)**2*(18-36*a**2+67*a**4)*x**4+\
 					630*(1-2*a**2)*(1-2*a**2+2*a**4)*x**2*y**2-35*a**4*(49-98*a**2+67*a**4)*y**4-\
 					30*(1-a**2)*(7-10*a**2-12*a**4+75*a**6-67*a**8)*x**2-\
 					30*a**2*(7-77*a**2+189*a**4-193*a**6+67*a**8)*y**2+\

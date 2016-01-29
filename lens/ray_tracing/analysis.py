@@ -1,7 +1,7 @@
 from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-
+import cal_tools
 # Ray Class
 
 def spotdiagram(Lens):
@@ -22,6 +22,7 @@ def spotdiagram(Lens):
 		m = -1
 		__plt__.subplot(field_num, 1, n)
 		for ray_list in field_list:
+			print cal_tools.rms(ray_list)
 			m = m + 1
 			x = []
 			y = []

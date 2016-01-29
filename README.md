@@ -89,7 +89,7 @@ If you have questions and advice, or want to participate in this project, contac
 ###MIT License
 -----------
 
-Copyright (c) 2014-2015 Xing fan (https://github.com/Sterncat/opticspy)
+Copyright (c) 2014-2016 Xing fan (https://github.com/Sterncat/opticspy)
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
