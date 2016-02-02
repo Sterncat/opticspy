@@ -10,7 +10,7 @@ class Lens(object):
 		self.field_list = []
 		self.image_plane_ray_list = []
 		self.wavelength_list = []
-		self.EPD_diameter = 30
+		self.EPD_diameter = 20
 		
 	def lens_info(self):
 		print self.lens_name

@@ -16,7 +16,7 @@ from numpy.fft import fft2 as __fft2__
 from numpy.fft import ifft2 as __ifft2__
 import seidel2 as __seidel2__
 import tools as __tools__
-
+import hartmann as __hartmann__
 
 class Coefficient(object):
 	"""
@@ -321,6 +321,10 @@ class Coefficient(object):
 
 	def twyman_green(self,lambda_1=632,PR=1):
 		__interferometer__.twyman_green(self,lambda_1=lambda_1,PR=PR)
+
+
+	def hartmann(self,r=1,R=1):
+		__hartmann__.hartmann(self,r=r,R=R)
 
 	def zernike2seidel(self):
 		'''

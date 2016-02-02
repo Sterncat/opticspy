@@ -26,6 +26,6 @@ New_Lens.add_surface(number=5,radius=10000000,thickness=0,glass='air')
 
 
 
-#trace.trace_sys(New_Lens)
-#
-#New_Lens.spotdiagram()
+trace.trace_sys(New_Lens)
+
+New_Lens.spotdiagram()
