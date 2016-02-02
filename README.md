@@ -71,12 +71,15 @@ And just have fun with it!
 * ✓ Diffraction: generate diffraction pattern
 * ✓ Convert Zernike to Seidel coefficient
 * ✓ Seidel aberrations surface and interferogram
-* ✓ Fresnel and Fraunhofer diffraction 
-* Geometric matrix calculation
+* ✓ Fresnel and Fraunhofer diffraction
+* ✓ Hartmann Pattern Simulation
+* ✓ Geometric matrix calculation
+* ✓ PSF, OTF and MTF calculation
+* Rochi Test
+* Asphere fitting
 * Some freeform theory
-* PSF, OTF and MTF calculation
-* More interferogram
-* Ray tracing
+* More testing technology
+* Real Ray tracing and basic lens design
 * Third and high order aberration calculation
 * Make it rock!
 
