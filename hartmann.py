@@ -14,15 +14,18 @@ def hartmann(coefficients, r, R):
 	use circle hartmann plate
 	coefficients: zernike coefficients
 	r: distance from the pupil of the wavefront
-	R: radius of mirror under test 
+	R: radius of mirror under test
 	"""
 	coefficients = coefficients.__coefficients__
 	x_list = []
 	y_list = []
 	Ax_list = []
 	Ay_list = []
-	x = y = __np__.linspace(-R, R, 20)
+	s = 20
+	x = y = __np__.linspace(-R, R, s)
+	M = []
 	for i in x:
+		tmp = []
 		for j in y:
 			if i**2 + j**2 < R**2:
 				x_list.append(i)
@@ -34,13 +37,70 @@ def hartmann(coefficients, r, R):
 				TAy = -(Wy-W0)/(0.01*j)*r
 				Ax_list.append(TAx)
 				Ay_list.append(TAy)
-	# fig = __plt__.figure(1)
-	# __plt__.plot(x_list,y_list,'*')
-	# __plt__.show()
-	fig = __plt__.figure(2,figsize=(6, 6))
+				tmp.append([1,[i,j],[TAx,TAy]])
+			else:
+				tmp.append([0,[i,j],[0,0]])
+		M.append(tmp)
+	fig = __plt__.figure(1,figsize=(6, 6))
 	ax = fig.gca()
 	ax.set_axis_bgcolor('black')
 	__plt__.title('Hartmann Spotdiagram',fontsize=18)
 	__plt__.plot(Ax_list,Ay_list,'wo')
 	__plt__.show()
+
+	return M,r
+
+
+def hartmann_rebuild(M):
+
+
+	return 0
+
+
+#Depth first search algorithm, use to find phase map(where)
+def DFS(M,ph1,m,n,s):
+	stack = []
+	stack.append([m,n])
+	M[m,n] = 2
+	ph = __np__.zeros([s,s])
+
+	while (len(stack) != 0):
+		[m,n] = stack[-1]
+		if m + 1 < s and n < s and M[m+1,n] == 1 and M[m+1,n] != 0 and M[m+1,n] != 2:
+			m = m + 1
+			M[m,n] = 2
+			stack.append([m,n])
+			#print m,n
+			
+			ph[m,n] = ph[m-1,n] + v(ph1[m,n] - ph1[m-1,n])
+			
+		elif m - 1 > 0 and n < s and M[m-1,n] == 1 and M[m-1,n] != 0 and M[m-1,n] != 2:
+			m = m - 1
+			M[m,n] = 2
+			stack.append([m,n])
+			#print m,n
+			
+			ph[m,n] = ph[m+1,n] + v(ph1[m,n] - ph1[m+1,n])
+			
+		elif m < s and n + 1 < s and M[m,n+1] == 1 and M[m,n+1] != 0 and M[m,n+1] != 2: 
+			n = n + 1
+			M[m,n] = 2
+			stack.append([m,n])
+			#print m,n
+			
+			ph[m,n] = ph[m,n-1] + v(ph1[m,n] - ph1[m,n-1])
+			
+		elif m < s and n - 1 > 0 and M[m,n-1] == 1 and M[m,n-1] != 0 and M[m,n-1] != 2: 
+			n = n - 1
+			M[m,n] = 2
+			stack.append([m,n])
+			#print m,n
+			
+			ph[m,n] = ph[m,n+1] + v(ph1[m,n] - ph1[m,n+1])
+			
+		else:
+			stack.pop()
+	return ph
+
+
 	

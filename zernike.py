@@ -324,7 +324,8 @@ class Coefficient(object):
 
 
 	def hartmann(self,r=1,R=1):
-		__hartmann__.hartmann(self,r=r,R=R)
+		M = __hartmann__.hartmann(self,r=r,R=R)
+		return M
 
 	def zernike2seidel(self):
 		'''

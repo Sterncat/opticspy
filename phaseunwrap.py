@@ -4,7 +4,7 @@ from unwrap import unwrap as __unwrap__
 v = lambda x: __np__.arctan2(__np__.sin(x), __np__.cos(x))
 wrap_diff = lambda x: v(__np__.diff(x)) 
 
-#Depth first search algorithm, use to find phase map(where )
+#Depth first search algorithm, use to find phase map(where)
 def DFS(M,ph1,m,n,s):
 	stack = []
 	stack.append([m,n])
