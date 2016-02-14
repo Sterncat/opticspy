@@ -23,7 +23,10 @@ def trace_sys(Lens):
 				ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
 			field_info.append(ray_list)
 		Lens.image_plane_ray_list.append(field_info)
-	return 0
+
+	for surface in surface_list:
+		print surface.radius
+		surface.__diameter__ = 40
 
 def traceray(ray_list, surface1, surface2, wave_num):
     '''

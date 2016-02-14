@@ -1,4 +1,4 @@
-import surface, field, analysis, wavelength
+import surface, field, analysis, wavelength, first_order_tools
 
 # Ray Class
 
@@ -28,6 +28,12 @@ class Lens(object):
 
 	def first_order(self):
 		print 'first order information'
+
+
+	def EFL(self,start_surface=0,end_surface=0):
+		first_order_tools.EFL(self,start_surface,end_surface)
+
+
 
 	def thickness(self,start_surface,end_surface):
 		print 'thickness between 2 surface'
