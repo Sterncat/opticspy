@@ -2,6 +2,17 @@ from __future__ import division as __division__
 import numpy as np
 
 
+def ABCD(matrix_list):
+	'''
+	ABCD matrix calculator
+	input: a matrix list
+	output: ABCD matrix
+	'''
+	M = matrix_list.pop()
+	while matrix_list:
+		M = np.dot(M,matrix_list.pop())
+	return M[0,0],M[0,1],M[1,0],M[1,1]
+
 c1 = 1/50
 c2 = 1/(1175.71107)
 n = 1.521414
@@ -10,14 +21,18 @@ R1 = np.array([[1,0],[-c1*(n-1),1]])
 T2 = np.array([[1,5/n],[0,1]])
 R2 = np.array([[1,0],[-c2*(1-n),1]])
 
+#M1 = np.dot(R2,T2)
+#M2 = np.dot(M1,R1)   # caution the order of dot() calculation of T1,T2... R1,R2....
 
-M1 = np.dot(R2,T2)
-M2 = np.dot(M1,R1)   # caution the order of dot() calculation of T1,T2... R1,R2....
+list = [R1,T2,R2]
+print list
+A,B,C,D = ABCD(list)
+#A = M2[0,0]
+#B = M2[0,1]
+#C = M2[1,0]
+#D = M2[1,1]
 
-A = M2[0,0]
-B = M2[0,1]
-C = M2[1,0]
-D = M2[1,1]
+print A,B,C,D
 
 print A*D-B*C
 

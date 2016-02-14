@@ -67,12 +67,13 @@ def EFL(Lens,start_surface=0,end_surface=0):
 		R1 = R(c,n_left,n_right)
 		T1 = T(t,n_right)
 		RT_matrix.append(R1)
-		if i != end:
+		if i+2 != end:
 			RT_matrix.append(T1)
-		else:
-			pass
+	print '--------------------------------'
 	print RT_matrix
+	print '--------------------------------'
 	A,B,C,D = ABCD(RT_matrix)
+	print A,B,C,D
 	print 'Front Focal Point F:',D/C
 	print 'Rear Focal Point F\':',-A/C
 	print 'Front Principal Point P:', (D-1)/C
