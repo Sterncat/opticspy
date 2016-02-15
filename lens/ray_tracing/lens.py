@@ -33,7 +33,17 @@ class Lens(object):
 	def EFL(self,start_surface=0,end_surface=0):
 		first_order_tools.EFL(self,start_surface,end_surface)
 
+	def BFL(self):
+		first_order_tools.BFL(self)
 
+	def OAL(self,start_surface=0,end_surface=0):
+		first_order_tools.OAL(self,start_surface,end_surface)
+
+	def image_position(self):
+		first_order_tools.image_position(self)
+
+	def EP(self):
+		first_order_tools.EP(self)
 
 	def thickness(self,start_surface,end_surface):
 		print 'thickness between 2 surface'
