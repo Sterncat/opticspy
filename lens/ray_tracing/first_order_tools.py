@@ -85,7 +85,6 @@ def list(Lens):
 	output: print information
 			refresh Lens first order information
 	'''
-
 	return 0
 
 
@@ -113,9 +112,7 @@ def OAL(Lens,start_surface,end_surface):
 	OAL = 0
 	for i in range(start,end):
 		OAL = OAL + s[i-1].thickness
-
 	print 'Overall length:',OAL
-
 	return OAL
 
 def image_position(Lens):
@@ -136,7 +133,7 @@ def image_position(Lens):
 
 def EP(Lens):
 	# Entrance pupil's position and diameter
-	print '---------Calculating Entrance Pupil Diameter-----------'
+	print '---------Calculating Entrance Pupil Position-----------'
 	s = Lens.surface_list
 	
 	for surface in s:
@@ -158,25 +155,41 @@ def EP(Lens):
 	P = (D-1)/C
 	Pp = (1-A)/C
 	lp = t_stop-Pp
-	# print 'power', phi
-	# print 'stop position:',lp
 	l = 1/(1/lp - phi)
-	print 'entrance pupil position l\' = ',l + P
-	return 0
+	EP = l + P
+	print 'entrance pupil position EP:',EP
+	return EP
 
-def EX():
-# Exit pupil's position and diameter
-	return 0
+def EX(Lens):
+	# Exit pupil's position and diameter
+	print '---------Calculating Exit Pupil Position-----------'
+	s = Lens.surface_list
+	for surface in s:
+		if surface.STO == True:
+			n = surface.number
+			print 'STOP Surface',n
+			if n == len(s)-1:
+				EX = 0   # if stop at last, EX = 0, code V do this
+				return EX
+			else:
+				t_stop = s[n-1].thickness
+				print 'STOP thickness',t_stop
+				start_surface = n + 1
+				end_surface = len(s) - 1
+		else:
+			pass
+	A,B,C,D = ABCD_start_end(Lens,start_surface,end_surface)
+	phi = -C
+	P = (D-1)/C
+	Pp = (1-A)/C
+	l = -(t_stop+P)
+	lp = 1/(1/l + phi)
+	EX = lp + Pp
+	print 'exit pupil position EX:',EX
+	return EX
 
-
-
-
-
-
-
-
-
-
+## note for future work: for system no in air, need to change part of program,
+## For example, 'Rear Focal Length f\':',-1/C ----> -np/C, etc
 
 
 

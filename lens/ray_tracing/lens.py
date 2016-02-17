@@ -1,4 +1,4 @@
-import surface, field, analysis, wavelength, first_order_tools
+import surface, field, analysis, wavelength, first_order_tools, draw
 
 # Ray Class
 
@@ -8,10 +8,18 @@ class Lens(object):
 		self.creator = creator
 		self.surface_list = []
 		self.field_list = []
+		self.field_angle_list = []
 		self.image_plane_ray_list = []
 		self.wavelength_list = []
-		self.EPD_diameter = 20
-		
+		self.EP_thickness = 0
+		self.EFL = 0
+		self.EPD = 0
+		self.FNO = 0
+		self.chief_ray_tracing = []
+		self.marginal_ray_y = []
+		self.marginal_ray_x = []
+		self.tmp_ray = []
+
 	def lens_info(self):
 		print self.lens_name
 		print self.creator
@@ -26,12 +34,18 @@ class Lens(object):
 		for i in self.field_list:
 			print i
 
+
+	def refresh_paraxial(self):
+		self.EFL = first_order_tools.EFL(self,0,0)
+		self.EPD = self.EFL/self.FNO
+		self.EP_thickness = first_order_tools.EP(self)
+
 	def first_order(self):
 		print 'first order information'
 
-
-	def EFL(self,start_surface=0,end_surface=0):
-		first_order_tools.EFL(self,start_surface,end_surface)
+	def EFY(self,start_surface=0,end_surface=0):
+		EFY = first_order_tools.EFL(self,start_surface,end_surface)
+		return EFY
 
 	def BFL(self):
 		first_order_tools.BFL(self)
@@ -43,7 +57,11 @@ class Lens(object):
 		first_order_tools.image_position(self)
 
 	def EP(self):
-		first_order_tools.EP(self)
+		EP = first_order_tools.EP(self)
+		return EP
+
+	def EX(self):
+		first_order_tools.EX(self)
 
 	def thickness(self,start_surface,end_surface):
 		print 'thickness between 2 surface'
@@ -62,7 +80,7 @@ class Lens(object):
 #-----------------------Field functions--------------------------
 	def add_field(self,angle):
 		field.add_field_YAN(self,angle)
-
+		self.field_angle_list.append(angle)
 
 #-----------------------Wavelength Fucntions---------------------
 	def add_wavelength(self,wl):

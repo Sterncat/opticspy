@@ -1,11 +1,13 @@
 from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-import field
+import field,first_order_tools,surface
 
 # Function: trace rays
 # input a list of ray 
 # output [ray position and direction] on next surface
+
+
 
 def trace_sys(Lens):
 	'''
@@ -26,7 +28,91 @@ def trace_sys(Lens):
 
 	for surface in surface_list:
 		print surface.radius
-		surface.__diameter__ = 40
+		surface.__diameter__ = 20
+
+
+
+def trace_ab_ray(Lens):
+	'''
+	trace a b ray
+	chief ray(0,0),marginal ray(0,1)(0,-1) in different field
+	so if there are 3 field, len(ab_ray_list) = 9
+	output: ab_ray_list
+	'''
+	ab_ray_list = []
+	
+	wave_num = int(len(Lens.wavelength_list)/2+1)
+	for field_num in range(len(Lens.field_list)):
+		field_num = field_num + 1
+		chief_ray_list = trace_one_ray(Lens,field_num,wave_num,[0,0])
+		marginal_ray_list_1 = trace_one_ray(Lens,field_num,wave_num,[0,1])
+		marginal_ray_list_2 = trace_one_ray(Lens,field_num,wave_num,[0,-1])
+		ab_ray_list.append(chief_ray_list)
+		ab_ray_list.append(marginal_ray_list_1)
+		ab_ray_list.append(marginal_ray_list_2)
+	# print 'ab_ray_list_length',len(ab_ray_list)
+	return ab_ray_list
+
+
+
+def trace_one_ray(Lens,field_num,wave_num,ray):
+    '''
+    trace specific rays
+    ------------------------------
+    input: 
+    field: int, field number
+    wave_num: wavelength number
+    ray: relative ray to entrance pupil
+            [0,0] chef ray
+            [0,1] marginal ray1
+            [0,-1] marginal ray2
+       	also could do [1,0] [-1,0]
+    '''
+    print '---------------start tracing chief rays--------------'
+    Lens.chief_ray_tracing = []
+    EP = Lens.EP_thickness
+    EPD = Lens.EPD
+    print 'Entrance pupil position',EP
+    print 'Entrance pupil diameter',EPD
+    angle = Lens.field_angle_list[field_num-1]
+    surface_list = Lens.surface_list
+    ray_list = []
+    start = 2
+    end = len(surface_list)
+    OAL = first_order_tools.OAL(Lens,start,end)
+    Pos_z = OAL*0.2
+    surface_list[0] = surface.Surface(wavelength_list = Lens.wavelength_list,number=1,\
+                            radius=10000000,thickness=Pos_z,glass='air',STO=False,\
+                            __diameter__=0)
+    #print 'z position:',Pos_z
+    if ray == [0,0]:
+        print 'trace chef ray'
+    elif ray == [0,1] or ray == [0,-1]:
+    	print 'trace marginal ray(y)'
+    elif ray == [1,0] or ray == [-1,0]:
+    	print 'trace marginal ray(x)'
+    else:
+    	print 'trace one ray'
+
+    Pos_x = ray[0] * Lens.EPD/2
+    #print angle
+    Pos_y = -(OAL*0.2 + EP)*__np__.tan(angle/180*__np__.pi) + Lens.EPD/2 * ray[1]
+    #print 'y position:',Pos_y
+    l = __np__.sin(angle/180*__np__.pi)
+    m = __np__.cos(angle/180*__np__.pi)
+    Pos = [Pos_x,Pos_y,0]
+    KLM = [0,l,m]
+    ray = field.Ray(Pos,KLM)
+    ray_list.append(ray)
+
+    Lens.chief_ray_tracing.append(ray_list)
+    for i in range(len(surface_list)-1):
+        ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
+        Lens.chief_ray_tracing.append(ray_list)
+        # three chief rays
+    #print 'surface_list',len(surface_list)
+    return Lens.chief_ray_tracing
+
 
 def traceray(ray_list, surface1, surface2, wave_num):
     '''
@@ -40,7 +126,9 @@ def traceray(ray_list, surface1, surface2, wave_num):
     KLM_new_list = []
     for ray in ray_list:
         Pos = ray.Pos
+        #print 'Pos',Pos
         KLM = ray.KLM
+        #print 'KLM:',KLM
         c1 = 1 / surface1.radius
         c2 = 1 / surface2.radius
         n1 = surface1.indexlist[wave_num]
@@ -48,6 +136,7 @@ def traceray(ray_list, surface1, surface2, wave_num):
         tn1 = surface1.thickness
         tn2 = surface2.thickness
         xyz = __np__.asarray([Pos[0], Pos[1], Pos[2] - tn1])
+        #print 'xyz',xyz
         delta, cosI = pos(xyz, KLM, c2)
         Pos_new = xyz + delta * KLM
         Pos_new_list.append(Pos_new)
@@ -71,6 +160,9 @@ def traceray(ray_list, surface1, surface2, wave_num):
 
 
 def pos(Pos, KLM, curvature):
+    '''
+    calculate new position of a ray on spherical surface
+    '''
     c = curvature
     x0 = Pos[0]
     y0 = Pos[1]

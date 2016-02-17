@@ -38,7 +38,7 @@ def add(self,number,radius,thickness,glass,STO):
 	print '-------------------------------------------------------------'
 	New_Surface = Surface(wavelength_list = self.wavelength_list,number=number,\
 							radius=radius,thickness=thickness,glass=glass,STO=STO,\
-							__diameter__=10)
+							__diameter__=0)
 	self.surface_list.append(New_Surface)
 
 # def update(number,key,value):

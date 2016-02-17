@@ -6,6 +6,10 @@ import matplotlib.pyplot as __plt__
 
 class Ray(object):
 	def __init__(self,Pos,KLM):
+		'''
+		Pos: ray position
+		KLM: ray direction
+		'''
 		self.Pos = __np__.asarray(Pos)
 		self.KLM = __np__.asarray(KLM)
 	def list(self):
@@ -25,7 +29,7 @@ def add_field_YAN(Lens,angle):
 	angle: Object angle 
 	'''
 	print 'add field'
-	diameter = Lens.EPD_diameter
+	diameter = Lens.EPD
 	l1 = __np__.linspace(-diameter,diameter,15)
 	Pos = []
 	for i in l1:
