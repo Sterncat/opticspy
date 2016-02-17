@@ -29,10 +29,10 @@ New_Lens.add_surface(number=9,radius=10000000,thickness=0,glass='air')
 New_Lens.refresh_paraxial()
 
 #print New_Lens.EP_thickness
-print New_Lens.EFL
+#print New_Lens.EFL
 #print New_Lens.EPD
 #print New_Lens.FNO
 trace.trace_ab_ray(New_Lens)
-trace.trace_sys(New_Lens)
+#trace.trace_sys(New_Lens)
 
 draw.draw_system(New_Lens)

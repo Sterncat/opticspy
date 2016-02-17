@@ -14,7 +14,7 @@ def glass2indexlist(wavelength_list,glassname):
 	wavelength_num = len(wavelength_list)
 	if glassname == 'air' or glassname == 'AIR':
 		lens_index_list = [1]*wavelength_num
-		output(wavelength_list,lens_index_list)
+		#output(wavelength_list,lens_index_list)
 		return lens_index_list
 	else:
 		n = glassname.find('_')
@@ -43,7 +43,7 @@ def glass2indexlist(wavelength_list,glassname):
 			for wavelength in wavelength_list:
 				index = find_closest_wavelength(wavelength,wave_list,index_list)
 				lens_index_list.append(index)
-			output(wavelength_list,lens_index_list)
+			#output(wavelength_list,lens_index_list)
 			return lens_index_list
 
 def find_closest_wavelength(wavelength,wave_list,index_list):

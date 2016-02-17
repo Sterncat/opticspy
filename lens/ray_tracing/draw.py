@@ -26,7 +26,7 @@ def draw_surface(r,x0,d):
 
 def draw_system(Lens):
 	print '------------------start drawing lens system-------------'
-	fig = plt.figure()
+	fig = plt.figure(figsize=(12, 6))
 	ax = fig.add_subplot(111)
 	surface_list = Lens.surface_list
 	m = len(surface_list)
@@ -56,6 +56,7 @@ def draw_system(Lens):
 		path = Path(verts, codes)
 		patch = patches.PathPatch(path, facecolor='white', lw=1)
 		ax.add_patch(patch)
+
 		# start drawing edge
 		if num == 0:
 			pass
@@ -83,7 +84,7 @@ def draw_system(Lens):
 		patch1 = patches.PathPatch(path, facecolor='white',fill=0, lw=1,edgecolor=linecolor )
 		ax.add_patch(patch1)
 	ax.set_xlim(-0.5*sum(thinkness_list[1:-1]),1.1*sum(thinkness_list[1:-1]))
-	ax.set_ylim(-d/2*3,d/2*3)
+	ax.set_ylim(-d/4*3,d/4*3)
 	plt.show()
 
 
@@ -99,8 +100,9 @@ def draw_system(Lens):
 # 	return path_list
 
 def draw_rays(Lens):
-	'drawing chef ray and two maginal rays'
-	'fields = [1,2,3]'
+	'''
+	draw chief and marginal rays, draw field
+	'''
 	ray_list = trace.trace_ab_ray(Lens)
 	path_list = []
 	for ray in ray_list:

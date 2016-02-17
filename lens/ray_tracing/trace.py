@@ -26,21 +26,22 @@ def trace_sys(Lens):
 			field_info.append(ray_list)
 		Lens.image_plane_ray_list.append(field_info)
 
-	for surface in surface_list:
-		print surface.radius
-		surface.__diameter__ = 20
+	# for surface in surface_list:
+	# 	print surface.radius
+	# 	surface.__diameter__ = 18
 
 
 
 def trace_ab_ray(Lens):
 	'''
-	trace a b ray
+	trace a ray and b ray
 	chief ray(0,0),marginal ray(0,1)(0,-1) in different field
 	so if there are 3 field, len(ab_ray_list) = 9
 	output: ab_ray_list
 	'''
 	ab_ray_list = []
-	
+	list_1 = []
+	list_2 = []
 	wave_num = int(len(Lens.wavelength_list)/2+1)
 	for field_num in range(len(Lens.field_list)):
 		field_num = field_num + 1
@@ -50,7 +51,34 @@ def trace_ab_ray(Lens):
 		ab_ray_list.append(chief_ray_list)
 		ab_ray_list.append(marginal_ray_list_1)
 		ab_ray_list.append(marginal_ray_list_2)
-	# print 'ab_ray_list_length',len(ab_ray_list)
+
+		list_1.append(marginal_ray_list_1) # length 3
+		list_2.append(marginal_ray_list_2) # length 3
+
+	# start find surface aperture diameter
+	diameter_list = []
+	print '============================================'
+	for i,j in zip(list_1,list_2):
+		tmp1 = []
+		tmp2 = []
+		print '++++++++++++++++++++++++++++++++++++++++'
+		for m,n in zip(i,j):
+			ray_height1 = abs(m[0].Pos[1])
+			ray_height2 = abs(n[0].Pos[1])
+			tmp1.append(ray_height1)
+			tmp2.append(ray_height2)
+		diameter_list.append(tmp1)
+		diameter_list.append(tmp2)
+	print '============================================'
+	D = []
+	diameter_list = __np__.asarray(diameter_list)
+	diameter_list = __np__.transpose(diameter_list)
+	for i in diameter_list:
+		print i
+		D.append(max(i)*2)
+
+	for (surface,d) in zip(Lens.surface_list,D):
+		surface.__diameter__ = d*1.1
 	return ab_ray_list
 
 
