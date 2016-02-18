@@ -40,7 +40,6 @@ def add(self,number,radius,thickness,glass,STO):
 							radius=radius,thickness=thickness,glass=glass,STO=STO,\
 							__diameter__=0)
 	self.surface_list.append(New_Surface)
-
 # def update(number,key,value):
 # 	if key = 'STO':
 

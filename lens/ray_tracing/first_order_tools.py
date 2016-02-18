@@ -121,7 +121,8 @@ def image_position(Lens):
 	'''
 	print '------------Calculating image position---------------'
 	s = Lens.surface_list
-	z = -s[0].thickness  # object distance
+	z = Lens.object_position  # object distance
+	print 'object distance',z
 	A,B,C,D = ABCD_start_end(Lens,start_surface=0,end_surface=0)
 	f = -1/C
 	fp = -1/C

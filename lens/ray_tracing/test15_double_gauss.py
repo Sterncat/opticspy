@@ -3,6 +3,7 @@ import lens, trace, glass, draw
 
 
 New_Lens = lens.Lens(lens_name='doublegauss',creator='XF')
+New_Lens.FNO = 5
 New_Lens.lens_info()
 
 New_Lens.add_wavelength(wl = 656.30)
@@ -29,7 +30,10 @@ New_Lens.add_surface(number=11,radius=177.41176,thickness=7,glass='NSK16_SCHOTT'
 New_Lens.add_surface(number=12,radius=-79.41143,thickness=61.487536,glass='air')
 New_Lens.add_surface(number=13,radius=100000000,thickness=0,glass='air')
 
-trace.trace_sys(New_Lens)
-New_Lens.EP()
-New_Lens.EX()
+
+New_Lens.refresh_paraxial()
+New_Lens.image_position()
+trace.trace_draw_ray(New_Lens)
 draw.draw_system(New_Lens)
+New_Lens.image_position()
+New_Lens.EFY()

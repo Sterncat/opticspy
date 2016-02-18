@@ -1,5 +1,4 @@
-
-import lens, trace, glass, draw
+import lens, trace, glass, draw, analysis
 
 
 New_Lens = lens.Lens(lens_name='triplet',creator='XF')
@@ -32,7 +31,11 @@ New_Lens.refresh_paraxial()
 #print New_Lens.EFL
 #print New_Lens.EPD
 #print New_Lens.FNO
-trace.trace_ab_ray(New_Lens)
-#trace.trace_sys(New_Lens)
-
+New_Lens.image_position()
+trace.trace_draw_ray(New_Lens)
 draw.draw_system(New_Lens)
+#trace.trace_sys(New_Lens)
+#analysis.spotdiagram(New_Lens)
+
+New_Lens.image_position()
+New_Lens.EFY()

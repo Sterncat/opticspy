@@ -25,7 +25,7 @@ class Field(object):
 def add_field_YAN(Lens,angle):
 	'''
 	Add field by object angle
-	self.EPD.diameter: Entrance pupil diameter
+	Lens.EPD: Entrance pupil diameter
 	angle: Object angle 
 	'''
 	print 'add field'

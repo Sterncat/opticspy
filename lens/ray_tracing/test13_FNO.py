@@ -1,18 +1,18 @@
 
-import lens, trace, glass, draw
+import lens, trace, glass, draw, analysis
 
 
 New_Lens = lens.Lens(lens_name='triplet',creator='XF')
-New_Lens.FNO = 10
+New_Lens.FNO = 3
 New_Lens.lens_info()
 
 New_Lens.add_wavelength(wl = 656.30)
-New_Lens.add_wavelength(wl = 546.10)
+New_Lens.add_wavelength(wl = 587.60)
 New_Lens.add_wavelength(wl = 486.10)
 New_Lens.list_wavelengths()
 
 New_Lens.add_field(angle=0)
-New_Lens.add_field(angle=10)
+New_Lens.add_field(angle=14)
 New_Lens.add_field(angle=20)
 New_Lens.list_fields()
 
@@ -33,13 +33,21 @@ New_Lens.refresh_paraxial()
 #print New_Lens.EPD
 #print New_Lens.FNO
 #trace.trace_ab_ray(New_Lens)
-trace.trace_sys(New_Lens)
-trace.trace_ab_ray(New_Lens)
+New_Lens.image_position()
+trace.trace_draw_ray(New_Lens)
 #New_Lens.spotdiagram()
 #New_Lens.EFL()
 #New_Lens.BFL()
 #New_Lens.OAL(2,9)
-#New_Lens.image_position()
 #New_Lens.EP()
 #New_Lens.EX()
 draw.draw_system(New_Lens)
+#trace.trace_sys(New_Lens)
+#analysis.spotdiagram(New_Lens)
+
+
+New_Lens.image_position()
+New_Lens.EFY()
+print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+#trace.trace_sys(New_Lens)
+#analysis.spotdiagram(New_Lens)

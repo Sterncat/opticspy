@@ -13,7 +13,7 @@ def spotdiagram(Lens):
 	sign_list = ['b*','go','rs','cD','m+','yx','k1','ws']
 
 
-	fig = __plt__.figure(figsize=(5, 9), dpi=80)
+	fig = __plt__.figure(2,figsize=(5, 9), dpi=80)
 	field_num = len(Lens.field_list)
 	wave_num = len(Lens.wavelength_list)
 	n = field_num

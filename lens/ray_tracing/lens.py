@@ -3,22 +3,22 @@ import surface, field, analysis, wavelength, first_order_tools, draw
 # Ray Class
 
 class Lens(object):
+	surface_list = []
 	def __init__(self,lens_name='',creator=''):
 		self.lens_name = lens_name
 		self.creator = creator
-		self.surface_list = []
+		
 		self.field_list = []
 		self.field_angle_list = []
-		self.image_plane_ray_list = []
 		self.wavelength_list = []
 		self.EP_thickness = 0
 		self.EFL = 0
 		self.EPD = 0
 		self.FNO = 0
-		self.chief_ray_tracing = []
-		self.marginal_ray_y = []
-		self.marginal_ray_x = []
 		self.tmp_ray = []
+		self.object_position = 0
+
+		self.image_plane_ray_list = []
 
 	def lens_info(self):
 		print self.lens_name
@@ -39,7 +39,16 @@ class Lens(object):
 		self.EFL = first_order_tools.EFL(self,0,0)
 		self.EPD = self.EFL/self.FNO
 		self.EP_thickness = first_order_tools.EP(self)
+		self.object_position = -1000000    # temporary only for infinity conjugate
+		start = 2
+		end = len(self.surface_list)
+		OAL = first_order_tools.OAL(self,start,end)
+		Pos_z = OAL * 0.2
 
+		# entrance pupil fake surface use as surface 1
+		self.surface_list[0] = surface.Surface(wavelength_list = self.wavelength_list,number=1,\
+										radius=10000000,thickness=Pos_z,glass='air',STO=False,\
+										__diameter__=0)
 	def first_order(self):
 		print 'first order information'
 
@@ -79,7 +88,7 @@ class Lens(object):
 
 #-----------------------Field functions--------------------------
 	def add_field(self,angle):
-		field.add_field_YAN(self,angle)
+		#field.add_field_YAN(self,angle)
 		self.field_angle_list.append(angle)
 
 #-----------------------Wavelength Fucntions---------------------

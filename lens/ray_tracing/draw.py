@@ -54,7 +54,7 @@ def draw_system(Lens):
 		# start drawing surface
 		print 'draw surface:',num+1
 		path = Path(verts, codes)
-		patch = patches.PathPatch(path, facecolor='white', lw=1)
+		patch = patches.PathPatch(path, facecolor='none', lw=1)
 		ax.add_patch(patch)
 
 		# start drawing edge
@@ -63,15 +63,15 @@ def draw_system(Lens):
 		elif surface_list[num-1].glass != ('air' or 'AIR'):
 			print 'drawing edge:',num,'---',num+1
 			verts1 = [start_end_list[num-1][0],start_end_list[num][0]]
-			print verts1
+			#print verts1
 			verts2 = [start_end_list[num-1][1],start_end_list[num][1]]
-			print verts2
+			#print verts2
 			codes = [Path.MOVETO,Path.LINETO]
 			path = Path(verts1,codes)
-			patch = patches.PathPatch(path, facecolor='white',fill=0, lw=1)
+			patch = patches.PathPatch(path,fill=0, lw=1)
 			ax.add_patch(patch)
 			path = Path(verts2,codes)
-			patch = patches.PathPatch(path, facecolor='white',fill=0, lw=1)	
+			patch = patches.PathPatch(path, facecolor='none',fill=0, lw=1)	
 			ax.add_patch(patch)
 		else:
 			pass
@@ -81,7 +81,7 @@ def draw_system(Lens):
 	m = 0
 	color_list = ['red']*3+['green']*3+['blue']*3 
 	for path, linecolor in zip(path_list,color_list):
-		patch1 = patches.PathPatch(path, facecolor='white',fill=0, lw=1,edgecolor=linecolor )
+		patch1 = patches.PathPatch(path, facecolor='none',fill=0, lw=1,edgecolor=linecolor)
 		ax.add_patch(patch1)
 	ax.set_xlim(-0.5*sum(thinkness_list[1:-1]),1.1*sum(thinkness_list[1:-1]))
 	ax.set_ylim(-d/4*3,d/4*3)
@@ -103,7 +103,7 @@ def draw_rays(Lens):
 	'''
 	draw chief and marginal rays, draw field
 	'''
-	ray_list = trace.trace_ab_ray(Lens)
+	ray_list = trace.trace_draw_ray(Lens)
 	path_list = []
 	for ray in ray_list:
 		p = draw_line(Lens,ray)
@@ -128,7 +128,7 @@ def draw_line(Lens,ray_tracing):
 		n = n + 1
 	codes[0] = Path.MOVETO
 	path = Path(verts,codes)
-	print verts
+	#print verts
 	return path
 
 
