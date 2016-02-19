@@ -32,10 +32,12 @@ New_Lens.refresh_paraxial()
 #print New_Lens.EPD
 #print New_Lens.FNO
 New_Lens.image_position()
+
 trace.trace_draw_ray(New_Lens)
+trace.trace_one_ray(New_Lens,field_num=3,wave_num=2,ray=[0,1],start=3,end=6,output=True,output_list=['X','Y','Z'])
 draw.draw_system(New_Lens)
 #trace.trace_sys(New_Lens)
 #analysis.spotdiagram(New_Lens)
 
-New_Lens.image_position()
-New_Lens.EFY()
+#New_Lens.image_position()
+#New_Lens.EFY()

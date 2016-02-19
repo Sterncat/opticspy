@@ -2,7 +2,7 @@ from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 import field,first_order_tools,surface
-#import copy
+import output_tools
 
 # Function: trace rays
 # input a list of ray 
@@ -87,7 +87,7 @@ def trace_draw_ray(Lens):
 
 
 
-def trace_one_ray(Lens,field_num,wave_num,ray):
+def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_list=[]):
     '''
     trace specific rays
     ------------------------------
@@ -101,44 +101,44 @@ def trace_one_ray(Lens,field_num,wave_num,ray):
        		[1,0]  (+X)Sagital Ray 
        		[-1,0] (-X)Sagiral Ray
     '''
-    print '---------------start tracing chief rays--------------'
+    print '-------------------ray tracing------------------'
     ray_tracing = []
     EP = Lens.EP_thickness
     EPD = Lens.EPD
-    print 'Entrance pupil position',EP
-    print 'Entrance pupil diameter',EPD
+    # print 'Entrance pupil position',EP
+    # print 'Entrance pupil diameter',EPD
     angle = Lens.field_angle_list[field_num-1]
     surface_list = Lens.surface_list
     ray_list = []
     Pos_z = surface_list[0].thickness
 
-    if ray == [0,0]:
-        print 'trace chief ray'
-    elif ray == [0,1] or ray == [0,-1]:
-    	print 'trace meridional ray(y)'
-    elif ray == [1,0] or ray == [-1,0]:
-    	print 'trace sagiral ray(x)'
-    else:
-    	print 'trace one ray'
+  #   if ray == [0,0]:
+  #       print 'trace chief ray'
+  #   elif ray == [0,1] or ray == [0,-1]:
+		# print 'trace meridional ray(y)'
+  #   elif ray == [1,0] or ray == [-1,0]:
+		# print 'trace sagiral ray(x)'
+  #   else:
+  #       print 'trace one ray'
 
     Pos_x = Lens.EPD/2 * ray[0]    # not general enough, now only could trace y angle ray
     							   # not really need to be traced?
     							   # need to think
     Pos_y = -(Pos_z + EP)*__np__.tan(angle/180*__np__.pi) + Lens.EPD/2 * ray[1]
-    #print 'y position:',Pos_y
     l = __np__.sin(angle/180*__np__.pi)
     m = __np__.cos(angle/180*__np__.pi)
     Pos = [Pos_x,Pos_y,0]
     KLM = [0,l,m]
     ray = field.Ray(Pos,KLM)
     ray_list.append(ray)
-
     ray_tracing.append(ray_list)
     for i in range(len(surface_list)-1):
         ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
         ray_tracing.append(ray_list)
-        # three chief rays
-    #print 'surface_list',len(surface_list)
+
+    ray_dict = ray2dict(ray_tracing)
+    if output == True:
+        output_tools.ray_output(ray_dict=ray_dict,start=start,end=end,output_list=output_list)
     return ray_tracing
 
 
@@ -203,3 +203,28 @@ def pos(Pos, KLM, curvature):
     delta = E / (G + __np__.sqrt(G ** 2 - c * E))
     cosI = __np__.sqrt(G ** 2 - c * E)
     return delta, cosI
+
+def ray2dict(ray_tracing):
+    #print 'ray2dict============',len(ray_tracing),'============='
+    ray_dict = {'Num':[],'X':[],'Y':[],'Z':[],'K':[],'L':[],'M':[]}
+    n = 0
+    for ray_list in ray_tracing:
+		n = n + 1
+		Ray = ray_list[0]
+		Pos = Ray.Pos
+		KLM = Ray.KLM
+		ray_dict['X'].append(Pos[0])
+		ray_dict['Y'].append(Pos[1])
+		ray_dict['Z'].append(Pos[2])
+		ray_dict['K'].append(KLM[0])
+		ray_dict['L'].append(KLM[1])
+		ray_dict['M'].append(KLM[2])
+		ray_dict['Num'].append(n)
+    return ray_dict
+
+
+
+
+
+
+
