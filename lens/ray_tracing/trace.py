@@ -9,81 +9,98 @@ import output_tools
 # output [ray position and direction] on next surface
 
 
-
 def trace_sys(Lens):
-	'''
-	trace all field through all surfaces, and give the spotgram
-	of the Image(last) surface
-	'''
-	#==========================================
-	#just test, bad idea doing it this way
-	# Lens.field_list = []
-	# for angle in Lens.field_angle_list:
-	# 	field.add_field_YAN(Lens,angle)
-	#==========================================
-	surface_list = Lens.surface_list
-	field_list  = Lens.field_list
-	wavelength_list = Lens.wavelength_list
-	for field1 in field_list:
-		field_info = []
-		for wave_num in range(len(wavelength_list)):
-			ray_list = field1.ray_list
-			for i in range(len(surface_list)-1):
-				ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
-			field_info.append(ray_list)
-		Lens.image_plane_ray_list.append(field_info)
+    '''
+    trace all field,all wavelength through all surfaces
+    return list of dictionary
+    '''
+    surface_list = Lens.surface_list
+    all_field_ray_dict_list = []
+    for wave_num in range(len(Lens.wavelength_list)):
+        wave_num = wave_num + 1
+        one_wavelength_trace = []
+        for field_num in range(len(Lens.field_angle_list)):
+            field_num = field_num + 1
+            field_ray_dict_list = trace_field_wave(Lens,field_num,wave_num)
+            one_wavelength_trace.append(field_ray_dict_list)
+        all_field_ray_dict_list.append(one_wavelength_trace)
+    Lens.field_trace_info = all_field_ray_dict_list
+    return all_field_ray_dict_list
+
+def trace_field_wave(Lens,field_num,wave_num):
+    '''
+    trace one field in one wavelength
+    '''
+    field_angle = Lens.field_angle_list[field_num-1]
+    surface_list = Lens.surface_list
+
+    field_ray_dict_list = []
+
+    field_rays_list = field.field_rays_generator(Lens,field_angle)
+    for ray_list in field_rays_list:
+        ray_list = [ray_list]
+        ray_tracing = []
+        ray_tracing.append(ray_list)
+        for i in range(len(surface_list)-1):
+            ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
+            ray_tracing.append(ray_list)
+        ray_dict = ray2dict(ray_tracing)
+        field_ray_dict_list.append(ray_dict)
+
+    return field_ray_dict_list
+
 
 def trace_draw_ray(Lens):
-	'''
-	trace ray for drawing lens and find the diameter of lens
-	chief ray(0,0),marginal ray(0,1)(0,-1) in different field
-	so if there are 3 field, len(ab_ray_list) = 9
+    '''
+    trace ray for drawing lens and find the diameter of lens
+    chief ray(0,0),marginal ray(0,1)(0,-1) in different field
+    so if there are 3 field, len(ab_ray_list) = 9
 
-	It is trace the marginal rays, so it is similar to the set vig part
+    It is trace the marginal rays, so it is similar to the set vig part
 
-	output: ab_ray_list
-	'''
-	ab_ray_list = []
-	list_1 = []
-	list_2 = []
-	wave_num = int(len(Lens.wavelength_list)/2+1)
-	for field_num in range(len(Lens.field_angle_list)):
-		field_num = field_num + 1
-		chief_ray_list = trace_one_ray(Lens,field_num,wave_num,[0,0])
-		marginal_ray_list_1 = trace_one_ray(Lens,field_num,wave_num,[0,1])
-		marginal_ray_list_2 = trace_one_ray(Lens,field_num,wave_num,[0,-1])
-		ab_ray_list.append(chief_ray_list)
-		ab_ray_list.append(marginal_ray_list_1)
-		ab_ray_list.append(marginal_ray_list_2)
+    output: ab_ray_list
+    '''
+    ab_ray_list = []
+    list_1 = []
+    list_2 = []
+    wave_num = int(len(Lens.wavelength_list)/2+1)
+    for field_num in range(len(Lens.field_angle_list)):
+        field_num = field_num + 1
+        chief_ray_list = trace_one_ray(Lens,field_num,wave_num,[0,0])
+        marginal_ray_list_1 = trace_one_ray(Lens,field_num,wave_num,[0,1])
+        marginal_ray_list_2 = trace_one_ray(Lens,field_num,wave_num,[0,-1])
+        ab_ray_list.append(chief_ray_list)
+        ab_ray_list.append(marginal_ray_list_1)
+        ab_ray_list.append(marginal_ray_list_2)
 
-		list_1.append(marginal_ray_list_1) # length 3
-		list_2.append(marginal_ray_list_2) # length 3
+        list_1.append(marginal_ray_list_1) # length 3
+        list_2.append(marginal_ray_list_2) # length 3
 
-	# start find surface aperture diameter
-	diameter_list = []
-	print '============================================'
-	for i,j in zip(list_1,list_2):
-		tmp1 = []
-		tmp2 = []
-		print '++++++++++++++++++++++++++++++++++++++++'
-		for m,n in zip(i,j):
-			ray_height1 = abs(m[0].Pos[1])
-			ray_height2 = abs(n[0].Pos[1])
-			tmp1.append(ray_height1)
-			tmp2.append(ray_height2)
-		diameter_list.append(tmp1)
-		diameter_list.append(tmp2)
-	print '============================================'
-	D = []
-	diameter_list = __np__.asarray(diameter_list)
-	diameter_list = __np__.transpose(diameter_list)
-	for i in diameter_list:
-		#print i
-		D.append(max(i)*2)
+    # start find surface aperture diameter
+    diameter_list = []
+    print '============================================'
+    for i,j in zip(list_1,list_2):
+        tmp1 = []
+        tmp2 = []
+        print '++++++++++++++++++++++++++++++++++++++++'
+        for m,n in zip(i,j):
+            ray_height1 = abs(m[0].Pos[1])
+            ray_height2 = abs(n[0].Pos[1])
+            tmp1.append(ray_height1)
+            tmp2.append(ray_height2)
+        diameter_list.append(tmp1)
+        diameter_list.append(tmp2)
+    print '============================================'
+    D = []
+    diameter_list = __np__.asarray(diameter_list)
+    diameter_list = __np__.transpose(diameter_list)
+    for i in diameter_list:
+        #print i
+        D.append(max(i)*2)
 
-	for (surface,d) in zip(Lens.surface_list,D):
-		surface.__diameter__ = d*1.1
-	return ab_ray_list
+    for (surface,d) in zip(Lens.surface_list,D):
+        surface.__diameter__ = d*1.1
+    return ab_ray_list
 
 
 
@@ -98,8 +115,8 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_
             [0,0]  Chief ray
             [0,1]  (+Y)Meridional ray
             [0,-1] (-Y)Meridional ray
-       		[1,0]  (+X)Sagital Ray 
-       		[-1,0] (-X)Sagiral Ray
+            [1,0]  (+X)Sagital Ray 
+            [-1,0] (-X)Sagiral Ray
     '''
     print '-------------------ray tracing------------------'
     ray_tracing = []
@@ -115,22 +132,22 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_
   #   if ray == [0,0]:
   #       print 'trace chief ray'
   #   elif ray == [0,1] or ray == [0,-1]:
-		# print 'trace meridional ray(y)'
+        # print 'trace meridional ray(y)'
   #   elif ray == [1,0] or ray == [-1,0]:
-		# print 'trace sagiral ray(x)'
+        # print 'trace sagiral ray(x)'
   #   else:
   #       print 'trace one ray'
 
     Pos_x = Lens.EPD/2 * ray[0]    # not general enough, now only could trace y angle ray
-    							   # not really need to be traced?
-    							   # need to think
+                                   # not really need to be traced?
+                                   # need to think
     Pos_y = -(Pos_z + EP)*__np__.tan(angle/180*__np__.pi) + Lens.EPD/2 * ray[1]
     l = __np__.sin(angle/180*__np__.pi)
     m = __np__.cos(angle/180*__np__.pi)
     Pos = [Pos_x,Pos_y,0]
     KLM = [0,l,m]
-    ray = field.Ray(Pos,KLM)
-    ray_list.append(ray)
+    Ray_1 = field.Ray(Pos,KLM)
+    ray_list.append(Ray_1)
     ray_tracing.append(ray_list)
     for i in range(len(surface_list)-1):
         ray_list = traceray(ray_list, surface_list[0+i], surface_list[1+i], wave_num)
@@ -144,9 +161,9 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_
 
 def traceray(ray_list, surface1, surface2, wave_num):
     '''
-	Basic ray tracing function, tracing ray position and ray direction from
-	one surface to next surface 
-	Return ray position and ray direction
+    Basic ray tracing function, tracing ray position and ray direction from
+    one surface to next surface 
+    Return ray position and ray direction
     '''
     ray_num = len(ray_list)
     new_ray_list = []
@@ -159,8 +176,8 @@ def traceray(ray_list, surface1, surface2, wave_num):
         #print 'KLM:',KLM
         c1 = 1 / surface1.radius
         c2 = 1 / surface2.radius
-        n1 = surface1.indexlist[wave_num]
-        n2 = surface2.indexlist[wave_num]
+        n1 = surface1.indexlist[wave_num-1]
+        n2 = surface2.indexlist[wave_num-1]
         tn1 = surface1.thickness
         tn2 = surface2.thickness
         xyz = __np__.asarray([Pos[0], Pos[1], Pos[2] - tn1])
@@ -182,7 +199,7 @@ def traceray(ray_list, surface1, surface2, wave_num):
         KLM_new_list.append(KLM_new)
 
     for Pos,KLM in zip(Pos_new_list,KLM_new_list):
-    	new_ray_list.append(field.Ray(Pos,KLM))
+        new_ray_list.append(field.Ray(Pos,KLM))
 
     return new_ray_list
 
@@ -209,17 +226,17 @@ def ray2dict(ray_tracing):
     ray_dict = {'Num':[],'X':[],'Y':[],'Z':[],'K':[],'L':[],'M':[]}
     n = 0
     for ray_list in ray_tracing:
-		n = n + 1
-		Ray = ray_list[0]
-		Pos = Ray.Pos
-		KLM = Ray.KLM
-		ray_dict['X'].append(Pos[0])
-		ray_dict['Y'].append(Pos[1])
-		ray_dict['Z'].append(Pos[2])
-		ray_dict['K'].append(KLM[0])
-		ray_dict['L'].append(KLM[1])
-		ray_dict['M'].append(KLM[2])
-		ray_dict['Num'].append(n)
+        n = n + 1
+        Ray = ray_list[0]
+        Pos = Ray.Pos
+        KLM = Ray.KLM
+        ray_dict['X'].append(Pos[0])
+        ray_dict['Y'].append(Pos[1])
+        ray_dict['Z'].append(Pos[2])
+        ray_dict['K'].append(KLM[0])
+        ray_dict['L'].append(KLM[1])
+        ray_dict['M'].append(KLM[2])
+        ray_dict['Num'].append(n)
     return ray_dict
 
 

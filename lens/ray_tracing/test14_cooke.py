@@ -1,4 +1,4 @@
-import lens, trace, glass, draw, analysis
+import lens, trace, glass, draw, analysis, field
 
 
 New_Lens = lens.Lens(lens_name='triplet',creator='XF')
@@ -10,9 +10,9 @@ New_Lens.add_wavelength(wl = 546.10)
 New_Lens.add_wavelength(wl = 486.10)
 New_Lens.list_wavelengths()
 
-New_Lens.add_field(angle=0)
-New_Lens.add_field(angle=10)
-New_Lens.add_field(angle=20)
+New_Lens.add_field_YAN(angle=0)
+New_Lens.add_field_YAN(angle=14)
+New_Lens.add_field_YAN(angle=20)
 New_Lens.list_fields()
 
 New_Lens.add_surface(number=1,radius=10000000,thickness=1000000,glass='air')
@@ -27,17 +27,21 @@ New_Lens.add_surface(number=9,radius=10000000,thickness=0,glass='air')
 
 New_Lens.refresh_paraxial()
 
+#field.grid_generator(n = 12,grid_type = 'grid',output=True)
 #print New_Lens.EP_thickness
 #print New_Lens.EFL
 #print New_Lens.EPD
-#print New_Lens.FNO
+##print New_Lens.FNO
 New_Lens.image_position()
 
 trace.trace_draw_ray(New_Lens)
-trace.trace_one_ray(New_Lens,field_num=3,wave_num=2,ray=[0,1],start=3,end=6,output=True,output_list=['X','Y','Z'])
+#trace.trace_one_ray(New_Lens,field_num=3,wave_num=2,ray=[0,1],start=3,end=6,output=True,output_list=['X','Y','Z'])
 draw.draw_system(New_Lens)
-#trace.trace_sys(New_Lens)
-#analysis.spotdiagram(New_Lens)
+field_ray_dict_list = trace.trace_field_wave(New_Lens,1,2)
+all_field_ray_dict_list = trace.trace_sys(New_Lens)
+#analysis.spotdiamgram_field_wave(New_Lens,2,3)
+analysis.spotdiagram(New_Lens,[1,2,3],[1,2,3])
 
 #New_Lens.image_position()
 #New_Lens.EFY()
+#trace.trace_sys(New_Lens)

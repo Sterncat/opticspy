@@ -7,8 +7,6 @@ class Lens(object):
 	def __init__(self,lens_name='',creator=''):
 		self.lens_name = lens_name
 		self.creator = creator
-		
-		self.field_list = []
 		self.field_angle_list = []
 		self.wavelength_list = []
 		self.EP_thickness = 0
@@ -17,8 +15,8 @@ class Lens(object):
 		self.FNO = 0
 		self.tmp_ray = []
 		self.object_position = 0
-
 		self.image_plane_ray_list = []
+		self.field_trace_info = []
 
 	def lens_info(self):
 		print self.lens_name
@@ -31,7 +29,7 @@ class Lens(object):
 
 	def list_fields(self):
 		print 'list all fields information'
-		for i in self.field_list:
+		for i in self.field_angle_list:
 			print i
 
 
@@ -87,9 +85,8 @@ class Lens(object):
 
 
 #-----------------------Field functions--------------------------
-	def add_field(self,angle):
-		#field.add_field_YAN(self,angle)
-		self.field_angle_list.append(angle)
+	def add_field_YAN(self,angle):
+		field.add_field_YAN(self,angle)
 
 #-----------------------Wavelength Fucntions---------------------
 	def add_wavelength(self,wl):
