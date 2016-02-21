@@ -9,7 +9,7 @@ import output_tools
 # output [ray position and direction] on next surface
 
 
-def trace_sys(Lens):
+def trace_sys(Lens,n=12,grid_type='grid'):
     '''
     trace all field,all wavelength through all surfaces
     return list of dictionary
@@ -21,13 +21,13 @@ def trace_sys(Lens):
         one_wavelength_trace = []
         for field_num in range(len(Lens.field_angle_list)):
             field_num = field_num + 1
-            field_ray_dict_list = trace_field_wave(Lens,field_num,wave_num)
+            field_ray_dict_list = trace_field_wave(Lens,field_num,wave_num,n,grid_type)
             one_wavelength_trace.append(field_ray_dict_list)
         all_field_ray_dict_list.append(one_wavelength_trace)
     Lens.field_trace_info = all_field_ray_dict_list
     return all_field_ray_dict_list
 
-def trace_field_wave(Lens,field_num,wave_num):
+def trace_field_wave(Lens,field_num,wave_num,n,grid_type):
     '''
     trace one field in one wavelength
     '''
@@ -36,7 +36,7 @@ def trace_field_wave(Lens,field_num,wave_num):
 
     field_ray_dict_list = []
 
-    field_rays_list = field.field_rays_generator(Lens,field_angle)
+    field_rays_list = field.field_rays_generator(Lens,field_angle,n,grid_type)
     for ray_list in field_rays_list:
         ray_list = [ray_list]
         ray_tracing = []

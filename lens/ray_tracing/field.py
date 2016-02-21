@@ -58,23 +58,50 @@ def grid_generator(n,grid_type,output = False):
     ========================================
     input: 
     d: different meaning in different type
-        1. in grid type, n means rays accross the center of diameter
+        1. in grid type, n means rays accross the center of diameter, n = 12 ==> 88 points
+        2. in circular type, n means how many rings in the circle.
+            the ring near the center of circle is ring 1, then ring 2,3.
+            ring 1 has 1*6 points on it
+            ring 2 has 2*6 points on it,etc
+            n = 4 ==> 60 points
+        3. in random type, n means points in entrance pupil
     type: grid, circular,quasi-random 
     '''
+    grid_list = []
     if grid_type == 'grid':
-        grid_list = []
         x1 = y1 = __np__.linspace(-1,1,n)
         for x in x1:
             for y in y1:
                 if x**2 + y**2 <= 1:
                     grid_list.append([x,y])
+    elif grid_type == 'circular':
+        for i in range(n):
+            i = i + 1
+            theta = __np__.linspace(0,360-360/i/6,i*6)
+            r = 1/n*i
+            for theta_1 in theta:
+                x = r * __np__.cos(theta_1*__np__.pi/180)
+                y = r * __np__.sin(theta_1*__np__.pi/180)
+                grid_list.append([x,y])
+
+    elif grid_type == 'random':
+        r = __np__.sqrt(__np__.random.rand(n))    #sqrt(random(0--r^2)) get radius
+        theta = 2*__np__.pi*__np__.random.rand(n)  # random(0--2pi) get theta
+        for r_1,theta_1 in zip(r,theta):
+            x = r_1 * __np__.cos(theta_1)
+            y = r_1 * __np__.sin(theta_1)
+            grid_list.append([x,y])
+    else:
+        print 'No this kind of grid!'
     if output == True:
-        fig = __plt__.figure(1)
+        fig = __plt__.figure(1,figsize = (5,5))
         ax = __plt__.gca()
         ax.plot(*zip(*grid_list), marker='o', color='r', ls='')
         circle1 = __plt__.Circle((0,0),1,fill=False)
         fig.gca().add_artist(circle1)
-        ax.set_aspect('equal')
+        ax.set_xlim([-1,1])
+        ax.set_ylim([-1,1])
+        ax.set_title('Entrance Pupil Sampling')
         __plt__.show()
     return grid_list
 

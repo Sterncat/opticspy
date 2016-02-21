@@ -1,5 +1,5 @@
 
-import lens, trace, glass, draw
+import lens, trace, glass, draw, analysis
 
 
 New_Lens = lens.Lens(lens_name='doublegauss',creator='XF')
@@ -11,9 +11,9 @@ New_Lens.add_wavelength(wl = 587.60)
 New_Lens.add_wavelength(wl = 486.10)
 New_Lens.list_wavelengths()
 
-New_Lens.add_field(angle=0)
-New_Lens.add_field(angle=10)
-New_Lens.add_field(angle=14)
+New_Lens.add_field_YAN(angle=0)
+New_Lens.add_field_YAN(angle=10)
+New_Lens.add_field_YAN(angle=14)
 New_Lens.list_fields()
 
 New_Lens.add_surface(number=1,radius=10000000,thickness=10000000,glass='air')
@@ -37,3 +37,6 @@ trace.trace_draw_ray(New_Lens)
 draw.draw_system(New_Lens)
 New_Lens.image_position()
 New_Lens.EFY()
+all_field_ray_dict_list = trace.trace_sys(New_Lens)
+#analysis.spotdiamgram_field_wave(New_Lens,2,3)
+analysis.spotdiagram(New_Lens,[1,2,3],[1,2,3])

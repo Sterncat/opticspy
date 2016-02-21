@@ -17,17 +17,23 @@ def spotdiagram(Lens,field_plot,wave_plot):
     wave_plot_length = len(wave_plot)
 
     sign_list = ['rs','go','b*','cD','m+','yx','k1','ws']
-    
+    marker_list = ['s','o','^','*','D','x','1','s']
+    c_list = ['b','g','r','c','m','y','k','w']
 
     fig = __plt__.figure(2,figsize=(5, 9), dpi=80)
-    m = field_plot_length
+    fig.canvas.set_window_title('Spotdiagram')
+    fig.suptitle("Spotdiagram", fontsize="x-large")
+    m = 0
     for wave_num in wave_plot:
+        n = field_plot_length
         for field_num in field_plot:
-            __plt__.subplot(field_plot_length, 1, field_plot_length-field_num+1)
+            __plt__.subplot(field_plot_length, 1, n)
             xy_list = spotdiamgram_field_wave(Lens,field_num,wave_num)
-            __plt__.plot(xy_list[0],xy_list[1],sign_list[m-1])
+            __plt__.scatter(xy_list[0],xy_list[1],marker=marker_list[m],\
+                                         edgecolors=c_list[m],alpha=0.5,facecolors='none')
             __plt__.axis('equal')
-        m = m - 1
+            n = n - 1
+        m = m + 1
     __plt__.show()
     return 0
 
