@@ -28,7 +28,7 @@ def draw_system(Lens):
     print '------------------start drawing lens system-------------'
     fig = plt.figure(figsize=(12, 6))
     fig.canvas.set_window_title('View Lens')
-    fig.suptitle('View Lens', fontsize="x-large")
+    fig.suptitle('View Lens:'+Lens.lens_name, fontsize="x-large")
     ax = fig.add_subplot(111)
     surface_list = Lens.surface_list
     m = len(surface_list)
@@ -47,7 +47,7 @@ def draw_system(Lens):
             x0 = 0 - thinkness_list[0]
         else:
             x0 = sum(thinkness_list[0:-1]) - thinkness_list[0]
-            print x0
+            #print x0
         verts,codes,start_end = draw_surface(r,x0,d)
         start_end_list.append(start_end)
         verts_list.append(verts)

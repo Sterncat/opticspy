@@ -20,8 +20,7 @@ def glass2indexlist(wavelength_list,glassname):
 		n = glassname.find('_')
 		glass_catalog_name = glassname[n+1:]
 		glass_name = glassname[:n]
-		dir = 'glass/' + glass_catalog_name+'/'+glassname
-		#print dir
+		dir = 'opticspy/ray_tracing/glass/' + glass_catalog_name+'/'+glassname
 		e = os.path.exists(dir)
 
 		if e == False:

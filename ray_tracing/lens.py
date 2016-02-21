@@ -30,7 +30,7 @@ class Lens(object):
 	def list_fields(self):
 		print 'list all fields information'
 		for i in self.field_angle_list:
-			print i
+			print 'Field angle:',i
 
 
 	def refresh_paraxial(self):
@@ -94,9 +94,9 @@ class Lens(object):
 		wavelength.add(self,wl)
 
 	def list_wavelengths(self):
-		print 'list all wavelength information'
+		print 'List all wavelength information'
 		for i in self.wavelength_list:
-			print i
+			print 'Wavelength',i,'nm'
 
 #-----------------------Spotdiagram------------------------------
 	def spotdiagram(self):

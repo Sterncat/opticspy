@@ -78,11 +78,11 @@ def trace_draw_ray(Lens):
 
     # start find surface aperture diameter
     diameter_list = []
-    print '============================================'
+    #print '============================================'
     for i,j in zip(list_1,list_2):
         tmp1 = []
         tmp2 = []
-        print '++++++++++++++++++++++++++++++++++++++++'
+        #print '++++++++++++++++++++++++++++++++++++++++'
         for m,n in zip(i,j):
             ray_height1 = abs(m[0].Pos[1])
             ray_height2 = abs(n[0].Pos[1])
@@ -90,7 +90,7 @@ def trace_draw_ray(Lens):
             tmp2.append(ray_height2)
         diameter_list.append(tmp1)
         diameter_list.append(tmp2)
-    print '============================================'
+    #print '============================================'
     D = []
     diameter_list = __np__.asarray(diameter_list)
     diameter_list = __np__.transpose(diameter_list)
@@ -118,7 +118,7 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_
             [1,0]  (+X)Sagital Ray 
             [-1,0] (-X)Sagiral Ray
     '''
-    print '-------------------ray tracing------------------'
+    #print '-------------------ray tracing------------------'
     ray_tracing = []
     EP = Lens.EP_thickness
     EPD = Lens.EPD
