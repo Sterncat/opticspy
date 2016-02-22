@@ -48,19 +48,20 @@ def spotdiagram(Lens,field_plot,wave_plot,n=12,grid_type='grid'):
 
 
     n = field_plot_length
+    m = 0
     for field_num in field_plot:
         __plt__.subplot(field_plot_length, 1, n)
         ax = __plt__.gca()
 
-        Relative_field = str(round(Lens.field_angle_list[n-1]/Lens.field_angle_list[-1],2))
-        str_angle = str(Lens.field_angle_list[n-1]) + ' DG'
+        Relative_field = str(round(Lens.field_angle_list[field_num-1]/Lens.field_angle_list[-1],2))
+        str_angle = str(Lens.field_angle_list[field_num-1]) + ' DG'
         label1 = 'Field'+str(field_num)+'\n'+'0.00, '+Relative_field+'\n'+'0.000, '+str_angle
         ax.annotate(label1, xy=(0.08, 0.73), xycoords='axes fraction', fontsize=12)
-
-        label2 = 'RMS:'+RMS_list[field_num-1]
+        label2 = 'RMS:'+RMS_list[m]
         ax.annotate(label2, xy=(0.7, 0.9), xycoords='axes fraction', fontsize=12)
         ax.set_aspect('equal', 'datalim')
         n = n - 1
+        m = m + 1
 
     __plt__.show()
     return 0
@@ -127,8 +128,8 @@ def Ray_fan(Lens,field_plot,wave_plot):
         __plt__.plot([-1,1],[0,0],c='k')
         __plt__.plot([0,0],[-max_E,max_E],c='k')
         ax.set_ylabel('Field '+str(field_num))
-        Relative_field = str(round(Lens.field_angle_list[n-1]/Lens.field_angle_list[-1],2))
-        str_angle = str(Lens.field_angle_list[n-1])+' DG'
+        Relative_field = str(round(Lens.field_angle_list[field_num-1]/Lens.field_angle_list[-1],2))
+        str_angle = str(Lens.field_angle_list[field_num-1])+' DG'
         label = Relative_field+' Relative\n'+ 'Field Height\n'+ str_angle 
 
         ax.annotate(label, xy=(0.7, 0.7), xycoords='axes fraction', fontsize=12)
