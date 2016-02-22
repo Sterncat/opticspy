@@ -1,7 +1,7 @@
 
 #opticspy  
 
-Opticspy is a python module for optics application. I want to this for a long time. One reason is I know both optics and python, so why no develop some optics tools? The second reason is that there is not much opensource, easy-to-use optics program module(matlab has great fuctions but do not specify to optics application). I want this could be developed in to a core for a future web application for optics.
+Opticspy is a python module for optics application. I want this for a long time. One reason is I know both optics and python, so why no develop some optics tools? The second reason is that there is not much opensource, easy-to-use optics program module(matlab has great fuctions but do not specify to optics application). I want this could be developed in to a core for a future web application for optics.
 
 ###There are some examples opticspy module: 
 
@@ -63,13 +63,14 @@ And just have fun with it!
 </ul>
 
 ##TODO:
+* ✓ Real Ray tracing and basic lens design
+* ✓ Zernike Coefficient calculation
+* ✓ Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D), PSF
+* ✓ Zernike Polynomials Fitting Method
 * ✓ Rectangular, circle, double circle, frame, etc aperture
 * ✓ Third order ray aberration plot
 * ✓ Twyman_Green interferogram with aberration
 * ✓ Lateral Shear interferogram with aberration
-* ✓ Zernike Coefficient calculation
-* ✓ Zernike Polynomials surface(3D), map(2D), cutoff of 3D(1D), PSF
-* ✓ Zernike Polynomials Fitting Method
 * ✓ Diffraction: generate diffraction pattern
 * ✓ Convert Zernike to Seidel coefficient
 * ✓ Seidel aberrations surface and interferogram
@@ -81,10 +82,8 @@ And just have fun with it!
 * Asphere fitting
 * Some freeform theory
 * More testing technology
-* Real Ray tracing and basic lens design
 * Third and high order aberration calculation
 * Make it rock!
-
 
 
 ##Authors and Contributors
