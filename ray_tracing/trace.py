@@ -9,12 +9,11 @@ import output_tools
 # output [ray position and direction] on next surface
 
 
-def trace_sys(Lens,n=12,grid_type='grid'):
+def trace_spotdiagram(Lens,n,grid_type):
     '''
     trace all field,all wavelength through all surfaces
     return list of dictionary
     '''
-    surface_list = Lens.surface_list
     all_field_ray_dict_list = []
     for wave_num in range(len(Lens.wavelength_list)):
         wave_num = wave_num + 1
@@ -27,17 +26,71 @@ def trace_sys(Lens,n=12,grid_type='grid'):
     Lens.field_trace_info = all_field_ray_dict_list
     return all_field_ray_dict_list
 
+def trace_Y_fan(Lens):
+    all_Y_fan_ray_dict_list = []
+    for wave_num in range(len(Lens.wavelength_list)):
+        wave_num = wave_num + 1
+        one_wavelength_trace = []
+        for field_num in range(len(Lens.field_angle_list)):
+            field_num = field_num + 1
+            field_ray_dict_list = trace_Y_fan_field_wave(Lens,field_num,wave_num,n=25)
+            one_wavelength_trace.append(field_ray_dict_list)
+        all_Y_fan_ray_dict_list.append(one_wavelength_trace)
+
+    Lens.Y_fan_info = all_Y_fan_ray_dict_list
+    return all_Y_fan_ray_dict_list
+
+def trace_X_fan(Lens):
+    all_X_fan_ray_dict_list = []
+    for wave_num in range(len(Lens.wavelength_list)):
+        wave_num = wave_num + 1
+        one_wavelength_trace = []
+        for field_num in range(len(Lens.field_angle_list)):
+            field_num = field_num + 1
+            field_ray_dict_list = trace_X_fan_field_wave(Lens,field_num,wave_num,n=20)
+            one_wavelength_trace.append(field_ray_dict_list)
+        all_X_fan_ray_dict_list.append(one_wavelength_trace)
+
+    Lens.X_fan_info = all_X_fan_ray_dict_list
+    return all_X_fan_ray_dict_list
+
+
+
+
 def trace_field_wave(Lens,field_num,wave_num,n,grid_type):
     '''
     trace one field in one wavelength
     '''
     field_angle = Lens.field_angle_list[field_num-1]
-    surface_list = Lens.surface_list
-
-    field_ray_dict_list = []
-
     field_rays_list = field.field_rays_generator(Lens,field_angle,n,grid_type)
-    for ray_list in field_rays_list:
+    field_ray_dict_list = raylist2raydict(Lens,field_rays_list,wave_num)
+    return field_ray_dict_list
+
+def trace_Y_fan_field_wave(Lens,field_num,wave_num,n):
+    field_angle = Lens.field_angle_list[field_num-1]
+    Y_fan_rays_list = field.Y_fan_rays_generator(Lens,n,field_angle)
+    Y_fan_ray_dict_list = raylist2raydict(Lens,Y_fan_rays_list,wave_num)
+    return Y_fan_ray_dict_list
+
+def trace_X_fan_field_wave(Lens,field_num,wave_num,n):
+    field_angle = Lens.field_angle_list[field_num-1]
+    X_fan_rays_list = field.X_fan_rays_generator(Lens,n,field_angle)
+    X_fan_ray_dict_list = raylist2raydict(Lens,X_fan_rays_list,wave_num)
+    return X_fan_ray_dict_list
+
+
+def raylist2raydict(Lens,rayslist,wave_num):
+    '''
+    Trace ray from entrance pupil through all surface
+    ==========================================================
+    input:
+    Lens: Lens instance
+    raylist: ray list in EP
+    wave_num: wavelength number
+    '''
+    field_ray_dict_list = []
+    surface_list = Lens.surface_list
+    for ray_list in rayslist:
         ray_list = [ray_list]
         ray_tracing = []
         ray_tracing.append(ray_list)
@@ -46,8 +99,10 @@ def trace_field_wave(Lens,field_num,wave_num,n,grid_type):
             ray_tracing.append(ray_list)
         ray_dict = ray2dict(ray_tracing)
         field_ray_dict_list.append(ray_dict)
-
     return field_ray_dict_list
+
+
+
 
 
 def trace_draw_ray(Lens):
@@ -104,7 +159,7 @@ def trace_draw_ray(Lens):
 
 
 
-def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_list=[]):
+def trace_one_ray(Lens,field_num,wave_num,ray,start=0,end=0,output=False,output_list=[]):
     '''
     trace specific rays
     ------------------------------
@@ -156,7 +211,9 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=1,end=0,output=False,output_
     ray_dict = ray2dict(ray_tracing)
     if output == True:
         output_tools.ray_output(ray_dict=ray_dict,start=start,end=end,output_list=output_list)
-    return ray_tracing
+        return 0
+    else:
+        return ray_tracing
 
 
 def traceray(ray_list, surface1, surface2, wave_num):

@@ -17,6 +17,7 @@ class Lens(object):
 		self.object_position = 0
 		self.image_plane_ray_list = []
 		self.field_trace_info = []
+		self.Y_fan_info = []
 
 	def lens_info(self):
 		print self.lens_name
@@ -69,9 +70,6 @@ class Lens(object):
 
 	def EX(self):
 		first_order_tools.EX(self)
-
-	def thickness(self,start_surface,end_surface):
-		print 'thickness between 2 surface'
 
 	def radius(self,surface_number):
 		print 'surface radius' 

@@ -34,6 +34,11 @@ def add_field_YAN(Lens,angle):
 
 def field_rays_generator(Lens,angle,n=12,grid_type='grid'):
     grid_list = grid_generator(n,grid_type)
+    field_rays_list = grid2rays(Lens,grid_list,angle)
+    return field_rays_list
+
+def grid2rays(Lens,grid_list,angle):
+    field_rays_list = []
     EPD = Lens.EPD
     EP = Lens.EP_thickness
     field_rays_list = []
@@ -49,8 +54,6 @@ def field_rays_generator(Lens,angle,n=12,grid_type='grid'):
         New_Ray = Ray(Pos,KLM)
         field_rays_list.append(New_Ray)
     return field_rays_list
-
-
 
 def grid_generator(n,grid_type,output = False):
     '''
@@ -103,10 +106,35 @@ def grid_generator(n,grid_type,output = False):
         ax.set_ylim([-1,1])
         ax.set_title('Entrance Pupil Sampling')
         __plt__.show()
-    return grid_list
+        return 0
+    else:
+        return grid_list
 
 
 
-
+def Y_fan_rays_generator(Lens,n,angle):
+    grid_list = []
+    x = [0]*n
+    y = __np__.linspace(-1,1,n)
+    for x1,y1 in zip(x,y):
+        grid_list.append([x1,y1])
+    field_rays_list = grid2rays(Lens,grid_list,angle)
+    return field_rays_list
 
     
+def X_fan_rays_generator(Lens,n,angle):
+    grid_list = []
+    x = __np__.linspace(0,1,n)
+    y = [0]*n
+    for x1,y1 in zip(x,y):
+        grid_list.append([x1,y1])
+    field_rays_list = grid2rays(Lens,grid_list,angle)
+    return field_rays_list
+
+
+
+
+
+
+
+

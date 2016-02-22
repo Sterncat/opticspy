@@ -189,6 +189,7 @@ def EX(Lens):
 	print 'exit pupil position EX:',EX
 	return EX
 
+
 ## note for future work: for system no in air, need to change part of program,
 ## For example, 'Rear Focal Length f\':',-1/C ----> -np/C, etc
 

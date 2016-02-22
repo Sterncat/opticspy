@@ -5,7 +5,7 @@ import matplotlib.pyplot as __plt__
 
 
 # real ray tracing output
-def ray_output(ray_dict,output_list,start=2,end=0):
+def ray_output(ray_dict,output_list,start,end):
     '''
     real ray tracing output
     ==============================================
@@ -23,7 +23,7 @@ def ray_output(ray_dict,output_list,start=2,end=0):
         end = len(ray_dict['Num'])
         
     row_length = end - start + 1
-    print row_length
+    #print row_length
     
     header_format = '%-*s' * (line_length+1)
     header_tup1 = (5,'Num')
