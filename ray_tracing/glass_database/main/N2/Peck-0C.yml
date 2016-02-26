@@ -1,0 +1,10 @@
+# this file is part of refractiveindex.info database
+# refractiveindex.info database is in the public domain
+# copyright and related rights waived via CC0 1.0
+
+REFERENCES: "E. R. Peck and B. N. Khanna. Dispersion of Nitrogen, <a href=\"http://dx.doi.org/10.1364/JOSA.56.001059\"><i>J. Opt. Soc. Am.</i> <b>56</b>, 1059-1063 (1963)</a>"
+COMMENTS: "0 °C."
+DATA:
+  - type: formula 6
+    range: 0.4679 2.0586
+    coefficients: 6.8552E-5 3.243157E-2 144

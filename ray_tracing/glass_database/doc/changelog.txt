@@ -1,0 +1,296 @@
+2016-01-31
+  bug fixes (thanks to Thibault North!)
+    fixed path to organic/CH6H6 - benzene.Moutzouris.yml in library.yml
+    added main/Ti/Rakic.yml to library.yml
+    added glass/schott/P-SF69.yml to library.yml
+    removed database/main/Ag/Sthrenberg.yml
+  new data (thnks to Robert Treharne for updating the database via GitHub!)
+    main/CdS/Treharne.yml
+    main/CdTe/Treharne.yml
+    other/doped crystals/Al-ZnO/Treharne.yml
+    glass/nsg/Pilkington-Optiwhite.yml
+  new data (thnks to Prof. Dr. Eberhard Riedle, Ludwig-Maximilians-Universitaet Muenchen, Germany!)
+    organic/C6H14 - hexane/Kozma.yml
+    organic/CH4O - methanol/Kozma.yml
+    organic/C2H6O - ethanol/Kozma.yml
+    organic/C3H8O - propanol/Kozma.yml
+    organic/C2H6O2 - ethylene glycol/Kozma.yml
+    organic/C4H8O2 - ethyl acetate/Kozma.yml
+    organic/C6H12 - cyclohexane/Kozma.yml
+    organic/C7H8 - toluene/Kozma.yml
+    organic/C2H3N - acetonitrile/Kozma.yml
+    organic/C2H6OS - dimethyl sulfoxide/Kozma.yml
+    organic/C5H12 - pentane/Kerl-293K.yml
+    organic/C5H12 - pentane/Kerl-313K.yml
+    organic/C5H12 - pentane/Kerl-333K.yml
+    organic/C6H14 - hexane/Kerl-293K.yml
+    organic/C6H14 - hexane/Kerl-313K.yml
+    organic/C6H14 - hexane/Kerl-333K.yml
+    organic/C7H16 - heptane/Kerl-293K.yml
+    organic/C7H16 - heptane/Kerl-313K.yml
+    organic/C7H16 - heptane/Kerl-333K.yml
+    organic/C8H18 - octane/Kerl-293K.yml
+    organic/C8H18 - octane/Kerl-313K.yml
+    organic/C8H18 - octane/Kerl-333K.yml
+    organic/C6H12 - cyclohexane/Kerl-293K.yml
+    organic/C6H12 - cyclohexane/Kerl-313K.yml
+    organic/C6H12 - cyclohexane/Kerl-333K.yml
+  new data (thanks to Guy Beadie, Naval Research Laboratory, Washington DC, USA, for providing data in yaml format!)
+    organic/(C5O2H8)n - poly(methyl methacrylate)/Beadie.yml
+  new data (thanks to John Valley, SunEdison Semiconductor!)
+    main/Si/Green.yml
+    main/Si/Jellison.yml
+  new data
+    organic/C2H2 - acetylene/Loria.yml
+    main/GaAs/Jellison.yml
+    main/GaP/Jellison.yml
+    main/Ge/Jellison.yml
+  new data (thanks to Robert Moerland, Delft University of Technology, Netherlands, for providing data in yaml format!)
+    other/mixed crystals/In2O3-SnO2/Moerland.yml
+  improved data
+    organic/CH4 - methane/Loria.yml
+  new and updated data (+ extended data - 'INFO' field - for optical designers)
+    glass/hikari/*.yml
+    glass/ohara/*.yml
+    glass/schott/*.yml
+
+2015-12-01
+  better data (thanks to Elisa Sani)
+    organic/C2H6O2 - ethylene glycol/Sani.yml
+  removed data (dispersion formulae for select ranges from Sani.yml; Sani1.yml formula for vis/NIR is also included in Sani_and_Otanicar.yml)
+    organic/C2H6O2 - ethylene glycol/Sani1.yml
+    organic/C2H6O2 - ethylene glycol/Sani2.yml
+  new data (thanks to Mikael Malmström)
+    main/Ta2O5/Bright-amorphous.yml
+    main/Ta2O5/Bright-nanocrystalline.yml
+    main/Si/Chandler-Horowitz.yml
+  new data (thanks to Robert Treharne, University of Liverpool, UK, for providing data in yaml format!)
+    other/perovskite/CH3NH3PbI3/Phillips.yml
+  new data (thanks to Mathieu Perrin INSA Rennes, France for suggesting data)
+    main/ZnSe/Marple.yml
+    main/ZnTe/Marple.yml
+    main/CdTe/Marple.yml
+  bug fixes
+    corrected misspelled McPeak name in libraty.yml
+    fixed dispersion formula in main/LiIO3/Herbst-o.yml.yml (thanks to Jiaan Zheng, DESY, Hamburg, Germany)
+    fixed missing data headers in glass/schott/obsolete/LAKL12.yml and LASFN9.yml (thanks to Thibault North!)
+    removed tabs in main/Ag/McPeak.yml, main/Al/McPeak.yml, main/Au/McPeak.yml, main/Cu/McPeak.yml (thanks to Thibault North!)
+    fixed encoding error in main/Ag3AsS3/Hulme-e.yml (thanks to Thibault North!)
+  other
+    library.yml: ' - ' replaced by ': ' in page names
+
+2015-08-18
+  !!! version to be uploaded on GitHub !!!
+  new data (thanks to Juan I. Larruquert, Instituto de Optica, Madrid, Spain for providing numerical data)
+    main/B4C/Larruquert.yml
+    main/Ca/Rodriguez-de Marcos.yml
+    main/SiC/Larruquert.yml
+    main/SrF2/Rodriguez-de Marcos.yml
+    main/Sr/Rodriguez-de Marcos.yml
+    main/C/Larruquert.yml
+  bug fixes
+    corrected publication date of main/Ho/Fernandez-Perea.yml data in library.yml (2008->2011)
+    main/Tm/Garcia-Cortes.yml renamed to main/Tm/Vidal-Dasilva.yml; Record in library.yml updated accordingly
+    removed legacy main/C/Amorphous.yml
+
+2015-07-05
+  new data (thanks to Kevin McPeak, ETH Zürich, Switzerland for providing data in yaml format!)
+    main/Ag/McPeak.yml
+    main/Al/McPeak.yml
+    main/Au/McPeak.yml
+    main/Cu/McPeak.yml
+  new data (thanks to Piers Barnes, Imperial College London, UK, for providing data in yaml format!)
+    other/perovskite/CH3NH3PbI3/Leguy.yml
+    other/perovskite/CH3NH3PbI3/Leguy-hydrated.yml
+  new data
+    main/Rh/Coulter-40.yml
+    main/Rh/Coulter-300.yml
+    main/Rh/Arndt.yml
+    main/Rh/Weaver.yml
+    main/Sc2O3/Arndt.yml
+    organic/C2H6O2 - ethylene glycol/Sani_and_Otanicar.yml
+    organic/C3H8O2 - propylene glycol/Otanicar.yml
+    other/heat transfer fluids/Therminol VP-1/Otanicar.yml
+  other
+    library.yml: Improved classification of organic compounds (alcohols -> alcohols, diols and triols)
+    library.yml: Amyl alcohol renamed to Pentanol
+  
+2015-05-24
+  new data (thanks to Elisa Sani, National Institute of Optics, Firenze, Italy)
+    organic/C2H6O2 - ethylene glycol/Sani.yml
+    organic/C2H6O2 - ethylene glycol/Sani1.yml
+    organic/C2H6O2 - ethylene glycol/Sani2.yml
+  new data (thanks to Mikael Malmström for suggesting and digitizing data)
+    main/C/Dore.yml
+  new data (thanks to Peter Zeppenfeld, Johannes Kepler University, Linz, Austria for suggesting data)
+    main/Au/Olmon-ev.yml
+    main/Au/Olmon-sc.yml
+    main/Au/Olmon-ts.yml
+  new data (thanks to Peter Zeppenfeld for suggesting data and to Norbert Esser, Leibniz-Institut für Analytische Wissenschaften - ISAS, Dortmund, Germany for providing numerical data)
+    main/Ag/Stahrenberg.yml
+    main/Cu/Stahrenberg.yml
+  bug fixes
+    library.yml: fixed wavelength range in Phillip and Taft 1964 - Diamond
+    library.yml: added missing quotation mark and "content" keyword in lines 2182-2183 (Thanks to Thomas Mansencal, Moving Picture Company, London, UK and to Nikita Khodakovskiy, Max Born Institute, Berlin, Germany)
+  small improvements
+    "Numerical data kindly provided by..." notes modified to use same format across the database
+    library.yml: added missing "n,k" in the names of some pages (in Ag, Al, Au, Cu)
+
+2015-03-11
+  new data
+    organic/C5H12 - pentane/Anderson.yml
+    organic/C8H18 - octane/Anderson.yml
+  bug fixes
+    corrected "dash" character in page ranges in ~70 files
+  bug fixes (refrerences corrected)
+    organic/(C6H9NO)n - polyvinylpyrrolidone/Konig.yml
+    other/mixed crystals/In2O3-SnO2/Konig-EMA.yml
+    other/mixed crystals/In2O3-SnO2/Konig.yml
+    organic/C2H3N - acetonitrile/Moutzouris.yml
+    organic/C3H8O - propanol/Moutzouris.yml
+    organic/C4H10O - butanol/Moutzouris-iso.yml
+    organic/C4H10O - butanol/Moutzouris-n.yml
+    organic/C4H8O2 - dioxane/Moutzouris.yml
+    organic/C5H12O - amyl alcohol/Moutzouris-iso.yml
+    organic/C5H12O - amyl alcohol/Moutzouris-normal.yml
+    organic/C5H12O2 - pentanediol/Moutzouris.yml
+    organic/C6H6 - benzene/Moutzouris.yml
+    organic/C7H8 - toluene/Moutzouris.yml
+    organic/CCl4 - carbon tetrachloride/Moutzouris.yml
+    organic/CH4O - methanol/Moutzouris.yml
+
+2015-02-15
+  new data (thanks to Vamsi Borra, University of Toledo for very useful input)
+    main/In/Golovashkin-295.yml
+    main/In/Golovashkin-4.2.yml
+    main/Nb/Golovashkin-293.yml
+    main/Nb/Golovashkin-78.yml
+    main/Nb/Golovashkin-4.2.yml
+    main/Pb/Golovashkin-293.yml
+    main/Pb/Golovashkin-78.yml
+    main/Pb/Golovashkin-4.2.yml
+    main/Sn/Golovashkin-293.yml
+    main/Sn/Golovashkin-78.yml
+    main/Sn/Golovashkin-4.2.yml
+    main/Ti/Mash.yml
+    main/Zn/Motulevich.yml
+    other/alloys/Nb-Sn/Golovashkin-06.yml
+    other/alloys/Nb-Sn/Golovashkin-22.yml
+    other/alloys/Nb-Sn/Golovashkin-28.yml
+    other/alloys/Nb-Sn/Golovashkin-30.yml
+    other/alloys/Nb-Sn/Golovashkin-34.yml
+    other/alloys/Nb-Sn/Golovashkin-40.yml
+    other/alloys/Nb-Sn/Golovashkin-55.yml
+    other/alloys/V-Ga/Golovashkin-293.yml
+    other/alloys/V-Ga/Golovashkin-78.yml
+  new data
+    main/Cu/Babar.yml
+    main/Ag/Babar.yml
+    main/Au/Babar.yml
+    other/other/soot/acetylene soot - Dalzell.yml
+    other/other/soot/propane soot - Dalzell.yml"
+  bug fixes
+    corrected error in library.yml that resulted in not displaying platinum on the "3D" shelf
+  small improvements
+    added Pb and Ti "3D" shelf
+    added "MISCELLANEOUS" book to "3D" shelf
+    added acetylene and propane soot to "3D" shelf
+
+2015-01-17
+  !!! refractiveindex.info database is released to public domain via CC0 1.0 Universal Public Domain Dedication !!!
+  bug fixes
+    glass/schott/inquiry/N-BAF3 - added closing quotation mark in the "COMMENTS:" field
+
+2015-01-01
+  data relevant to 3D rendering assembled in a separate shelf (thanks to Thomas Coote, Pinewood Studios for useful feedback)
+  new data
+    glass/ohara/S-FPL55.yml
+    glass/ohara/S-LAH92.yml
+    main/Si/Pierce.yml (thanks to Dmitrii Baranov, ITMO, St. Petersburg, Russia)
+    main/BaF2/Li.yml
+    main/CaF2/Li.yml
+    main/SrF2/Li.yml
+    main/MgF2/Li-o.yml
+    main/MgF2/Li-e.yml
+
+2014-11-08
+  !!! LICENSE (LGPL) ADDED !!!
+  new data (thanks to Mikael Malmström, KTH Royal Institute of Technology, Stockholm, Sweden for suggesting data and Jan Kischkat, Humboldt University Berlin, Germany for providing numerical data)
+    main/SiO2/Kischkat.yml
+    main/Al2O3/Kischkat.yml
+    main/TiO2/Kischkat.yml
+    main/Si3N4/Kischkat.yml
+    main/AlN/Kischkat.yml
+  new data
+    main/MoO3/Lajaunie-alpha.yml
+    main/MoO3/Lajaunie-beta.yml
+    main/MoO3/Lajaunie-gamma.yml
+  updated data
+    glass/schott/misc/BOROFLOAT33.yml (thanks to Ulf Griesmann and SCHOTT North America Inc.)
+  bug fixes
+    catalog.yml - minor corrections for CH4 entries (k -> K;)
+    catalog.yml - missing and wrongly positioned "pages" key in "chloroform", "PMMA resists" and "Copolymer resists" books(thanks to Pavel Dmitriev)
+  format modifications
+    catalog.yml renamed to library.yml
+    library.yml:
+      "books:" -> "content:"
+      "pages:" -> "content:"
+      "divider:" -> "DIVIDER:"
+  other
+    added a comment to all optical glass entries about refractive index and wavelength being relative to air (thanks to Rod Vance for the idea)
+
+2014-09-29
+  new data
+    main/H2O/Kedenburg.yml
+    main/D2O/Kedenburg.yml
+    main/CS2/Kedenburg.yml
+    organic/CHCl3 - chloroform/Kedenburg.yml
+    organic/CCl4 - carbon tetrachloride/Kedenburg.yml
+    organic/C7H8 - toluene/Kedenburg.yml
+    organic/C2H6O - ethanol/Kedenburg.yml
+    organic/C6H5NO2 - nitrobenzene/Kedenburg.yml
+    glass/SCHOTT-multipurpose/BOROFLOAT33.yml (thanks to Ulf Griesmann)
+    other/resists/Microchem 495.yml (thanks to Pavel Dmitriev)
+    other/resists/Microchem 950.yml (thanks to Pavel Dmitriev)
+    other/resists/Microchem 8.5 mEL.yml (thanks to Pavel Dmitriev)
+  updated data
+    glass/vitron/*.yml - absorption data added (thanks to Dr. Rolf Henkel)
+  bug fixes
+    removed main/Si/Palik.yml (thanks to Joel Murray and Ulf Griesmann)
+    removed a superfluous copy of the "AgGaSe2" directory in main/Al (thanks to Ulf Griesmann)
+    main/Tl3AsSe3/Ewbank-e.yml - added missing ":" after COMMENTS keyword (thanks to Pavel Dmitriev and Ulf Griesmann)
+    main/GaN/Barker-o.yml - removed extra symbols in the COMMENTS string (thanks to Pavel Dmitriev and Ulf Griesmann)
+  other
+    shelves renamed:
+        "Main"    -> "MAIN - simple inorganic materials"
+        "Organic" -> "ORGANIC - organic materials"
+        "Glass"   -> "GLASS - glasses"
+        "Other"   -> "OTHER - miscellaneous materials"
+
+2014-07-21
+  format modification for better following YAML specifications (thanks to Pavel Dmitriev, National Research University of Information Technologies, Mechanics and Optics, St. Petersburg, Russia for reporting a bug and for useful advices on format update)
+    'DATA: [n,k,nk]' and 'FORMULA: [1-9]' key/value pairs are replaced by '  - type: tabulated [n,k,nk]' and '  - type formula [1-9]' sub-enties of the 'DATA:' key respectively.
+  new data
+    main/GaAs/Skauli.yml
+  updated data
+    glass/vitron/*.yml (thanks to Dr. Rolf Henkel, VITRON Spezialwerkstoffe GmbH)
+
+2014-07-05
+  bug fixes (thanks to Joel Murray for reporting most of these bugs)
+    removed not used files with not relevant content (main/AlCu/AlCu.yml and main/AlSb/AlSb.yml)
+    corrected link to 'Hagemann 1974 - DESY report SR-74-7.pdf' in several files
+    removed extra newline symbols in the REFERENCES field in many files
+    replaced /n by /r/n everywhere (previously booth notations for newline were used inconsistently)
+
+2014-07-01
+  new data
+    ITO (In2O3-SnO2): data provided by Dr. Tobias König, University of Bayreuth, Germany
+      other/mixed crystals/In2O3-SnO2/Konig.yml
+      other/mixed crystals/In2O3-SnO2/Konig-EMA.yml
+    PVP (polyvinylpyrrolidone (C6H9NO)n): data provided by Tobias König
+      organic/(C6H9NO)n - polyvinylpyrrolidone/Konig.yml
+    Graphene: data provided by Jan-Willem Weber, Eindhoven Univ. of Technology, The Netherlands
+      main/C/Weber.yml
+  bug fixes
+    glass/ohara/S-BSL7.yml: error in dispersion formula fixed (thanks to Joel Murray)
+    main/Al: removed AgGaSe2 sub-folder (thanks to Joel Murray)

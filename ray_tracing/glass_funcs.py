@@ -2,8 +2,32 @@ from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 import os
+from glass_function.refractiveIndex import *
 
-# glass related functions
+
+#glass related functions
+
+
+# def glass2indexlist(wavelength_list,glassname):
+	
+# 	lens_index_list = []
+# 	wavelength_num = len(wavelength_list)
+# 	if glassname == 'air' or glassname == 'AIR':
+# 		lens_index_list = [1]*wavelength_num
+# 		return lens_index_list
+# 	else:
+# 		n = glassname.find('_')
+# 		glass_catalog_name = glassname[n+1:]
+# 		glass_name = glassname[:n]
+# 		catalog = RefractiveIndex()
+# 		for w in wavelength_list:
+# 			mat = catalog.getMaterial('glass', glass_catalog_name, glass_name)
+# 			n = mat.getRefractiveIndex(w)
+# 			lens_index_list.append(round(n,6))
+# 	return lens_index_list
+
+
+
 
 def glass2indexlist(wavelength_list,glassname):
 	"""

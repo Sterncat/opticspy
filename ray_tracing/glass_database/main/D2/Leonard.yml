@@ -1,0 +1,27 @@
+# this file is part of refractiveindex.info database
+# refractiveindex.info database is in the public domain
+# copyright and related rights waived via CC0 1.0
+
+REFERENCES: "P. J. Leonard. Refractive indices, Verdet constants, and polarizabilities of the inert gases, <a href=\"http://dx.doi.org/10.1016/S0092-640X(74)80028-8\"><i>Atomic Data and Nuclear Data Tables</i> <b>14</b>, 21-37 (1974)</a>"
+COMMENTS: "273 K (0 °C)"
+DATA:
+  - type: tabulated n
+    data: |
+        0.230209 1.00015680
+        0.234555 1.00015584
+        0.237999 1.00015510
+        0.244691 1.00015378
+        0.246407 1.00015347
+        0.257630 1.00015158
+        0.267499 1.00015014
+        0.275278 1.00014915
+        0.275971 1.00014906
+        0.289357 1.00014756
+        0.292541 1.00014725
+        0.334148 1.00014395
+        0.380166 1.00014160
+        0.410807 1.00014048
+        0.491604 1.00013850
+        0.546074 1.00013766
+        0.576959 1.00013731
+        0.579065 1.00013727

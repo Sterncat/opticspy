@@ -1,0 +1,10 @@
+# this file is part of refractiveindex.info database
+# refractiveindex.info database is in the public domain
+# copyright and related rights waived via CC0 1.0
+
+REFERENCES: "S. Loria Über die Dispersion des Lichtes in gasförmigen Kohlenwasserstoffen. <a href=\"http://dx.doi.org/10.1002/andp.19093340809\"><i>Annalen der Physik</i> <b>334</b>, 605-622 (1909)</a> (in German)."
+COMMENTS: "0 °C (293 K), 760 torr (1.013 bar)."
+DATA:
+  - type: formula 5
+    range: 0.5461 0.6708
+    coefficients: 1.00054242 7.8813626e-6 -2
