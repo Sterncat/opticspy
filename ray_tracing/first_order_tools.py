@@ -141,7 +141,7 @@ def EP(Lens):
 		if surface.STO == True:
 			n = surface.number
 			print 'STOP Surface',n
-			if n == 0:
+			if n == 2:
 				EP = 0
 				return EP
 			else:
