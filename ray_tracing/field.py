@@ -29,7 +29,7 @@ def add_field_YAN(Lens,angle):
     angle: Object angle 
     '''
     Lens.field_angle_list.append(angle)
-
+    print 'Add field angle:'+str(angle)+' degree done'
 
 
 def field_rays_generator(Lens,angle,n=12,grid_type='grid'):
