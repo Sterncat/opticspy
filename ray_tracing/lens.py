@@ -48,6 +48,10 @@ class Lens(object):
 		self.surface_list[0] = surface.Surface(wavelength_list = self.wavelength_list,number=1,\
 										radius=10000000,thickness=Pos_z,glass='air',STO=False,\
 										__diameter__=0)
+
+	def solve_imageposition(self):
+		self.surface_list[-2].thickness = first_order_tools.image_position(self)
+
 	def first_order(self):
 		print 'first order information'
 
