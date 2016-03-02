@@ -28,14 +28,14 @@ def add(self,number,radius,thickness,glass,STO):
 	add a surface instance to a Lens Class
 	input: a Lens Class
 	"""
-	print '-----------------------Add surface:--------------------------'
-	print '-------------------------------------------------------------'
-	print "| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<10s} |  {4:<5s} |".\
+	print '-----------------------Add surface:-------------------------------'
+	print '------------------------------------------------------------------'
+	print "| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
 				format('Num','Radius','Thickness','Glass','STO')
-	print '-------------------------------------------------------------'
-	print "| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<10s} |  {4:<5s} |".\
+	print '------------------------------------------------------------------'
+	print "| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
 				format(str(number),str(radius),str(thickness),glass,str(STO))
-	print '-------------------------------------------------------------'
+	print '------------------------------------------------------------------'
 	New_Surface = Surface(wavelength_list = self.wavelength_list,number=number,\
 							radius=radius,thickness=thickness,glass=glass,STO=STO,\
 							__diameter__=0)
