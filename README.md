@@ -5,7 +5,13 @@ Opticspy is a python module for optics application. I want this for a long time.
 
 ### Followings are primary opticspy modules: 
 
-#### 1. [Real ray tracing and Lens Design](http://sterncat.github.io/files/Real_Ray_Tracing.html)
+#### 1. Real ray tracing and Lens Design:
+
+* #### [Example 1: Basic functions introduction](http://sterncat.github.io/files/Real_Ray_Tracing.html)
+
+* #### [Example 2: A double gauss lens example](http://sterncat.github.io/files/Double_Gauss.html)
+
+* #### [Example 3: Build a Petzval lens with codev seq file](http://sterncat.github.io/files/CodeV_Convertor.html)
   
 #### 2. [Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
 

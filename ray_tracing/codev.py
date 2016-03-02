@@ -30,7 +30,6 @@ def readseq(filename):
         count = count + 1
         # lens name
         if line[0] == 'TITLE':
-            print line[0]
             lens_dict['Name'] = ''.join(line[1:])
         # wavelength,EPD,XAN,YAN,FNO,NA
         if line[0] in ['WL','EPD','XAN','YAN','FNO','NA']:
