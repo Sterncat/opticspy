@@ -47,7 +47,7 @@ Opticspy is a python module for optics application. I want this for a long time.
 ```
 $ pip install opticspy
 ```
-#### [Or download here](http://sterncat.github.io/files/opticspy-0.1.tar.gz)
+#### [Or download here](http://sterncat.github.io/files/opticspy-0.2.0.tar.gz)
 
 ```
 $ python2.7 setup.py install
