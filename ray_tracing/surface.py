@@ -34,7 +34,7 @@ def add(self,number,radius,thickness,glass,STO):
 				format('Num','Radius','Thickness','Glass','STO')
 	print '------------------------------------------------------------------'
 	print "| {0:<5s} |  {1:<10s} |  {2:<11s} |  {3:<15s} |  {4:<5s} |".\
-				format(str(number),str(radius),str(thickness),glass,str(STO))
+				format(str(number),str(round(radius,4)),str(round(thickness,4)),glass,str(STO))
 	print '------------------------------------------------------------------'
 	New_Surface = Surface(wavelength_list = self.wavelength_list,number=number,\
 							radius=radius,thickness=thickness,glass=glass,STO=STO,\
