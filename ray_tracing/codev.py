@@ -13,7 +13,7 @@ def str2num(str_list):
     return num_list
 
 
-def readseq(filename):
+def readseq(filename,output=False):
     file = open(filename)
     lines = []
     surface_data = []
@@ -66,7 +66,7 @@ def readseq(filename):
             STOP = True
         else:
             STOP = False
-        New_Lens.add_surface(number=n,radius=r,thickness=t,glass=g,STO=STOP)
+        New_Lens.add_surface(number=n,radius=r,thickness=t,glass=g,STO=STOP,output=output)
     return New_Lens
 
 

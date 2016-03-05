@@ -78,8 +78,8 @@ class Lens(object):
 	def radius(self,surface_number):
 		print 'surface radius' 
 #-----------------------surface functions-----------------------
-	def add_surface(self,number,radius,thickness,glass,STO=False):
-		surface.add(self,number,radius,thickness,glass,STO)
+	def add_surface(self,number,radius,thickness,glass,STO=False,output=False):
+		surface.add(self,number,radius,thickness,glass,STO,output)
 	# def update_surface(self,number,radius,thickness,index,STO):
 	# 	surface.update(self,number,radius,thickness,index,STO)
 	# def delete_surface(self,number,radius,thickness,index,STO):

@@ -29,9 +29,8 @@ def glass2indexlist(wavelength_list,glassname):
 			mat = catalog.getMaterial('glass', glass_catalog_name, glass_name)
 			n = mat.getRefractiveIndex(w)
 			lens_index_list.append(round(n,6))
-	return lens_index_list
+	return lens_index_list 
 
-	
 def output(wavelength_list,lens_index_list):
 	print 'Lens wavelength vs index'
 	print 'wavelength-----index---'

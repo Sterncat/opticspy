@@ -62,31 +62,30 @@ class RefractiveIndex:
         #         book.pages = pages
 
     def getMaterialFilename(self, shelf, book, page):
-        """
+        cwd = os.getcwd()
+        rootdir = cwd + "/opticspy/ray_tracing/glass_database/"
+        glass_catalog = book
+        filename = page + '.yml'
+        for root, subFolders, files in os.walk(rootdir):
+            if root.endswith(glass_catalog):
+                break
+        for f in files:
+            if f == filename:
+                filepath = os.path.join(self.referencePath,root,filename)
+                break
+        return filepath
+        # """
 
-        :param shelf:
-        :param book:
-        :param page:
-        :return:
-        """
-        filename = os.path.join(self.referencePath,shelf,book,page) + '.yml'
-        # print shelf,book,page
-        # filename = ''
-        # # FIXME:There MUST be a way to access an elements w/o iterating over the whole damn dictionary.
-        # for sh in self.catalog:
-        #     if sh['SHELF'] == shelf:
-        #         for b in sh['content']:
-        #             if 'DIVIDER' not in b:
-        #                 if b['BOOK'] == book:
-        #                     for p in b['content']:
-        #                         if 'DIVIDER' not in p:
-        #                             if p['PAGE'] == page:
-        #                                 # print("From {0} opening {1}, {2}\n".format(sh['name'], b['name'], p['name']))
-        #                                 filename = os.path.join(self.referencePath, os.path.normpath(p['path']))
-        #                                 # print("Located at {}".format(filename))
+        # :param shelf:
+        # :param book:
+        # :param page:
+        # :return:
+        # """
+
+        # filename = os.path.join(self.referencePath,shelf,book,page) + '.yml'
         # print filename
-        assert filename != ''
-        return filename
+        # assert filename != ''
+        # return filename
 
     def getMaterial(self, shelf, book, page):
         """
