@@ -12,22 +12,29 @@ Opticspy is a python module for optics application. I want this for a long time.
 * #### [Example 2: A double gauss lens example](http://sterncat.github.io/files/Double_Gauss.html)
 
 * #### [Example 3: Build a Petzval lens with codev seq file](http://sterncat.github.io/files/CodeV_Convertor.html)
+
+* #### [Example 4: Build a microscope lens with codev seq file](http://sterncat.github.io/files/Microscope.html)
+
+#### 2. Zernike Polynomial Methods
+
+* #### [Basic Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
+
+* #### [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)
+
+* #### [Orthonormal Rectangular Polynomials](http://sterncat.github.io/files/Orthonormal_Rectangular_Polynomials.html)   
+
+#### 3. Interferometer and Testing Methods
+
+* #### [Basic Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html) 
+
+* #### [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)
+
+* #### [Hartmann Test Patterns](http://sterncat.github.io/files/Hartmann_Test.html) 
+
+#### 4. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)
+
+#### 5. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)
   
-#### 2. [Zernike Polynomial Methods](http://sterncat.github.io/files/Zernike_Polynomial_Method.html)
-
-#### 3. [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)  
-
-#### 4. [Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html) 
-
-#### 5. [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)
-
-#### 6. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)
-
-#### 7. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)
-
-#### 8. [Orthonormal Rectangular Polynomials](http://sterncat.github.io/files/Orthonormal_Rectangular_Polynomials.html) 
-
-#### 9. [Hartmann Test Patterns](http://sterncat.github.io/files/Hartmann_Test.html)   
 
 ### There are some interesting derivative from opticspy:
 
