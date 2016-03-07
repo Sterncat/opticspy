@@ -146,6 +146,7 @@ def draw_system(Lens):
     ax.set_xlim(-0.5*sum(thinkness_list[1:-1]),1.1*sum(thinkness_list[1:-1]))
     d = max(draw_diameter_list)
     ax.set_ylim(-d/4*3,d/4*3)
+    plt.axis('equal')
     plt.show()
 
 
