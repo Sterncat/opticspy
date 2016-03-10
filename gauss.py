@@ -1,7 +1,7 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
-from mpl_toolkits.mplot3d import Axes3D as __Axes3D__
+from mplot3d import Axes3D as __Axes3D__
 def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 	"""
 	Gauss beam Calculator
