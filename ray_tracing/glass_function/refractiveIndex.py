@@ -21,11 +21,7 @@ import os
 import yaml
 import sys
 import argparse
-import numpy
-import scipy.interpolate
-
-
-# import collections
+import numpy 
 
 
 class RefractiveIndex:
@@ -304,7 +300,8 @@ class TabulatedRefractiveIndexData:
         if self.rangeMin == self.rangeMax:
             self.refractiveFunction = values[0]
         else:
-            self.refractiveFunction = scipy.interpolate.interp1d(wavelengths, values)
+            xvals = numpy.linspace(self.rangeMin,self.rangeMax,50)
+            self.refractiveFunction = numpy.interp(xvals, wavelengths, values)
 
     def getRefractiveIndex(self, wavelength):
         """
@@ -345,9 +342,10 @@ class ExtinctionCoefficientData:
         :param wavelengths:
         :param coefficients:
         """
-        self.extCoeffFunction = scipy.interpolate.interp1d(wavelengths, coefficients)
         self.rangeMin = numpy.min(wavelengths)
         self.rangeMax = numpy.max(wavelengths)
+        xvals = numpy.linspace(self.rangeMin,self.rangeMax,50)
+        self.extCoeffFunction = numpy.interp(xvals, wavelengths, coefficients)
 
     def getExtinctionCoefficient(self, wavelength):
         """
