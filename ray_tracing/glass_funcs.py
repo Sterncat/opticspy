@@ -2,11 +2,11 @@ from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 import os
-from glass_function.refractiveIndex import *
+from . glass_function.refractiveIndex import *
 
 
 # glass related functions
-# use polyanskiy's refractiveindex database(http://refractiveindex.info/) 
+# use polyanskiy's refractiveindex database(http://refractiveindex.info/)
 # polyanskiy's github: https://github.com/polyanskiy
 # https://github.com/polyanskiy/refractiveindex.info-database
 # Also use Pavel Dmitriev's script for return refractiveindex from database
@@ -14,7 +14,7 @@ from glass_function.refractiveIndex import *
 
 
 def glass2indexlist(wavelength_list,glassname):
-	
+
 	lens_index_list = []
 	wavelength_num = len(wavelength_list)
 	if glassname == 'air' or glassname == 'AIR':
@@ -29,15 +29,15 @@ def glass2indexlist(wavelength_list,glassname):
 			mat = catalog.getMaterial('glass', glass_catalog_name, glass_name)
 			n = mat.getRefractiveIndex(w)
 			lens_index_list.append(round(n,6))
-	return lens_index_list 
+	return lens_index_list
 
 def output(wavelength_list,lens_index_list):
-	print 'Lens wavelength vs index'
-	print 'wavelength-----index---'
+	print('Lens wavelength vs index')
+	print('wavelength-----index---')
 	for wavelength,index in zip(wavelength_list,lens_index_list):
-		print "| {0:<8s} |  {1:<8s} |".\
-		format(str(wavelength),str(index))
-	print '-----------------------'
+		print("| {0:<8s} |  {1:<8s} |".\
+		format(str(wavelength),str(index)))
+	print('-----------------------')
 	return 0
 
 #=============================================================

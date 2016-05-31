@@ -1,11 +1,11 @@
 from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-import field,first_order_tools,surface
-import output_tools
+from . import field,first_order_tools,surface
+from . import output_tools
 
 # Function: trace rays
-# input a list of ray 
+# input a list of ray
 # output [ray position and direction] on next surface
 
 
@@ -163,14 +163,14 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=0,end=0,output=False,output_
     '''
     trace specific rays
     ------------------------------
-    input: 
+    input:
     field: int, field number
     wave_num: wavelength number
     ray: relative ray to entrance pupil
             [0,0]  Chief ray
             [0,1]  (+Y)Meridional ray
             [0,-1] (-Y)Meridional ray
-            [1,0]  (+X)Sagital Ray 
+            [1,0]  (+X)Sagital Ray
             [-1,0] (-X)Sagiral Ray
     '''
     #print '-------------------ray tracing------------------'
@@ -219,7 +219,7 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=0,end=0,output=False,output_
 def traceray(ray_list, surface1, surface2, wave_num):
     '''
     Basic ray tracing function, tracing ray position and ray direction from
-    one surface to next surface 
+    one surface to next surface
     Return ray position and ray direction
     '''
     ray_num = len(ray_list)

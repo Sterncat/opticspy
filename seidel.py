@@ -35,10 +35,10 @@ class Coefficient(object):
 
 		------------------------------------------------
 		"""
-		print "h="+str(self.__coefficients__[0])
+		print("h="+str(self.__coefficients__[0]))
 		for i in range(len(self.__coefficients__)-1):
-			print self.__seidellist___[i][0:4]+"="+\
-				str(self.__coefficients__[i+1])+self.__seidellist___[i][4:]
+			print(self.__seidellist___[i][0:4]+"="+\
+				str(self.__coefficients__[i+1])+self.__seidellist___[i][4:])
 	def seidelsurface(self, label = True, zlim=[], matrix = False):
 		r1 = __np__.linspace(0, 1, 100)
 		u1 = __np__.linspace(0, 2*__np__.pi, 100)
@@ -52,7 +52,7 @@ class Coefficient(object):
 	        linewidth=0, antialiased=False, alpha = 0.6)
 		fig.colorbar(surf, shrink=1, aspect=30)
 		__plt__.show()
-		
+
 
 
 def __seidelpolar__(coefficient,r,u):

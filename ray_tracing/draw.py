@@ -33,7 +33,7 @@ def draw_surface(r,x0,d1,d2):
 
 
 def draw_system(Lens):
-    print '------------------start drawing lens system-------------'
+    print('------------------start drawing lens system-------------')
     # adjust diameter
     surface_list = Lens.surface_list
     m = len(surface_list)
@@ -131,7 +131,7 @@ def draw_system(Lens):
             patch = patches.PathPatch(path,fill=0, lw=1)
             ax.add_patch(patch)
             path = Path(verts2,codes)
-            patch = patches.PathPatch(path, facecolor='none',fill=0, lw=1)  
+            patch = patches.PathPatch(path, facecolor='none',fill=0, lw=1)
             ax.add_patch(patch)
         else:
             pass
@@ -139,7 +139,7 @@ def draw_system(Lens):
     'start drawing rays'
     path_list = draw_rays(Lens)
     m = 0
-    color_list = ['red']*3+['green']*3+['blue']*3 
+    color_list = ['red']*3+['green']*3+['blue']*3
     for path, linecolor in zip(path_list,color_list):
         patch1 = patches.PathPatch(path, facecolor='none',fill=0, lw=1,edgecolor=linecolor)
         ax.add_patch(patch1)

@@ -18,7 +18,7 @@ class Aperture():
 
 		"""
 
-		print "---------show aperture--------"
+		print("---------show aperture--------")
 		extent = self.__scale__ * self.__background__
 		__tools__.__apershow__(self.__aper__, extent)
 
@@ -31,7 +31,7 @@ class Aperture():
 		Diffraction pattern figure
 
 		"""
-		print "---------Fresnel Diffraction----------"
+		print("---------Fresnel Diffraction----------")
 		__diffraction__.fresnel(self,z,lambda1)
 		return 0
 	def fraunhofer(self,z = 2,lambda1 = 660*10**(-9)):
@@ -43,7 +43,7 @@ class Aperture():
 		Diffraction pattern figure
 
 		"""
-		print "---------Fraunhofer Diffraction----------"
+		print("---------Fraunhofer Diffraction----------")
 		__diffraction__.fraunhofer(self,z,lambda1)
 		return 0
 
@@ -51,7 +51,7 @@ class Aperture():
 		"""
 		Compute an aperture's otf
 		"""
-		print "-------------OTF---------------"
+		print("-------------OTF---------------")
 		aperfft = __np__.fft.fftshift(__np__.fft.fft2(self.__aper__))**2
 		aper_OTF = __np__.fft.fftshift(__np__.fft.fft2(aperfft))
 		__tools__.__apershow__(aper_OTF,extent = 0)
@@ -65,7 +65,7 @@ class Circle(Aperture):
 	Example
 	------------------------------------
 	aperture = opticspy.aper.Circle(200,50)
-	
+
  	Parameters
 	------------------------------------
 	background: int
@@ -122,11 +122,11 @@ class Rectangle(Aperture):
 	def __init__(self, background=500, height=200, width=200, scale=0.01/200):
 		"""
 		Build a rectangle aperture instance
-		
+
 		Example
 		-----------
 		aperture = opticspy.aper.Rectangle(200,20,40)
-		
+
 	 	Parameters
 		-----------
 		background: int

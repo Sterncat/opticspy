@@ -25,22 +25,22 @@ def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 		else:
 			list3.append(str(round(i,3)))
 	list2 = [
-	"Axial Distance, z (mm)",	
-	"Beam Waist, w0 (mm)",	
-	"Wavelength, lambda (um)",	
+	"Axial Distance, z (mm)",
+	"Beam Waist, w0 (mm)",
+	"Wavelength, lambda (um)",
 	"Half Beam Diameter, w(z) (mm)",
 	"Radius of Curvature, R(z) (mm)",
 	"Rayleigh Range, z0 (mm)",# [1]
 	"Rayleigh Half Diameter, w0 (mm)",
-	"Half Angle Divergence, theta (mrad)"]	
-	print"               Gaussian Beams Calculator"
-	print"--------------------------------------------------------"
+	"Half Angle Divergence, theta (mrad)"]
+	print("               Gaussian Beams Calculator")
+	print("--------------------------------------------------------")
 	for i in range(8):
-		print "| {0:>35s} |  {1:<6s} ".format(list2[i],list3[i])
-	print"--------------------------------------------------------"
+		print("| {0:>35s} |  {1:<6s} ".format(list2[i],list3[i]))
+	print("--------------------------------------------------------")
 	return list1
-	#[1] In optics and especially laser science, the Rayleigh length or Rayleigh 
-	# range is the distance along the propagation direction of a beam from the 
+	#[1] In optics and especially laser science, the Rayleigh length or Rayleigh
+	# range is the distance along the propagation direction of a beam from the
 	# waist to the place where the area of the cross section is doubled.
 def gaussbeam(w0 = 1,P = 5,z0 = 5, z = 10):
 	"""
@@ -71,7 +71,7 @@ def gaussbeam(w0 = 1,P = 5,z0 = 5, z = 10):
 	label_1 = "Beam Waist = " + str(w0) + "\n" +\
 			  "Total Power = " + str(P) + "\n" +\
 			  "Rayleigh Range = " + str(z0) + "\n" +\
-			  "Axial Distance = " + str(z)	
+			  "Axial Distance = " + str(z)
 	ax.text2D(0.02, 0.01, label_1, transform=ax.transAxes,fontsize=14)
 	__plt__.show()
 	return I

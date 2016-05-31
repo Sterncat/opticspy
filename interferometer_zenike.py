@@ -12,14 +12,14 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	"""
 	Genertate Twyman_Green Interferogram based on zernike polynomials
 	=============================================
-	
+
 	input
 	----------------------------------------------
-	
+
 	Class zernike polynomials coefficients in wavenumber
-	 
+
 	see Class:opticspy.zernike.Coefficients
-	
+
 	lambda_1: wavelength in nanometer, default = 632nm
 	PR: pupil radius, default = 1mm
 
@@ -30,7 +30,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	lambda_1 = lambda_1*(10**-9)
 	coefficients = coefficients.__coefficients__
 	r = __np__.linspace(-PR, PR, 400)
-	x, y = __np__.meshgrid(r,r) 
+	x, y = __np__.meshgrid(r,r)
 	rr = __np__.sqrt(x**2 + y**2)
 	OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
 
@@ -49,7 +49,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	for i in coefficients:
 		if i!=0:
 			label = label + "Z" + str(m) + "=" + str(i) +" "
-		m = m + 1	
+		m = m + 1
 	__plt__.xlabel(label,fontsize=16)
 	__plt__.title('Twyman Green Interferogram',fontsize=16)
 	fig.set_tight_layout(True)
@@ -62,14 +62,14 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', noise = 0
 	Genertate phase_shift Interferogram from interferometer
 	based on zernike polynomials and twyman_green interferometer
 	===========================================================
-	
+
 	input
 	----------------------------------------------
-	
+
 	Class zernike polynomials coefficients in wavenumber
-	 
+
 	see Class:opticspy.zernike.Coefficients
-	
+
 	lambda_1: wavelength in nanometer, default = 632nm
 	PR: pupil radius, default = 1(also use this value for aperture matrix generate)
 	type: PSI algorithm default:'4-step'
@@ -84,7 +84,7 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', noise = 0
 	lambda_1 = lambda_1*(10**-9)
 	coefficients = coefficients.__coefficients__
 	r = __np__.linspace(-PR, PR, sample)
-	x, y = __np__.meshgrid(r,r) 
+	x, y = __np__.meshgrid(r,r)
 	rr = __np__.sqrt(x**2 + y**2)
 	OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
 	Ia = 1
@@ -125,13 +125,13 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', noise = 0
 
 		return [I,PR,M,sample]
 	else:
-		print "No this type of PSI"
+		print("No this type of PSI")
 
 def rebuild_surface(data, shifttype = "4-step", unwraptype = "unwrap2D", noise = True):
 	"""
 	Rebuild surface function
 	============================================
-	input 
+	input
 	--------------------------------------------
 	data: Interferogram data from PSI
 	shifttype: PSI type, default 4-step PSI
@@ -186,7 +186,7 @@ def rebuild_surface(data, shifttype = "4-step", unwraptype = "unwrap2D", noise =
 		return rebuild_surface
 
 	else:
-		print "No this kind of phase shift type"
+		print("No this kind of phase shift type")
 		return 0
 
 

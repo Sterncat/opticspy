@@ -61,7 +61,7 @@ class Coefficient(object):
 						"Z77 Heptafoil X",
 						"Z80 Tertiary Spherical"]
 
-	def __init__(self, 
+	def __init__(self,
 			Z1=0, Z2=0, Z3=0, Z4=0, Z5=0, Z6=0, Z7=0, \
 			Z8=0, Z9=0, Z10=0, Z11=0, Z12=0, Z13=0, Z14=0, \
 			Z15=0, Z16=0, Z17=0, Z18=0, Z19=0, Z20=0, Z21=0, \
@@ -70,9 +70,9 @@ class Coefficient(object):
 		if type(Z1) == list:
 			self.__coefficients__ = Z1 + [0]*(37-len(Z1))
 		else:
-			self.__coefficients__ = [Z1, Z2, Z3, Z4, Z5, Z6, Z7, 
-					Z8, Z9, Z10, Z11, Z12, Z13, Z14, Z15, Z16, Z17, 
-					Z18, Z19, Z20, Z21, Z22, Z23, Z24, Z25, Z26, 
+			self.__coefficients__ = [Z1, Z2, Z3, Z4, Z5, Z6, Z7,
+					Z8, Z9, Z10, Z11, Z12, Z13, Z14, Z15, Z16, Z17,
+					Z18, Z19, Z20, Z21, Z22, Z23, Z24, Z25, Z26,
 					Z27, Z28, Z29, Z30, Z31, Z32, Z33, Z34, Z35, Z36, Z37]
 	def outputcoefficient(self):
 		return self.__coefficients__
@@ -90,7 +90,7 @@ class Coefficient(object):
 		label2 = ""
 		for i in self.__coefficients__:
 			if i != 0:
-				print 'Z'+str(m+1)+' = ',i,self.__zernikelist__[m]
+				print('Z'+str(m+1)+' = ',i,self.__zernikelist__[m])
 				label1 = label1 + 'Z'+str(m+1)+' = '+str(i)+"\n"
 				label2 = label2 + 'Z'+str(m+1)+' = '+str(i)+"  "
 			m = m + 1
@@ -107,7 +107,7 @@ class Coefficient(object):
 		"""
 		m = 1
 		for i in self.__zernikelist__:
-			print "Z"+str(m)+":"+i
+			print("Z"+str(m)+":"+i)
 			m = m + 1
 
 	def zernikesurface(self, label = True, zlim=[], matrix = False):
@@ -131,7 +131,7 @@ class Coefficient(object):
 		ax = fig.gca(projection='3d')
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
-		
+
 		if zlim == []:
 			v = max(abs(Z.max()),abs(Z.min()))
 			ax.set_zlim(-v*5, v*5)
@@ -155,7 +155,7 @@ class Coefficient(object):
 		else:
 			pass
 		__plt__.show()
-		
+
 		if matrix == True:
 			return Z
 		else:
@@ -195,7 +195,7 @@ class Coefficient(object):
 		------------------------------------------------
 		zernikeline()
 
-		Return a 1D cutoff through x and y axis of a 3D 
+		Return a 1D cutoff through x and y axis of a 3D
 		Zernike Polynomials surface figure
 		------------------------------------------------
 		"""
@@ -230,7 +230,7 @@ class Coefficient(object):
 		for i in range(len(Z)):
 			for j in range(len(Z)):
 				if x[i]**2+x[j]**2>r**2:
-					Z[i][j] = 0	
+					Z[i][j] = 0
 		d = 400 # background
 		A = __np__.zeros([d,d])
 		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
@@ -259,7 +259,7 @@ class Coefficient(object):
 		Return the point spread function of a wavefront described by
 		Zernike Polynomials
 		------------------------------------------------
-		Input: 
+		Input:
 
 		r: exit pupil radius(mm)
 
@@ -268,7 +268,7 @@ class Coefficient(object):
 		z: exit pupil to image plane distance(m)
 
 		"""
-		print r,lambda_1,z
+		print(r,lambda_1,z)
 		PSF = self.__psfcaculator__(r=r,lambda_1=lambda_1,z=z)
 		fig = __plt__.figure(figsize=(9, 6), dpi=80)
 		__plt__.imshow(abs(PSF),cmap=__cm__.RdYlGn)
@@ -329,7 +329,7 @@ class Coefficient(object):
 
 	def zernike2seidel(self):
 		'''
-		Ap is the piston aberration,coefficients Ai represent the 
+		Ap is the piston aberration,coefficients Ai represent the
 		peak value of the corresponding Seidel aberration term,
 		'''
 		a = [0]+self.__coefficients__
@@ -338,7 +338,7 @@ class Coefficient(object):
 		#tilt
 		At = 2*__sqrt__((a[2]-__sqrt__(8)*a[8])**2+(a[3]-__sqrt__(8)*a[7])**2)
 		Bt = __arctan2__(a[3]-__sqrt__(8)*a[7],a[2]-__sqrt__(8)*a[8])*180/__np__.pi
-		#Astigmatism 
+		#Astigmatism
 		Aa = 2*__sqrt__(6*(a[5]**2+a[6]**2))
 		Ba = 0.5*__arctan2__(a[5],a[6])*180/__np__.pi
 		#defocus
@@ -358,13 +358,13 @@ class Coefficient(object):
 				 	"Coma",
 				 	"Spherical"]
 		Atable = [[Ap,0.0],[At,Bt],[Ad,0.0],[Aa,Ba],[Ac,Bc],[As,0.0]]
-		print"                 Magnitude  Angle (Degrees)"
-		print"-------------------------------------------"
+		print("                 Magnitude  Angle (Degrees)")
+		print("-------------------------------------------")
 		for i in range(len(seidellist)):
-			print "| {0:>13s} |  {1:>8s}  | {2:>8s}   |".\
-			format(seidellist[i],str(round(Atable[i][0],3)),str(round(Atable[i][1],3)))
-		print"-------------------------------------------"
-		SeidelCoefficient = __seidel2__.Coefficient(Atable)	
+			print("| {0:>13s} |  {1:>8s}  | {2:>8s}   |".\
+			format(seidellist[i],str(round(Atable[i][0],3)),str(round(Atable[i][1],3))))
+		print("-------------------------------------------")
+		SeidelCoefficient = __seidel2__.Coefficient(Atable)
 		return SeidelCoefficient
 	def removepiston(self):
 		"""
@@ -375,7 +375,7 @@ class Coefficient(object):
 		return Z
 	def removetilt(self):
 		"""
-		Remove tilt, it is mainly caused by system tilt, not aberration 
+		Remove tilt, it is mainly caused by system tilt, not aberration
 		on surface
 		"""
 		tilt = [2,3]
@@ -409,7 +409,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 			Zernike coefficients barchart
 			Remaining aberration
 			Fiting surface plot
-	Input: 
+	Input:
 	Z: A surface or aberration matrix measure from inteferometer
 	   or something else.
 
@@ -460,17 +460,17 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 			xticklist.append('Z'+str(i+1))
 		barfigure = __plt__.bar(index, fitlist1, width,color = '#2E9AFE',edgecolor = '#2E9AFE')
 		__plt__.xticks( index+width/2, xticklist )
-		__plt__.xlabel('Zernike Polynomials',fontsize=18)  
-		__plt__.ylabel('Coefficient',fontsize=18)  
-		__plt__.title('Fitting Zernike Polynomials Coefficient',fontsize=18)  
+		__plt__.xlabel('Zernike Polynomials',fontsize=18)
+		__plt__.ylabel('Coefficient',fontsize=18)
+		__plt__.title('Fitting Zernike Polynomials Coefficient',fontsize=18)
 
-		__plt__.show()  
+		__plt__.show()
 	else:
 		pass
 
 
 	if remain3D == True:
-		
+
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
 		ax = fig.gca(projection='3d')
 		surf = ax.plot_surface(X2, Y2, Z_new, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
@@ -486,7 +486,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 		rms1 = round(__tools__.rms(Z_new),5)
 		label_new = "P-V: "+str(p2v)+"\n"+"RMS: "+str(rms1)
 		ax.text2D(0.02, 0.1,label_new, transform=ax.transAxes)
-		__plt__.show()		
+		__plt__.show()
 	else:
 		pass
 
@@ -530,7 +530,7 @@ def __zernikepolar__(coefficient,r,u):
 	------------------------------------------------
 	"""
 	Z = [0]+coefficient
-	Z1  =  Z[1]  * 1*(__cos__(u)**2+__sin__(u)**2)                                 
+	Z1  =  Z[1]  * 1*(__cos__(u)**2+__sin__(u)**2)
 	Z2  =  Z[2]  * 2*r*__cos__(u)
 	Z3  =  Z[3]  * 2*r*__sin__(u)
 	Z4  =  Z[4]  * __sqrt__(3)*(2*r**2-1)

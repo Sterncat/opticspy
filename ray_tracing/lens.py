@@ -1,4 +1,4 @@
-import surface, field, analysis, wavelength, first_order_tools, draw
+from . import surface, field, analysis, wavelength, first_order_tools, draw
 
 # Ray Class
 
@@ -20,18 +20,18 @@ class Lens(object):
 		self.Y_fan_info = []
 
 	def lens_info(self):
-		print self.lens_name
-		print self.creator
+		print(self.lens_name)
+		print(self.creator)
 
 	def list_surface(self):
-		print 'list all surface information'
+		print('list all surface information')
 		for i in self.surface_list:
-			print i
+			print(i)
 
 	def list_fields(self):
-		print 'list all fields information'
+		print('list all fields information')
 		for i in self.field_angle_list:
-			print 'Field angle:',i
+			print('Field angle:',i)
 
 
 	def refresh_paraxial(self):
@@ -53,7 +53,7 @@ class Lens(object):
 		self.surface_list[-2].thickness = first_order_tools.image_position(self)
 
 	def first_order(self):
-		print 'first order information'
+		print('first order information')
 
 	def EFY(self,start_surface=0,end_surface=0):
 		EFY = first_order_tools.EFL(self,start_surface,end_surface)
@@ -76,7 +76,7 @@ class Lens(object):
 		first_order_tools.EX(self)
 
 	def radius(self,surface_number):
-		print 'surface radius' 
+		print('surface radius')
 #-----------------------surface functions-----------------------
 	def add_surface(self,number,radius,thickness,glass,STO=False,output=False):
 		surface.add(self,number,radius,thickness,glass,STO,output)
@@ -92,24 +92,23 @@ class Lens(object):
 
 #-----------------------Wavelength Fucntions---------------------
 	def add_wavelength(self,wl):
-		print 'Add wavelength '+ str(wl) + 'nm done'
+		print('Add wavelength '+ str(wl) + 'nm done')
 		wavelength.add(self,wl)
 
 	def list_wavelengths(self):
-		print 'List all wavelength information'
+		print('List all wavelength information')
 		for i in self.wavelength_list:
-			print 'Wavelength',i,'nm'
+			print('Wavelength',i,'nm')
 
 #-----------------------Spotdiagram------------------------------
 	def spotdiagram(self):
 		analysis.spotdiagram(self)
 
 	def list_image_ray_info(self):
-		print self.image_plane_ray_list
+		print(self.image_plane_ray_list)
 
 
 
 
 
 
-	
