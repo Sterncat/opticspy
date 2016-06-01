@@ -13,8 +13,8 @@ class Ray(object):
         self.Pos = __np__.asarray(Pos)
         self.KLM = __np__.asarray(KLM)
     def list(self):
-        print "Ray Position :",self.Pos
-        print "Ray Direction:",self.KLM
+        print("Ray Position :",self.Pos)
+        print("Ray Direction:",self.KLM)
 
 class Field(object):
     def __init__(self,Raylist):
@@ -26,10 +26,10 @@ def add_field_YAN(Lens,angle):
     '''
     Add field by object angle
     Lens.EPD: Entrance pupil diameter
-    angle: Object angle 
+    angle: Object angle
     '''
     Lens.field_angle_list.append(angle)
-    print 'Add field angle:'+str(angle)+' degree done'
+    print('Add field angle:'+str(angle)+' degree done')
 
 
 def field_rays_generator(Lens,angle,n=12,grid_type='grid'):
@@ -59,7 +59,7 @@ def grid_generator(n,grid_type,output = False):
     '''
     Generate ray grid in normalized pupil
     ========================================
-    input: 
+    input:
     d: different meaning in different type
         1. in grid type, n means rays accross the center of diameter, n = 12 ==> 88 points
         2. in circular type, n means how many rings in the circle.
@@ -68,7 +68,7 @@ def grid_generator(n,grid_type,output = False):
             ring 2 has 2*6 points on it,etc
             n = 4 ==> 60 points
         3. in random type, n means points in entrance pupil
-    type: grid, circular,quasi-random 
+    type: grid, circular,quasi-random
     '''
     grid_list = []
     if grid_type == 'grid':
@@ -95,7 +95,7 @@ def grid_generator(n,grid_type,output = False):
             y = r_1 * __np__.sin(theta_1)
             grid_list.append([x,y])
     else:
-        print 'No this kind of grid!'
+        print('No this kind of grid!')
     if output == True:
         fig = __plt__.figure(1,figsize = (5,5))
         ax = __plt__.gca()
@@ -121,7 +121,7 @@ def Y_fan_rays_generator(Lens,n,angle):
     field_rays_list = grid2rays(Lens,grid_list,angle)
     return field_rays_list
 
-    
+
 def X_fan_rays_generator(Lens,n,angle):
     grid_list = []
     x = __np__.linspace(0,1,n)

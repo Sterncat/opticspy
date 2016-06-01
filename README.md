@@ -1,9 +1,20 @@
 
-#opticspy  
+#opticspy testing version porting to Python 3.0
+
+## To test
+* mkdir /tmp/github/
+* cd /tmp/github/
+* git clone https://github.com/Diti24/opticspy.git
+* sys.path.append('/tmp/github/')
+* sys.path.append('/tmp/github/opticspy')
+* from opticspy.ray_tracing import *
+The basics is working...
+New_Lens.add_surface(number=11,radius=177.41176,thickness=7,glass='N-SK16_schott')
+gives an error to be investigated...
 
 Opticspy is a python module for optics application. I want this for a long time. One reason is I know both optics and python, so why no develop some optics tools? The second reason is that there is not much opensource, easy-to-use optics program module(matlab has great fuctions but do not specify to optics application). I want this could be developed in to a core for a future web application for optics.
 
-### Followings are primary opticspy modules: 
+### Followings are primary opticspy modules:
 
 #### 1. Real ray tracing and Lens Design:
 
@@ -21,30 +32,30 @@ Opticspy is a python module for optics application. I want this for a long time.
 
 * #### [Zernike Polynomial Fitting Methods](http://sterncat.github.io/files/Zernike_Polynomial_Fitting_Method.html)
 
-* #### [Orthonormal Rectangular Polynomials](http://sterncat.github.io/files/Orthonormal_Rectangular_Polynomials.html)   
+* #### [Orthonormal Rectangular Polynomials](http://sterncat.github.io/files/Orthonormal_Rectangular_Polynomials.html)
 
 #### 3. Interferometer and Testing Methods
 
-* #### [Basic Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html) 
+* #### [Basic Interferometer Methods](http://sterncat.github.io/files/Interferometer_Method.html)
 
 * #### [Phase shift interferometer and surface rebuild](http://sterncat.github.io/files/PSI.html)
 
-* #### [Hartmann Test Patterns](http://sterncat.github.io/files/Hartmann_Test.html) 
+* #### [Hartmann Test Patterns](http://sterncat.github.io/files/Hartmann_Test.html)
 
 #### 4. [Wave Propagation and Aberration Methods](http://sterncat.github.io/files/Diffraction_Method.html)
 
 #### 5. [Lens aberration, Jones matrix and gauss beam methods ](http://sterncat.github.io/files/Other_functions.html)
-  
+
 
 ### There are some interesting derivative from opticspy:
 
-#### 1. [A Zernike Polynomial GUI app based on opticspy and PyQt5](https://github.com/Sterncat/zernikeapp) 
+#### 1. [A Zernike Polynomial GUI app based on opticspy and PyQt5](https://github.com/Sterncat/zernikeapp)
 #### It is very easy to reuse or "wrap" opticspy module with a GUI(e.g. PyQt)
 
 <p><img src="http://sterncat.github.io/images/panelpic.png" height="300" width="480" /></p>
 
 #### 2. [Zernike Surface gif show](http://sterncat.github.io/images/zernikegif.gif)
-  
+
 #### This is the [Opticspy project page](http://opticspy.org)
 
 #### This project is hosted on github in [https://github.com/Sterncat/opticspy](https://github.com/Sterncat/opticspy)
@@ -68,7 +79,7 @@ $ python2.7 setup.py install
 And just have fun with it!
 
 ## What I want
-<ul>	
+<ul>
   <li>1. After import the module and you will get some functions that can do some calculation and education in optics</li>
   <li>2. Parameters should be very flexible, and the results should be shown in visualized, intuitionistic figures.</li>
   <li>3. After development of core, I want it be dynamic web application(with Javascript)</li>
@@ -100,7 +111,7 @@ And just have fun with it!
 
 
 ## Authors and Contributors
-I am Xing Fan. An optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/). 
+I am Xing Fan. An optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/).
 
 And this is my personal blog [Marvin's Neverland!](http://sterncat.github.io)
 
@@ -132,4 +143,4 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-		
+

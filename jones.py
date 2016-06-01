@@ -26,7 +26,7 @@ class Component(object):
         return self.matrix
     def __repr__(self):
         return str(self.matrix)
-    def __mul__(self, other):   
+    def __mul__(self, other):
         return other.factory(self.v() * other.v())
 
 
@@ -34,16 +34,16 @@ class HalfWavePlate(Component):
     """Subclassed special case 1: HWP"""
     def __init__(self):
         self.matrix = __np__.matrix([[1,0],[0,-1]])
-        
+
 class QuaterWavePlate(Component):
     def __init__(self):
         self.matrix = __np__.matrix([[1,0],[0,1j]])
-        
+
 class Birefringence(Component):
     def __init__(self, w1, w2):
         self.matrix = __np__.matrix([[__np__.exp(1j*w1),0],[0,__np__.exp(1j*w2)]])
-        
-        
+
+
 
 class Jones(object):
     def __init__(self, matrix):
@@ -54,30 +54,30 @@ class Jones(object):
         return str(self.vector)
     def factory(self,matrix):
         return Jones(matrix)
-        
-    
-        
+
+
+
 class Hpol(Jones):
     def __init__(self):
         self.vector=__np__.matrix([[1],[0]])
 class Vpol(Jones):
     def __init__(self):
-        self.vector=__np__.matrix([[0],[1]])    
-        
+        self.vector=__np__.matrix([[0],[1]])
+
 class D1pol(Jones):
     def __init__(self):
-        self.vector=__np__.matrix([[1],[1]]) 
+        self.vector=__np__.matrix([[1],[1]])
 class D2pol(Jones):
     def __init__(self):
-        self.vector=__np__.matrix([[1],[-1]]) 
-        
+        self.vector=__np__.matrix([[1],[-1]])
+
 class C1pol(Jones):
     def __init__(self):
-        self.vector=__np__.matrix([[1],[1j]]) 
+        self.vector=__np__.matrix([[1],[1j]])
 class C2pol(Jones):
     def __init__(self):
-        self.vector=__np__.matrix([[1],[-1j]]) 
+        self.vector=__np__.matrix([[1],[-1j]])
 
 if __name__ == "__main__":
     #Usage example
-    print QuaterWavePlate().rotate(__pi__/4)*HalfWavePlate().rotate(__pi__/8)*D1pol()
+    print(QuaterWavePlate().rotate(__pi__/4)*HalfWavePlate().rotate(__pi__/8)*D1pol())

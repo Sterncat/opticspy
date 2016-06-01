@@ -6,11 +6,11 @@ def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	"""
 	Genertate Twyman_Green Interferogram based on Seidel aberration
 	=============================================
-	
+
 	input
 	----------------------------------------------
-	
-	coefficients in wavenumber(ex. D=8 means 8 max error 
+
+	coefficients in wavenumber(ex. D=8 means 8 max error
 				in defocus aberration)
 
 	A: Constant(piston)term
@@ -30,7 +30,7 @@ def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	lambda_1 = lambda_1*(1e-9)
 	coefficients = [A,B,C,D,E,F,G]
 	r = __np__.linspace(-PR, PR, 400)
-	x, y = __np__.meshgrid(r,r) 
+	x, y = __np__.meshgrid(r,r)
 	rr = __np__.sqrt(x**2 + y**2)
 	wavemap = lambda n: n*lambda_1*2/PR
 	[A,B,C,D,E,F,G] =  map(wavemap, [A,B,C,D,E,F,G])
@@ -45,7 +45,7 @@ def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	I1 = 1
 	I2 = 1
 	Ixy = I1 + I2 + 2 * __np__.sqrt(I1*I2) * __np__.cos(ph)
-	__tools__.makecircle(Ixy, r, PR) 
+	__tools__.makecircle(Ixy, r, PR)
 #======================================================
 	fig = __plt__.figure(figsize=(9, 6), dpi=80)
 	__plt__.imshow(-Ixy, extent=[-PR,PR,-PR,PR])
@@ -86,12 +86,12 @@ def lateral_shear(A=0, B=0, C=0, D=0, E=0, S=0.1, lambda_1 = 632, PR = 1):
 	"""
 	Genertate Lateral_Shear Interferogram
 	=============================================
-	
+
 	input
 	Lateral_Shear(A, B, C, D, E, S, lambda_1 = 632, PR = 1):
 	----------------------------------------------
-	
-	coefficients in wavenumber(ex. D=8 means 8 max error 
+
+	coefficients in wavenumber(ex. D=8 means 8 max error
 				in defocus aberration)
 
 	A: Primary spherical aberration
@@ -110,7 +110,7 @@ def lateral_shear(A=0, B=0, C=0, D=0, E=0, S=0.1, lambda_1 = 632, PR = 1):
 	lambda_1 = lambda_1*(10**-9)
 	r = __np__.linspace(-PR, PR, 400)
 	#r1 = __np__.linspace(-PR-S/2,PR+S/2)
-	x, y = __np__.meshgrid(r,r) 
+	x, y = __np__.meshgrid(r,r)
 	rr = __np__.sqrt(x**2 + y**2)
 	coefficients = [A*2,B*2,C*2,D*2,E*2]
 	def wavenumber(n):
@@ -148,7 +148,7 @@ def lateral_shear(A=0, B=0, C=0, D=0, E=0, S=0.1, lambda_1 = 632, PR = 1):
 				elif (a1 > PR**2 and a2 < PR**2) or (a1 < PR**2 and a2 >PR**2):
 					rec[j,i] = min*2/10
 		return rec
-	Ixy_new = doublecircle(Ixy, PR, S) 
+	Ixy_new = doublecircle(Ixy, PR, S)
 	fig = __plt__.figure(figsize=(9, 6), dpi=80)
 	__plt__.imshow(Ixy_new, extent=[-PR-S/2,PR+S/2,-PR,PR])
 	__plt__.set_cmap('Greys')

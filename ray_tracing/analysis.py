@@ -1,13 +1,13 @@
 from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-import cal_tools,trace
+from . import cal_tools,trace
 # All analysis functions
 
 def spotdiagram(Lens,field_plot,wave_plot,n=12,grid_type='grid'):
     '''
     Show spotdiagram of image plane for different field
-    input: 
+    input:
     Lens: Lens Class
     field_plot: list [1,2,3]
     wave_plot: plot wave list [1,2,3]
@@ -44,7 +44,7 @@ def spotdiagram(Lens,field_plot,wave_plot,n=12,grid_type='grid'):
     for i in tmp:
         rms = cal_tools.rms(i)
         RMS_list.append(str(round(rms,5)))
-        print 'RMS',rms
+        print('RMS',rms)
 
 
     n = field_plot_length
@@ -111,7 +111,7 @@ def Ray_fan(Lens,field_plot,wave_plot):
             max_tmp = max(abs(Ex))
             if max_tmp > max_E:
                 max_E = max_tmp
-            __plt__.plot(Px,Ex,c=c_list[m]) 
+            __plt__.plot(Px,Ex,c=c_list[m])
             n = n - 1
         m = m + 1
 
@@ -130,7 +130,7 @@ def Ray_fan(Lens,field_plot,wave_plot):
         ax.set_ylabel('Field '+str(field_num))
         Relative_field = str(round(Lens.field_angle_list[field_num-1]/Lens.field_angle_list[-1],2))
         str_angle = str(Lens.field_angle_list[field_num-1])+' DG'
-        label = Relative_field+' Relative\n'+ 'Field Height\n'+ str_angle 
+        label = Relative_field+' Relative\n'+ 'Field Height\n'+ str_angle
 
         ax.annotate(label, xy=(0.7, 0.7), xycoords='axes fraction', fontsize=12)
         # X fan axis
@@ -150,7 +150,7 @@ def Ray_fan(Lens,field_plot,wave_plot):
 def Y_fan(Lens,field_plot,wave_plot):
     '''
     Tangential fan,plot Ey vs Py
-    ''' 
+    '''
     trace.trace_Y_fan(Lens)
     field_plot_length = len(field_plot)
     wave_plot_length = len(wave_plot)
@@ -159,7 +159,7 @@ def Y_fan(Lens,field_plot,wave_plot):
     fig = __plt__.figure(3,figsize=(5, 9), dpi=80)
     fig.canvas.set_window_title('Ray aberration')
     fig.suptitle("Ray aberration", fontsize="x-large")
-    
+
     m = 0
     Py = __np__.linspace(-1,1,25)
     max_Ey = 0
@@ -169,7 +169,7 @@ def Y_fan(Lens,field_plot,wave_plot):
             __plt__.subplot(field_plot_length, 1, n)
             xy_list = Y_fan_field_wave(Lens,field_num,wave_num)
             Ey = xy_list[1]-xy_list[1][12]
-            __plt__.plot(Py,Ey,c=c_list[m])  
+            __plt__.plot(Py,Ey,c=c_list[m])
             #xy_list[1][12] is the Ey generate by Py=0
             max_tmp = max(abs(Ey))
             if max_tmp > max_Ey:
@@ -206,7 +206,7 @@ def Y_fan_field_wave(Lens,field_num,wave_num):
 def X_fan(Lens,field_plot,wave_plot):
     '''
     Sagittal fan,plot Ex vs Px
-    ''' 
+    '''
     trace.trace_X_fan(Lens)
     field_plot_length = len(field_plot)
     wave_plot_length = len(wave_plot)
@@ -227,7 +227,7 @@ def X_fan(Lens,field_plot,wave_plot):
             max_tmp = max(abs(Ex))
             if max_tmp > max_Ex:
                 max_Ex = max_tmp
-            __plt__.plot(Px,Ex,c=c_list[m]) 
+            __plt__.plot(Px,Ex,c=c_list[m])
             #xy_list[0][0] is the Ex generate by Px=0
             n = n - 1
         m = m + 1

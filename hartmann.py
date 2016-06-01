@@ -67,7 +67,7 @@ def hartmann_rebuild(M,r):
 			elif (M[n][m][0] != 0 and label == 1):
 				w[n,m] = w[n][m-1] + d/2/r*(M[n][m-1][2][0] + M[n][m][2][0])
 			else:
-				print 'wrong'
+				print('wrong')
 	fig = __plt__.figure(2,figsize=(6, 6))
 	__plt__.imshow(w)
 	__plt__.show()
@@ -95,33 +95,33 @@ def DFS(M,wavefront1,m,n,s):
 			m = m + 1
 			M[m,n] = 2
 			stack.append([m,n])
-			
+
 			wavefront[m,n] = wavefront[m-1,n] + v(wavefront1[m,n] - wavefront1[m-1,n])
-			
+
 		elif m - 1 > 0 and n < s and M[m-1,n] == 1 and M[m-1,n] != 0 and M[m-1,n] != 2:
 			m = m - 1
 			M[m,n] = 2
 			stack.append([m,n])
-			
+
 			wavefront[m,n] = wavefront[m+1,n] + v(wavefront1[m,n] - wavefront1[m+1,n])
-			
-		elif m < s and n + 1 < s and M[m,n+1] == 1 and M[m,n+1] != 0 and M[m,n+1] != 2: 
+
+		elif m < s and n + 1 < s and M[m,n+1] == 1 and M[m,n+1] != 0 and M[m,n+1] != 2:
 			n = n + 1
 			M[m,n] = 2
 			stack.append([m,n])
-			
+
 			wavefront[m,n] = wavefront[m,n-1] + v(wavefront1[m,n] - wavefront1[m,n-1])
-			
-		elif m < s and n - 1 > 0 and M[m,n-1] == 1 and M[m,n-1] != 0 and M[m,n-1] != 2: 
+
+		elif m < s and n - 1 > 0 and M[m,n-1] == 1 and M[m,n-1] != 0 and M[m,n-1] != 2:
 			n = n - 1
 			M[m,n] = 2
 			stack.append([m,n])
-			
+
 			wavefront[m,n] = wavefront[m,n+1] + v(wavefront1[m,n] - wavefront1[m,n+1])
-			
+
 		else:
 			stack.pop()
 	return wavefront
 
 
-	
+

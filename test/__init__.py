@@ -1,1 +1,1 @@
-import test_surface, test_surface2
+from . import test_surface, test_surface2
