@@ -1,12 +1,12 @@
 from __future__ import division as __division__
+from __future__ import absolute_import
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
 
-from . import zernike as __zernike__
+from .zernike_coeffs import __zernikecartesian__
 from . import tools as __tools__
 from .phaseunwrap import unwrap2D as __unwrap2D__
-
 
 def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	"""
@@ -32,7 +32,7 @@ def twyman_green(coefficients, lambda_1 = 632, PR = 1):
 	r = __np__.linspace(-PR, PR, 400)
 	x, y = __np__.meshgrid(r,r)
 	rr = __np__.sqrt(x**2 + y**2)
-	OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
+	OPD = 	__zernikecartesian__(coefficients,x,y)*2/PR
 
 	ph = 2 * __np__.pi * OPD
 	I1 = 1
@@ -86,7 +86,7 @@ def phase_shift(coefficients, lambda_1 = 632, PR = 1, type = '4-step', noise = 0
 	r = __np__.linspace(-PR, PR, sample)
 	x, y = __np__.meshgrid(r,r)
 	rr = __np__.sqrt(x**2 + y**2)
-	OPD = 	__zernike__.__zernikecartesian__(coefficients,x,y)*2/PR
+	OPD = 	__zernikecartesian__(coefficients,x,y)*2/PR
 	Ia = 1
 	Ib = 1
 	ph = 2 * __np__.pi * OPD
