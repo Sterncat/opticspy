@@ -1,5 +1,4 @@
 import numpy as __np__
-import matplotlib.pyplot as __plt__
 
 from . import diffraction as __diffraction__
 from . import tools as __tools__

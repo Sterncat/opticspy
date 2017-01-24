@@ -1,5 +1,4 @@
 import numpy as __np__
-import matplotlib.pyplot as __plt__
 from . import tools as __tools__
 
 def fresnel(aperture,z = 2,lambda1 = 660*10**(-9)):
