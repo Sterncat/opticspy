@@ -5,7 +5,6 @@ from numpy import sin as __sin__
 from numpy import sqrt as __sqrt__
 from numpy import arctan2 as __arctan2__
 import matplotlib.pyplot as __plt__
-from mplot3d import Axes3D as __Axes3D__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
@@ -13,7 +12,7 @@ from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
 from numpy.fft import ifft2 as __ifft2__
-import tools as __tools__
+from . import tools as __tools__
 
 
 class Coefficient(object):

@@ -1,7 +1,7 @@
 import numpy as __np__
-import matplotlib.pyplot as __plt__
-import diffraction as __diffraction__
-import tools as __tools__
+
+from . import diffraction as __diffraction__
+from . import tools as __tools__
 
 class Aperture():
 	def __init__(self, background):
