@@ -1,6 +1,5 @@
 from __future__ import division as __division__
 import numpy as __np__
-import interferometer_zenike as __interferometer__
 from numpy import cos as __cos__
 from numpy import sin as __sin__
 from numpy import sqrt as __sqrt__
@@ -14,9 +13,11 @@ from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
 from numpy.fft import ifft2 as __ifft2__
-import seidel2 as __seidel2__
-import tools as __tools__
-import hartmann as __hartmann__
+
+from . import interferometer_zenike as __interferometer__
+from . import seidel2 as __seidel2__
+from . import tools as __tools__
+from . import hartmann as __hartmann__
 
 class Coefficient(object):
 	"""

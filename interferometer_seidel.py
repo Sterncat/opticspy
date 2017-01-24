@@ -1,6 +1,6 @@
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-import tools as __tools__
+from . import tools as __tools__
 
 def twyman_green(A=0, B=0, C=0, D=0, E=0, F=0, G=0, lambda_1 = 632, PR = 1):
 	"""

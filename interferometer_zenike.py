@@ -1,11 +1,11 @@
 from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
-import zernike as __zernike__
-import tools as __tools__
-from phaseunwrap import unwrap2D as __unwrap2D__
 from matplotlib import cm as __cm__
 
+from . import zernike as __zernike__
+from . import tools as __tools__
+from .phaseunwrap import unwrap2D as __unwrap2D__
 
 
 def twyman_green(coefficients, lambda_1 = 632, PR = 1):
