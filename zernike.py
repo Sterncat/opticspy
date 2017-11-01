@@ -1,9 +1,11 @@
+# coding=utf-8
 from __future__ import division as __division__
 import numpy as __np__
 from numpy import cos as __cos__
 from numpy import sin as __sin__
 from numpy import sqrt as __sqrt__
 from numpy import arctan2 as __arctan2__
+import math
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
@@ -11,7 +13,9 @@ from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
+from numpy.linalg import inv
 from numpy.fft import ifft2 as __ifft2__
+import operator as op
 
 from . import interferometer_zenike as __interferometer__
 from . import seidel2 as __seidel2__
@@ -633,3 +637,104 @@ def __zernikecartesian__(coefficient,x,y):
 			Z20+ Z21+ Z22+ Z23+ Z24+ Z25+ Z26+ Z27+ Z28+ Z29+ \
 			Z30+ Z31+ Z32+ Z33+ Z34+ Z35+ Z36+ Z37
 	return ZW
+
+
+def transform(zernikes, tx, ty, thetaR, scaling=1.0):
+	"""
+		------------------------------------------------
+		transform(zernikes, scaling, tx, ty, thetaR):
+
+		scale (concentric), translation of center, and rotate your zernike polynomial without re-sampling.
+		scaling and translation is performed first and then rotation.
+
+		zernikes: Zernike coefficients in standard ANSI order - a list of floats with arbitrary length. The first index
+		 is the pivot, then x-tilt, y-tilt, first astigmatism,...
+		tx: Horizontal translation
+		ty: Vertical translation
+		thetaR: rotation in _degrees_
+		scaling: concentring scaling factor.
+
+		return: Zernike coefficients in standard ANSI order - same list length as the input.
+
+		Based on: Linda Lundström and Peter Unsbo, "Transformation of Zernike coefficients: scaled, translated, and
+		rotated wavefronts with circular and elliptical pupils," J. Opt. Soc. Am. A 24, 569-577 (2007)
+		Translated into Python by: Oskar Truffer
+		------------------------------------------------
+		"""
+	C1 = __np__.array(zernikes)
+	etaS = scaling
+	etaT = 2 * __np__.sqrt(__np__.square(tx) + __np__.square(ty)) / 1.0
+	thetaT = __np__.arctan2(ty, tx)
+	thetaR = thetaR * __np__.pi / 180
+	jnm = len(C1) - 1
+	nmax = int(__np__.ceil((-3 + __np__.sqrt(9 + 8 * jnm)) / 2))
+	jmax = int(nmax * (nmax + 3) / 2)
+	S = __np__.zeros((jmax + 1, 1))
+	S[0:len(C1)] = C1.reshape((len(C1), 1))
+	C1 = S
+	jmaxTuple = (jmax + 1, jmax + 1)
+	P = __np__.zeros(jmaxTuple)
+	N = __np__.zeros(jmaxTuple)
+	R = __np__.zeros(jmaxTuple)
+	CC1 = __np__.zeros((jmax + 1, 1), dtype=__np__.complex)
+	counter = 0
+	for m in xrange(-nmax, nmax + 1):
+		for n in xrange(__np__.abs(m), nmax + 1, 2):
+			jnm = (m + n * (n + 2)) / 2
+			P[counter, jnm] = 1
+			N[counter, counter] = __np__.sqrt(n + 1)
+			for s in xrange(0, int((n - abs(m)) / 2 + 1)):
+				R[counter - s, counter] = math.pow((-1), s) * math.factorial(n - s) / (
+					math.factorial(s) * math.factorial((n + m) / 2 - s) * math.factorial((n - m) / 2 - s))
+			if m < 0:
+				CC1[jnm] = complex(C1[(-m + n * (n + 2)) / 2], C1[jnm]) / __np__.sqrt(2)
+			elif m == 0:
+				CC1[jnm] = complex(C1[jnm], 0)
+			else:
+				CC1[jnm] = complex(C1[jnm], -C1[(-m + n * (n + 2)) / 2]) / math.sqrt(2)
+			counter += 1
+
+	ETA = None
+	for m in xrange(-nmax, nmax + 1):
+		for n in xrange(abs(m), nmax + 1, 2):
+			transd = _transformMatrix(n, m, jmax, etaS, etaT, thetaT, thetaR)
+			if ETA is None:
+				ETA = __np__.matmul(P, transd)
+			else:
+				ETA = __np__.hstack([ETA, __np__.matmul(P, transd)])
+
+	C = __np__.matmul(__np__.matmul(__np__.matmul(__np__.matmul(__np__.matmul(__np__.matmul(inv(P), inv(N)), inv(R)), ETA), R), N), P)
+	CC2 = __np__.matmul(C, CC1)
+	C2 = __np__.zeros((jmax + 1, 1))
+	for m in xrange(-nmax, nmax + 1):
+		for n in xrange(abs(m), nmax + 1, 2):
+			jnm = (m + n * (n + 2)) / 2
+			if m < 0:
+				C2[jnm] = __np__.imag(CC2[jnm] - CC2[(-m + n * (n + 2)) / 2]) / __np__.sqrt(2)
+			elif m == 0:
+				C2[jnm] = __np__.real(CC2[jnm])
+			else:
+				C2[jnm] = __np__.real(CC2[jnm] + CC2[(-m + n * (n + 2)) / 2]) / __np__.sqrt(2)
+
+	return C2
+
+
+def _transformMatrix(n, m, jmax, etaS, etaT, thetaT, thetaR):
+	Eta = __np__.zeros((jmax + 1, 1), dtype=__np__.complex)
+	for p in xrange(0, int((n + m) / 2 + 1)):
+		for q in xrange(0, int((n - m) / 2 + 1)):
+			nnew = n - p - q
+			mnew = m - p + q
+			jnm = (mnew + nnew * (nnew + 2)) / 2
+			Eta[int(math.floor(jnm))] += _ncr((n + m) / 2, p) * _ncr((n - m) / 2, q) * __np__.power(etaS,
+																										n - p - q) * __np__.power(
+				etaT, p + q) * __np__.exp(complex(0, ((p - q) * (thetaT - thetaR) + m * thetaR)))
+	return Eta
+
+
+def _ncr(n, r):
+	r = min(r, n - r)
+	if r == 0: return 1
+	numer = reduce(op.mul, xrange(n, n - r, -1))
+	denom = reduce(op.mul, xrange(1, r + 1))
+	return numer // denom
