@@ -53,7 +53,7 @@ class my_build(build):
 
 
 
-semifem_dist = setup(name = "opticspy",
+opticspy_dist = setup(name = "opticspy",
       version = "0.1",
       description = "Python optics module ",
       author = "Xing Fan",
