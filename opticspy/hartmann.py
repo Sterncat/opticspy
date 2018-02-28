@@ -3,7 +3,9 @@ import numpy as __np__
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
 
-from . import zernike as __zernike__
+#from . import zernike as __zernike__
+from . import interferometer_zenike as __interferometer__
+
 from . import tools as __tools__
 
 def hartmann(coefficients, r, R):
@@ -28,9 +30,9 @@ def hartmann(coefficients, r, R):
 			if i**2 + j**2 < R**2:
 				x_list.append(i)
 				y_list.append(j)
-				W0 = __zernike__.__zernikecartesian__(coefficients,i,j)
-				Wx = __zernike__.__zernikecartesian__(coefficients,1.01*i,j)
-				Wy = __zernike__.__zernikecartesian__(coefficients,i,1.01*j)
+				W0 = __interferometer__.__zernikecartesian__(coefficients,i,j)
+				Wx = __interferometer__.__zernikecartesian__(coefficients,1.01*i,j)
+				Wy = __interferometer__.__zernikecartesian__(coefficients,i,1.01*j)
 				TAx = -(Wx-W0)/(0.01*i)*r
 				TAy = -(Wy-W0)/(0.01*j)*r
 				Ax_list.append(TAx)
