@@ -237,8 +237,8 @@ class Coefficient(object):
 					Z[i][j] = 0
 		d = 400 # background
 		A = __np__.zeros([d,d])
-		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
-		axis_1 = d/pupil*r
+		A[d//2-l1//2+1:d//2+l1//2+1,d//2-l1//2+1:d//2+l1//2+1] = Z
+		axis_1 = d//pupil*r
 		fig = __plt__.figure()
 		# ax = fig.gca()
 		# __plt__.imshow(A,extent=[-axis_1,axis_1,-axis_1,axis_1],cmap=__cm__.RdYlGn)
@@ -463,7 +463,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 		for i in index:
 			xticklist.append('Z'+str(i+1))
 		barfigure = __plt__.bar(index, fitlist1, width,color = '#2E9AFE',edgecolor = '#2E9AFE')
-		__plt__.xticks( index+width/2, xticklist )
+		__plt__.xticks( index+width//2, xticklist )
 		__plt__.xlabel('Zernike Polynomials',fontsize=18)
 		__plt__.ylabel('Coefficient',fontsize=18)
 		__plt__.title('Fitting Zernike Polynomials Coefficient',fontsize=18)

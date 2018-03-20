@@ -1,12 +1,11 @@
 
-#opticspy testing version porting to Python 3.0
+# This fork can by used with python 3.6
 
 ## To test
 * mkdir /tmp/github/
 * cd /tmp/github/
 * git clone https://github.com/Diti24/opticspy.git
-* sys.path.append('/tmp/github/')
-* sys.path.append('/tmp/github/opticspy')
+* Add codebase to python path: ```pip install -e opticspy```
 * from opticspy.ray_tracing import *
 The basics is working...
 New_Lens.add_surface(number=11,radius=177.41176,thickness=7,glass='N-SK16_schott')

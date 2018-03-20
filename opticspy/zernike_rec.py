@@ -107,7 +107,7 @@ class Coefficient(object):
 		Z = __zernikecartesian__(self.__coefficients__,a,X,Y)
 		d = 400 # background
 		A = __np__.zeros([d,d])
-		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = Z
+		A[d//2-l1//2+1:d//2+l1//2+1,d//2-l1//2+1:d//2+l1//2+1] = Z
 		# fig = __plt__.figure()
 		# __plt__.imshow(A)
 		# __plt__.colorbar()
@@ -171,7 +171,7 @@ class Coefficient(object):
 		l1 = 100
 		d = 400
 		A = __np__.zeros([d,d])
-		A[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1] = PTF[d/2-l1/2+1:d/2+l1/2+1,d/2-l1/2+1:d/2+l1/2+1]
+		A[d//2-l1//2+1:d//2+l1//2+1,d//2-l1//2+1:d//2+l1//2+1] = PTF[d//2-l1//2+1:d//2+l1//2+1,d//2-l1//2+1:d//2+l1//2+1]
 		__plt__.imshow(abs(A),cmap=__cm__.rainbow)
 		__plt__.colorbar()
 		__plt__.show()
