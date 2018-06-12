@@ -21,7 +21,7 @@ import os
 import yaml
 import sys
 import argparse
-import numpy 
+import numpy
 
 
 class RefractiveIndex:
@@ -60,6 +60,10 @@ class RefractiveIndex:
     def getMaterialFilename(self, shelf, book, page):
         cwd = os.getcwd()
         rootdir = cwd + "/opticspy/ray_tracing/glass_database/"
+        if not os.path.exists(rootdir):
+            rootdir = self.referencePath
+            if not os.path.exists(rootdir):
+                raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), rootdir)
         glass_catalog = book
         filename = page + '.yml'
         for root, subFolders, files in os.walk(rootdir):
