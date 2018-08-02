@@ -59,10 +59,10 @@ class RefractiveIndex:
 
     def getMaterialFilename(self, shelf, book, page):
         cwd = os.getcwd()
-        rootdir = cwd + "/opticspy/ray_tracing/glass_database/"
+        #rootdir = cwd + "/opticspy/ray_tracing/glass_database/"
         glass_catalog = book
         filename = page + '.yml'
-        for root, subFolders, files in os.walk(rootdir):
+        for root, subFolders, files in os.walk(self.referencePath):
             if root.endswith(glass_catalog):
                 break
         for f in files:

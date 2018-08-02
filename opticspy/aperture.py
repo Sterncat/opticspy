@@ -86,7 +86,7 @@ class Circle(Aperture):
 		radius = d/2
 		self.__aper__ = __np__.zeros([n,n])
 		aper1 = __tools__.circle_aperture(d)
-		self.__aper__[(n/2-d/2):(n/2-d/2+d),(n/2-d/2):(n/2-d/2+d)] = aper1
+		self.__aper__[(n//2-d//2):(n//2-d//2+d),(n//2-d//2):(n//2-d//2+d)] = aper1
 
 class DoubleCircle(Aperture):
 	def __init__(self, background=500, d=50, D=0.01, separation = 100, scale=0.01/200):
@@ -100,8 +100,8 @@ class DoubleCircle(Aperture):
 		self.__aper__ = __np__.zeros([n,n])
 
 		aper1 = __tools__.circle_aperture(d)
-		self.__aper__[(n/2-d/2):(n/2-d/2+d),(n/2-s/2-d/2):(n/2-s/2+d/2)] = aper1
-		self.__aper__[(n/2-d/2):(n/2-d/2+d),(n/2+s/2-d/2):(n/2+s/2+d/2)] = aper1
+		self.__aper__[(n//2-d//2):(n//2-d//2+d),(n//2-s//2-d//2):(n//2-s//2+d//2)] = aper1
+		self.__aper__[(n//2-d//2):(n//2-d//2+d),(n//2+s//2-d//2):(n//2+s//2+d//2)] = aper1
 
 class Ring(Aperture):
 	def __init__(self, background=500, outside=200, inside=100, scale=0.01/200):
@@ -115,8 +115,8 @@ class Ring(Aperture):
 		aper1 = __tools__.circle_aperture(inside)
 		aper2 = __tools__.circle_aperture(outside)
 
-		aper2[(outside/2-inside/2):(outside/2-inside/2+inside),(outside/2-inside/2):(outside/2-inside/2+inside)] = -1*(aper1-1)
-		self.__aper__[(n/2-outside/2):(n/2-outside/2+outside),(n/2-outside/2):(n/2-outside/2+outside)] = aper2
+		aper2[(outside//2-inside//2):(outside//2-inside//2+inside),(outside//2-inside//2):(outside//2-inside//2+inside)] = -1*(aper1-1)
+		self.__aper__[(n//2-outside//2):(n//2-outside//2+outside),(n//2-outside//2):(n//2-outside//2+outside)] = aper2
 
 class Rectangle(Aperture):
 	def __init__(self, background=500, height=200, width=200, scale=0.01/200):
@@ -144,7 +144,7 @@ class Rectangle(Aperture):
 		#matrix_1 = [height,width]
 		aper1 = __np__.ones([height,width])
 		self.__aper__ = __np__.zeros([n,n])
-		self.__aper__[(n/2-height/2):(n/2-height/2+height),(n/2-width/2):(n/2-width/2+width)] = aper1
+		self.__aper__[(n//2-height//2):(n//2-height//2+height),(n//2-width//2):(n//2-width//2+width)] = aper1
 
 class DoubleRectangle(Aperture):
 	def __init__(self, background=500, height=50, width=2, separation=4, scale=0.01/200):
@@ -159,8 +159,8 @@ class DoubleRectangle(Aperture):
 		self.__scale__ = scale
 		self.__aper__ = __np__.zeros([n,n])
 		aper1 = __np__.ones([height,width])
-		self.__aper__[(n/2-height/2):(n/2-height/2+height),(n/2-width/2-separation/2):(n/2-width/2+width-separation/2)] = aper1
-		self.__aper__[(n/2-height/2):(n/2-height/2+height),(n/2-width/2+separation/2):(n/2-width/2+width+separation/2)] = aper1
+		self.__aper__[(n//2-height//2):(n//2-height//2+height),(n//2-width//2-separation//2):(n//2-width//2+width-separation//2)] = aper1
+		self.__aper__[(n//2-height//2):(n//2-height//2+height),(n//2-width//2+separation//2):(n//2-width//2+width+separation//2)] = aper1
 
 class Frame(Aperture):
 	def __init__(self, background=500, outside=200, inside=100, scale=0.01/200):
@@ -172,5 +172,5 @@ class Frame(Aperture):
 		self.__aper__ = __np__.zeros([n,n])
 		aper1 = __np__.ones([outside,outside])
 		aper2 = __np__.zeros([inside,inside])
-		self.__aper__[(n/2-outside/2):(n/2-outside/2+outside),(n/2-outside/2):(n/2-outside/2+outside)] = aper1
-		self.__aper__[(n/2-inside/2):(n/2-inside/2+inside),(n/2-inside/2):(n/2-inside/2+inside)] = aper2
+		self.__aper__[(n//2-outside//2):(n//2-outside//2+outside),(n//2-outside//2):(n//2-outside//2+outside)] = aper1
+		self.__aper__[(n//2-inside//2):(n//2-inside//2+inside),(n//2-inside//2):(n//2-inside//2+inside)] = aper2
