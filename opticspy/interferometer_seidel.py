@@ -133,7 +133,7 @@ def lateral_shear(A=0, B=0, C=0, D=0, E=0, S=0.1, lambda_1 = 632, PR = 1):
 		rec = __np__.zeros((y,x))
 		for i in range(400):
 			for j in range(400):
-				rec[j, i+100*S/PR] = a[j, i]
+				rec[j, int(i+100*S/PR)] = a[j, i]
 
 		x1 = __np__.linspace(-PR-S/2, PR+S/2, x)
 		y1 = __np__.linspace(-PR, PR, y)
