@@ -46,7 +46,7 @@ for p,q in zip(Pn1,KLM):
 	y.append(xyz_tmp[1])
 	z.append(xyz_tmp[2])
 	
-print xyz_list
+print(xyz_list)
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x, z, y)
@@ -66,7 +66,7 @@ for i,j,k in zip(xyz_list,KLM,cosI):
 	Mp = (n*j[2] - c*sigma*i[2] + sigma)/npp
 	KLM1.append([Kp,Lp,Mp]) 
 
-print KLM1	
+print(KLM1)
 
 
 
@@ -89,7 +89,7 @@ for p,q in zip(xyz_list,KLM1):
 	y2.append(xyz_tmp[1])
 	z2.append(xyz_tmp[2])
 	
-print xyz_list2
+print(xyz_list2)
 fig = plt.figure()
 plt.plot(x2,y2,'b*')
 plt.show()

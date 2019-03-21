@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.path import Path
 import matplotlib.patches as patches
 import numpy as np
-import trace
+from . import trace
 # All lens drawing and ray drawing functions
 
 def draw_surface(r,x0,d1,d2):
