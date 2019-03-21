@@ -1,4 +1,4 @@
-import lens
+from .. import lens
 '''
 CodeV seq file convertor
 return a Lens class
