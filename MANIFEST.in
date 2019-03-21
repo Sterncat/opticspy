@@ -1,0 +1,1 @@
+recursive-include opticspy/ray_tracing/glass_database *.yml *.txt *.ffs_db *.pdf *.docx 
