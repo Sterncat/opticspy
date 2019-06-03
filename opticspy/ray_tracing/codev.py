@@ -1,4 +1,4 @@
-import lens
+from . import lens
 '''
 CodeV seq file convertor
 return a Lens class
@@ -68,9 +68,3 @@ def readseq(filename,output=False):
             STOP = False
         New_Lens.add_surface(number=n,radius=r,thickness=t,glass=g,STO=STOP,output=output)
     return New_Lens
-
-
-
-
-
-
