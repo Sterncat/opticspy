@@ -10,5 +10,6 @@ setup(name='opticspy',
       url='http://opticspy.org',
       packages = find_packages(),
       include_package_data = True,
+      package_data = {'': ['ray_tracing/glass_database/*'],},
       #package_data = {'': ['*.md','ray_tracing/glass_database/*','ray_tracing/CodeV_examples/*'],},
      )
