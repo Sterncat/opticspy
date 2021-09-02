@@ -110,9 +110,9 @@ And just have fun with it!
 
 
 ## Authors and Contributors
-I am Xing Fan. An optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/).
+I am Xing Fan. I was optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/). Now I am an engineer in Apple.
 
-And this is my personal blog [Marvin's Neverland!](http://sterncat.github.io)
+And this is my personal optics blog [Faster than light](https://faster-than-light.net)
 
 ## Support or Contact
 If you have questions and advice, or want to participate in this project, contact me at marvin.fanxing@gmail.com. I would be very happy to find some one have the same interest!
@@ -120,7 +120,7 @@ If you have questions and advice, or want to participate in this project, contac
 ### MIT License
 -----------
 
-Copyright (c) 2014-2016 Xing Fan (https://github.com/Sterncat/opticspy)
+Copyright (c) 2014-2021 Xing Fan (https://github.com/Sterncat/opticspy)
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
