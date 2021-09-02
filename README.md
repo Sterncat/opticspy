@@ -110,7 +110,7 @@ And just have fun with it!
 
 
 ## Authors and Contributors
-I am Xing Fan. I was optics master student now studying in the [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/). Now I am an engineer in Apple.
+I am Xing Fan. I graduated from [Institute of Optics](http://www.optics.rochester.edu/), [University of Rochester](http://www.rochester.edu/). Now I am an engineer in Apple.
 
 And this is my personal optics blog [Faster than light](https://faster-than-light.net)
 
