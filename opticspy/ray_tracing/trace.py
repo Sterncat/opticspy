@@ -3,6 +3,7 @@ import numpy as __np__
 import matplotlib.pyplot as __plt__
 from . import field,first_order_tools,surface
 from . import output_tools
+from .first_order_tools import FOCAL_LENGTH
 
 # Function: trace rays
 # input a list of ray
@@ -231,8 +232,7 @@ def traceray(ray_list, surface1, surface2, wave_num):
         #print 'Pos',Pos
         KLM = ray.KLM
         #print 'KLM:',KLM
-        c1 = 1 / surface1.radius
-        c2 = 1 / surface2.radius
+        c2 = (None if surface2.radius is None else 1 / surface2.radius)
         n1 = surface1.indexlist[wave_num-1]
         n2 = surface2.indexlist[wave_num-1]
         tn1 = surface1.thickness
@@ -243,9 +243,17 @@ def traceray(ray_list, surface1, surface2, wave_num):
         Pos_new = xyz + delta * KLM
         Pos_new_list.append(Pos_new)
         # calculate new ray direction
-        # if curvature == 0, it is a stop, object or image plane
-        # don't need to calculate the new ray direction
-        if c2 == 0:
+        if c2 == None:
+            # Assume an ideal eye-piece having an effective focal length of 10mm
+            Kp = KLM[0] - Pos_new[0] / FOCAL_LENGTH
+            Lp = KLM[1] - Pos_new[1] / FOCAL_LENGTH
+            Mp = KLM[2] - Pos_new[2] / FOCAL_LENGTH
+            KLM_new = __np__.asarray([Kp, Lp, Mp])
+            #KLM_new = __np__.asarray(KLM)
+
+        elif c2 == 0:
+            # if curvature == 0, it is a stop, object or image plane
+            # don't need to calculate the new ray direction
             KLM_new = KLM
         else:
             sigma = __np__.sqrt(n2 ** 2 - n1 ** 2 * (1 - cosI ** 2)) - n1 * cosI
@@ -265,7 +273,7 @@ def pos(Pos, KLM, curvature):
     '''
     calculate new position of a ray on spherical surface
     '''
-    c = curvature
+    c = (0 if curvature is None else curvature)
     x0 = Pos[0]
     y0 = Pos[1]
     z0 = Pos[2]

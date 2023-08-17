@@ -3,6 +3,7 @@ from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 
+FOCAL_LENGTH = 50.0
 
 def start_end(Lens,start_surface,end_surface):
 	'''
@@ -31,6 +32,9 @@ def R(c,n_left,n_right):
 	'''
 	return __np__.array([[1,0],[-c*(n_right-n_left),1]])
 
+def lens(focal_length, n_right):
+	return __np__.array([[1,0],[-1/focal_length,1/n_right]])
+
 def ABCD(matrix_list):
 	'''
 	ABCD matrix calculator
@@ -51,23 +55,28 @@ def ABCD_start_end(Lens,start_surface=0,end_surface=0):
 	'''
 	s = Lens.surface_list
 	start,end = start_end(Lens,start_surface,end_surface)
+
 	R_matrix = []
 	T_matrix = []
 	RT_matrix = []
-	for i in range(start,end+1):
-		i = i - 1
-		# print 'i:',i
-		# print 'surface_num',s[i].number
-		c = 1/s[i].radius
+	for i in range(start - 1,end):
 		# now use central wavelength as reference
 		n_left = s[i-1].indexlist[int(len(s[i-1].indexlist)/2)]
 		n_right = s[i].indexlist[int(len(s[i].indexlist)/2)]
-		t = s[i].thickness
+
+		if s[i].radius is None:
+			# Ideal thin lens
+			RT_matrix.append(lens(FOCAL_LENGTH,n_right))
+			assert s[i+1].thickness == FOCAL_LENGTH
+			continue
+
+		# print 'surface_num',s[i].number
+		c = 1/s[i].radius
 		R1 = R(c,n_left,n_right)
-		T1 = T(t,n_right)
-		# print R1
-		# print T1
 		RT_matrix.append(R1)
+
+		t = s[i].thickness
+		T1 = T(t,n_right)
 		if i+1 != end:
 			RT_matrix.append(T1)
 	# print '--------------------------------'
