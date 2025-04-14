@@ -6,6 +6,7 @@ from numpy import sqrt as __sqrt__
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
 from . import tools as __tools__
+from mpl_toolkits.mplot3d import Axes3D
 
 
 class Coefficient(object):
@@ -36,7 +37,7 @@ class Coefficient(object):
 		Y = r*__sin__(u)
 		W = __seidelpolar__(self.__coefficients__,r,u)
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
-		ax = fig.gca(projection='3d')
+		ax = Axes3D(fig)
 		surf = ax.plot_surface(X, Y, W, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
 		fig.colorbar(surf, shrink=1, aspect=30)

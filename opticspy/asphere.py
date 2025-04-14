@@ -5,6 +5,7 @@ from numpy import cos as __cos__
 from numpy import sin as __sin__
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
+from mpl_toolkits.mplot3d import Axes3D
 
 class Coefficient(object):
 	"""
@@ -38,7 +39,7 @@ class Coefficient(object):
 		Y = r*__sin__(u)
 		Z = __aspherepolar__(self.__coefficients__,r)
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
-		ax = fig.gca(projection='3d')
+		ax = Axes3D(fig)
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
 		__plt__.show()
@@ -56,7 +57,7 @@ class Coefficient(object):
 				if x1[i]**2+x1[j]**2 > R**2:
 					Z[i][j] = 0
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
-		ax = fig.gca(projection='3d')
+		ax = Axes3D(fig)
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
 		__plt__.show()

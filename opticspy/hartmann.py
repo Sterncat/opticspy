@@ -2,6 +2,7 @@ from __future__ import division as __division__
 import numpy as __np__
 import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
+# from mpl_toolkits.mplot3d import Axes3D
 
 #from . import zernike as __zernike__
 from . import interferometer_zenike as __interferometer__
@@ -73,7 +74,7 @@ def hartmann_rebuild(M,r):
 	# x = __np__.linspace(-1,1,s)
 	# [X,Y] = __np__.meshgrid(x,x)
 	# fig = __plt__.figure(figsize=(8, 8), dpi=80)
-	# ax = fig.gca(projection='3d')
+	# ax = Axes3D(fig)
 	# surf = ax.plot_surface(w, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	#         linewidth=0, antialiased=False, alpha = 0.6)
 	# __plt__.show()

@@ -16,6 +16,7 @@ from numpy.fft import fft2 as __fft2__
 from numpy.linalg import inv
 from numpy.fft import ifft2 as __ifft2__
 import operator as op
+from mpl_toolkits.mplot3d import Axes3D
 
 from . import interferometer_zenike as __interferometer__
 from . import seidel2 as __seidel2__
@@ -132,7 +133,7 @@ class Coefficient(object):
 		Y = r*__sin__(u)
 		Z = __interferometer__.__zernikepolar__(self.__coefficients__,r,u)
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
-		ax = fig.gca(projection='3d')
+		ax = Axes3D(fig)
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
 
@@ -476,7 +477,7 @@ def fitting(Z,n,remain3D=False,remain2D=False,barchart=False,interferogram=False
 	if remain3D == True:
 
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
-		ax = fig.gca(projection='3d')
+		ax = Axes3D(fig)
 		surf = ax.plot_surface(X2, Y2, Z_new, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
 		v = max(abs(Z.max()),abs(Z.min()))

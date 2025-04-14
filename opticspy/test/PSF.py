@@ -9,6 +9,7 @@ from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
 from numpy.fft import fftshift as __fftshift__
 from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
+from mpl_toolkits.mplot3d import Axes3D
 
 def __apershow__(obj):
 	obj = -abs(obj)
@@ -29,7 +30,7 @@ for i in range(len(Z)):
 			Z[i][j]=0
 
 fig = __plt__.figure(1)
-ax = fig.gca(projection='3d')
+ax = Axes3D(fig)
 surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
     linewidth=0, antialiased=False, alpha = 0.6)
 

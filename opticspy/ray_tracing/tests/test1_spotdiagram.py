@@ -44,7 +44,7 @@ for i in Pos_new_list:
 	z.append(i[2])
 	
 fig = __plt__.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = Axes3D(fig)
 ax.scatter(x, z, y)
 ax.set_xlim3d(-6, 6)
 ax.set_ylim3d(-6, 6)

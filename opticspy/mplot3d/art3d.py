@@ -20,7 +20,7 @@ from matplotlib.collections import Collection, LineCollection, \
 from matplotlib.cm import ScalarMappable
 from matplotlib.patches import Patch
 from matplotlib.colors import Normalize
-from matplotlib.cbook import iterable
+from numpy import iterable
 
 import warnings
 import numpy as np

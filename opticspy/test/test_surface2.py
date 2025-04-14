@@ -6,6 +6,8 @@ import matplotlib.pyplot as __plt__
 from matplotlib import cm as __cm__
 from matplotlib.ticker import LinearLocator as __LinearLocator__
 from matplotlib.ticker import FormatStrFormatter as __FormatStrFormatter__
+from mpl_toolkits.mplot3d import Axes3D
+
 #generate test surface figure
 def makecircle(a, r, PR):
 	max = a.max()
@@ -61,7 +63,7 @@ def testsurface2():
 	OPD = ph*PR/2
 	Z = OPD
 	fig = __plt__.figure(figsize=(6, 6), dpi=80)
-	#ax = fig.gca(projection='3d')
+	#ax = Axes3D(fig)
 	#surf = ax.plot_surface(x, y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,linewidth=0, antialiased=False, alpha = 0.6)
 	im = __plt__.pcolormesh(x, y, Z, cmap=__cm__.RdYlGn)
 	__plt__.colorbar()

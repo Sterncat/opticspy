@@ -13,6 +13,7 @@ from numpy.fft import ifftshift as __ifftshift__
 from numpy.fft import fft2 as __fft2__
 from numpy.fft import ifft2 as __ifft2__
 from . import tools as __tools__
+from mpl_toolkits.mplot3d import Axes3D
 
 
 class Coefficient(object):
@@ -58,7 +59,7 @@ class Coefficient(object):
 		[X,Y] = __np__.meshgrid(x1,y1)
 		Z = __zernikecartesian__(self.__coefficients__,a,X,Y)
 		fig = __plt__.figure(figsize=(12, 8), dpi=80)
-		ax = fig.gca(projection='3d')
+		ax = Axes3D(fig)
 		surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
 	        linewidth=0, antialiased=False, alpha = 0.6)
 
