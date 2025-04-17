@@ -14,19 +14,33 @@ def draw_surface(r,x0,d1,d2):
     verts_1 = []
     verts_2 = []
     codes = []
-    for y in np.linspace(0,d1/2,10):
-        if r > 0:
-            x = -np.sqrt(r**2-y**2) + r
-        else:
-            x = np.sqrt(r**2-y**2) + r
-        verts_1.append([x+x0,y])
-        verts_2.append([x+x0,-y])
+    r = (r if r is not None else np.inf)
+
+    # Sample an arc with 10 control points
+    ymax = (6.0 if np.isnan(d1) else d2) / 2
+    y = np.linspace(0, ymax, 10)
+
+    sign = (-1.0 if r > 0 else 1.0)
+    x = sign * np.sqrt(r**2 - y**2) + r
+
+    # Top half
+    verts_1 = np.vstack((x + x0, y)).T
+
+    # Bottom half
+    verts_2 = np.vstack((x + x0, -y)).T
+
     if d1 == d2:
-        verts = verts_1[::-1] + verts_2[1:]
+        # If the curved surface meets the lens edge, concat the vertices
+        verts = np.vstack((verts_1[::-1], verts_2[1:]))
     elif d1 < d2:
-        verts = [[verts_1[-1][0],d2/2]] + verts_1[::-1] + verts_2[1:] + [[verts_2[-1][0],-d2/2]]
+        # If the dome is smaller than the lens edge, add straight edges
+        verts = np.vstack(([verts_1[-1][0],d2/2], verts_1[::-1], verts_2[1:], [verts_2[-1][0],-d2/2]))
+    else:
+        print(f'Warning: ray position larger than lens diameter: d1: {d1:1.3g}, d2: {d2:1.3g}')
+        verts = np.vstack((verts_1[::-1], verts_2[1:]))
+        
     codes.append(Path.MOVETO)
-    for j in range(len(verts)-1):
+    for j in range(verts.shape[0] - 1):
         codes.append(Path.LINETO)
     return verts,codes,[verts[0],verts[-1]]
 
@@ -117,6 +131,13 @@ def draw_system(Lens):
         patch = patches.PathPatch(path, facecolor='none', lw=1)
         ax.add_patch(patch)
 
+        # Also plot the control points
+        def draw_control_points(path):
+            x, y = zip(*path.vertices)
+            ax.plot(x, y, 'g+-')
+        
+        #draw_control_points(path)
+
         # start drawing edge
         if num == 0:
             pass
@@ -146,8 +167,10 @@ def draw_system(Lens):
     ax.set_xlim(-0.5*sum(thinkness_list[1:-1]),1.1*sum(thinkness_list[1:-1]))
     d = max(draw_diameter_list)
     ax.set_ylim(-d/4*3,d/4*3)
+    ax.set_ylim(-1, 1)
     plt.axis('equal')
-    plt.show()
+    plt.xlabel('x / mm')
+    plt.ylabel('y / mm')
 
 
 def draw_rays(Lens):
